@@ -8,4 +8,10 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
+<style>
+	:global(body) {
+		padding-left: 100px;
+	}
+</style>
+
 {@render children?.()}

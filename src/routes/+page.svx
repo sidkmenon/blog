@@ -1,0 +1,43 @@
+---
+title: "Home"
+description: "Sid Menon's blog"
+date: 2025-09-14
+draft: true
+---
+<script lang="ts">
+	import trafficCone from '$lib/assets/bob_the_builder.svg';
+</script>
+
+<style>
+	.home {
+		display: grid;
+		place-items: center;
+		gap: 1.5rem;
+		text-align: center;
+		padding: 3rem 1.5rem;
+		min-height: 70vh;
+	}
+
+	.mascot {
+		width: min(50vw, 18rem);
+		height: auto;
+	}
+
+	.quote {
+		font-style: italic;
+		max-width: 35ch;
+	}
+</style>
+
+<main class="home">
+	<h1>Sidharth Menon</h1>
+
+	<p>This site is under construction. Please check back later!</p>
+
+	<img class="mascot" src={trafficCone} alt="bob the builder" />
+
+	<p class="quote">
+		I have had my invitation to this world's festival, and thus my life has been blessed.
+		- Tajore
+	</p>
+</main>

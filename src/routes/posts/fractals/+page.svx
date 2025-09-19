@@ -1,0 +1,22 @@
+---
+title: "Fractals: Self‑Similarity and Infinite Detail"
+description: "A gentle introduction to fractals, core ideas, and a Mandelbrot demo."
+date: 2025-09-14
+tags:
+  - math
+  - visualization
+  - fractals
+draft: true
+---
+
+> Replace this lead with a one‑sentence summary of the post.
+
+## Overview
+
+Write a short introduction that explains what fractals are and why they matter.
+
+- Self‑similarity at multiple scales
+- Fractional (non‑integer) dimension
+- Simple rules, complex emergent structure
+
+
