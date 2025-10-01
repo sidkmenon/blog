@@ -1,0 +1,42 @@
+---
+title: "Fractals: Self‑Similarity and Infinite Detail"
+description: "A gentle introduction to fractals, core ideas, and a Mandelbrot demo."
+date: 2025-09-14
+tags:
+  - math
+  - visualization
+  - fractals
+draft: true
+---
+
+<script lang="ts">
+	import chevy from '$lib/assets/chevy_nova_1975.png';
+</script>
+
+# Curation
+
+I think now more than ever, *taste* is a vitally important differentator.
+
+This may seem trite at the surface, but I find that there's quite a bit here when we start unpacking it. Tech like Google and ChatGPT brought great search experiences to all, so asymmetry of raw information has largely ceased to be an advantage. Today I'd argue it's more important to have a sense of what to _do_ with that information.
+
+Let's look at a case study:
+
+## Sales in 1975 vs 2025: the General Motor Company
+
+In 1975, General Motors had the highest revenues of any company in the world ($50-60 billion). Let's take a look at an ad it placed in the magazine:
+
+The focus of the ad below is largely a logical argument for the Nova (*'every Nova buyer got a sensibly sized, sensibly priced, easy-to-drive, easy-to-park car'*).
+
+<img src={chevy} alt="chevy nova ad" />
+
+Let's juxtapose this ad against an ad from 2025 from the same company:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/y9LybNzBRS8?si=Xgn2giITTppjAGdB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+The 2025 advertisement is focused on _feelings_. It associated a group of rugged, hardworking folks with the Chevy brand. The companies that are most successful have a clear, succinct vision they communicate through their brand, and the pitch is largely emotional.
+
+## The Takeaways
+
+## How do you learn taste?
+
+I believe that taste is largely learned through exposure. People with good taste often struggle deeply with the quality of their work, since it does not hold up to the bar.
