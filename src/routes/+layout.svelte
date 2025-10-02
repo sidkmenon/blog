@@ -1,10 +1,15 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
+	import type { LayoutData } from './$types';
 
-	let { children } = $props();
+	let { children, data }: { children?: any; data: LayoutData } = $props();
 </script>
 
 <svelte:head>
+	<title>{data.metadata.title}</title>
+	<meta name="description" content={data.metadata.description} />
+	<meta property="og:title" content={data.metadata.title} />
+	<meta property="og:description" content={data.metadata.description} />
 	<link rel="icon" href={favicon} />
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" />

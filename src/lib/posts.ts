@@ -12,7 +12,7 @@ export interface Post extends PostMetadata {
 
 export async function getAllPosts(): Promise<Post[]> {
 	const postModules = import.meta.glob<{ metadata: PostMetadata }>(
-		'/src/routes/posts/**/+page.svx',
+		['/src/routes/posts/**/+page.svx', '!/src/routes/posts/+page.svx'],
 		{ eager: true }
 	);
 
