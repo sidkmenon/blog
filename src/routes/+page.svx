@@ -8,8 +8,6 @@ draft: true
 	import trafficCone from '$lib/assets/bob_the_builder.svg';
 </script>
 
-<title>Sid Menon's blog</title>
-
 <main class="home">
 	<h1>Sidharth Menon</h1>
 

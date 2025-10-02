@@ -1,0 +1,1074 @@
+================
+CODE SNIPPETS
+================
+TITLE: Accessing Parent Data in a Universal Layout Load Function
+DESCRIPTION: This snippet shows a universal `load` function in `src/routes/sum/+layout.js` that retrieves data from its parent `load` function using `await parent()`. It specifically accesses the `a` property from the server `load` and calculates `b` as `a + 1`, demonstrating data flow from server to universal `load` functions.
+
+SOURCE: https://svelte.dev/tutorial/kit/await-parent
+
+LANGUAGE: JavaScript
+CODE:
+```
+export async function load({ parent }) {
+	const { a } = await parent();
+	return { b: a + 1 };
+}
+```
+
+--------------------------------
+
+TITLE: Accessing Parent Data in Universal Layout Load Function (SvelteKit JavaScript)
+DESCRIPTION: This SvelteKit universal `load` function, defined in `src/routes/sum/+layout.js`, demonstrates how to access data from a parent `load` function using `await parent()`. It retrieves the value of `a` (from `src/routes/+layout.server.js`) and returns a new object with `b` calculated as `a + 1`.
+
+SOURCE: https://svelte.dev/tutorial/kit/await-parent
+
+LANGUAGE: JavaScript
+CODE:
+```
+/// file: src/routes/sum/+layout.js
+export async function load({ parent }) {
+	const { a } = await parent();
+	return { b: a + 1 };
+}
+```
+
+--------------------------------
+
+TITLE: Aggregating Parent Data in a Page Load Function
+DESCRIPTION: This snippet illustrates a universal `load` function in `src/routes/sum/+page.js` that accesses data from multiple parent `load` functions (both server and universal) using `await parent()`. It retrieves `a` and `b` and calculates their sum `c`, showcasing how a page `load` function can consolidate data from its entire parent chain.
+
+SOURCE: https://svelte.dev/tutorial/kit/await-parent
+
+LANGUAGE: JavaScript
+CODE:
+```
+export async function load({ parent }) {
+	const { a, b } = await parent();
+	return { c: a + b };
+}
+```
+
+--------------------------------
+
+TITLE: Defining Astro Load Function
+DESCRIPTION: This snippet defines a global `Astro.load` function, which is designed to asynchronously execute a provided function. It ensures that `self.Astro` exists before assigning the `load` function and dispatches a custom `astro:load` event on the `window` object, signaling that Astro's loading process has completed.
+
+SOURCE: https://developers.cloudflare.com/pages/configuration/headers/
+
+LANGUAGE: JavaScript
+CODE:
+```
+(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();
+```
+
+--------------------------------
+
+TITLE: Astro Global Load Function Initialization (JavaScript)
+DESCRIPTION: This immediately invoked function expression initializes the `Astro.load` function, which is designed to asynchronously load and execute a given module. It then dispatches a custom `astro:load` event on the `window` object, signaling that Astro's core loading mechanism is ready.
+
+SOURCE: https://orm.drizzle.team/
+
+LANGUAGE: JavaScript
+CODE:
+```
+(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();
+```
+
+--------------------------------
+
+TITLE: Accessing Multiple Parent Data in Page Load Function (SvelteKit JavaScript)
+DESCRIPTION: This SvelteKit universal `load` function, located in `src/routes/sum/+page.js`, illustrates how to access data from multiple parent `load` functions (both `a` from the server layout and `b` from the universal layout) using `await parent()`. It retrieves `a` and `b` and returns `c` as their sum, showcasing data aggregation across the route hierarchy.
+
+SOURCE: https://svelte.dev/tutorial/kit/await-parent
+
+LANGUAGE: JavaScript
+CODE:
+```
+/// file: src/routes/sum/+page.js
+export async function load({ parent }) {
+	const { a, b } = await parent();
+	return { c: a + b };
+}
+```
+
+--------------------------------
+
+TITLE: Declaring Dependencies in SvelteKit Load Function
+DESCRIPTION: Shows how to declare dependencies for a `load` function using the `depends` function, which takes over from the old `dependencies` return property, allowing SvelteKit to re-run the `load` function when specified paths change.
+
+SOURCE: https://github.com/sveltejs/kit/discussions/5774#_snippet_12
+
+LANGUAGE: JavaScript
+CODE:
+```
+export function load({ depends }) {
+  depends('/foo', '/bar');
+}
+```
+
+--------------------------------
+
+TITLE: Default Load Function for Server Data (SvelteKit)
+DESCRIPTION: This snippet illustrates the default behavior of a `load` function when a `+page.server.js` or `+layout.server.js` file is present but no explicit `load` function is defined. It shows that the data returned from the server-side handler (previously `props`, now `data`) is automatically passed through to the component.
+
+SOURCE: https://github.com/sveltejs/kit/discussions/5774#_snippet_10
+
+LANGUAGE: JavaScript
+CODE:
+```
+export function load({ props }) {
+  return props;
+}
+```
+
+--------------------------------
+
+TITLE: Updating Layout Load Type Import (TypeScript)
+DESCRIPTION: Describes the change in type import for `load` functions in layout files, shifting from `Load` in `__types` to `LayoutLoad` in `$types` for enhanced type safety.
+
+SOURCE: https://github.com/sveltejs/kit/discussions/5774#_snippet_3
+
+LANGUAGE: TypeScript
+CODE:
+```
+import type { LayoutLoad } from './$types';
+
+export const load: LayoutLoad = () => {
+  // ...
+}
+```
+
+--------------------------------
+
+TITLE: Updating Layout Load Type Import (JavaScript JSDoc)
+DESCRIPTION: Explains the updated JSDoc annotation for `load` functions in JavaScript layout files, moving from `Load` to `LayoutLoad` for improved type inference.
+
+SOURCE: https://github.com/sveltejs/kit/discussions/5774#_snippet_4
+
+LANGUAGE: JavaScript
+CODE:
+```
+/** @type {import('./$types').LayoutLoad} */
+export function load() {
+  // ...
+}
+```
+
+--------------------------------
+
+TITLE: Implementing Astro Load Event Dispatcher
+DESCRIPTION: This JavaScript snippet defines a global `Astro.load` function, which asynchronously executes a provided function. It then dispatches a custom `astro:load` event on the `window` object. This mechanism is likely used by Astro to signal that a page or component has finished loading, allowing other parts of the application to react to this state.
+
+SOURCE: https://developers.cloudflare.com/pages/configuration/serving-pages/
+
+LANGUAGE: JavaScript
+CODE:
+```
+(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();
+```
+
+--------------------------------
+
+TITLE: Preloading Route Data and Code in SvelteKit (TypeScript)
+DESCRIPTION: The `preloadData` function programmatically preloads a SvelteKit page by loading its code and executing its `load` function. This mirrors the behavior of `data-sveltekit-preload-data` on `<a>` elements, making subsequent navigation instantaneous by utilizing the returned `load` values. It takes an `href` string and returns a Promise that resolves with the result of the route's `load` functions.
+
+SOURCE: https://svelte.dev/docs/kit/$app-navigation
+
+LANGUAGE: TypeScript
+CODE:
+```
+function preloadData(href: string): Promise<
+	| {
+			type: 'loaded';
+			status: number;
+```
+
+--------------------------------
+
+TITLE: Accessing Server Data in SvelteKit Load Function
+DESCRIPTION: Demonstrates how `load` functions now receive data from `+page.server.js` or `+layout.server.js` via the `data` input parameter, replacing the `props` parameter.
+
+SOURCE: https://github.com/sveltejs/kit/discussions/5774#_snippet_9
+
+LANGUAGE: JavaScript
+CODE:
+```
+export function load({ data }) {
+  console.log(data.data_from_the_server);
+}
+```
+
+--------------------------------
+
+TITLE: Updating Page Load Type Import (JavaScript JSDoc)
+DESCRIPTION: Details the updated JSDoc annotation for `load` functions in JavaScript page files, transitioning from `Load` to `PageLoad` for better type inference.
+
+SOURCE: https://github.com/sveltejs/kit/discussions/5774#_snippet_2
+
+LANGUAGE: JavaScript
+CODE:
+```
+/** @type {import('./$types').PageLoad} */
+export function load() {
+  // ...
+}
+```
+
+--------------------------------
+
+TITLE: Concurrently Loading Dynamic JavaScript Modules
+DESCRIPTION: This snippet demonstrates how to concurrently load multiple JavaScript modules using dynamic `import()` expressions. It generates module paths dynamically based on an index, imports them all using `Promise.all()`, and then iterates through the loaded modules to call a `load()` function exported by each. This pattern is useful for loading a series of related modules or modules whose paths are determined at runtime.
+
+SOURCE: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import
+
+LANGUAGE: JavaScript
+CODE:
+```
+Promise.all(
+  Array.from({ length: 10 }).map(
+    (_, index) => import(`/modules/module-${index}.js`),
+  ),
+).then((modules) => modules.forEach((module) => module.load()));
+```
+
+--------------------------------
+
+TITLE: Updating Page Load Type Import (TypeScript)
+DESCRIPTION: Explains the change in type import for `load` functions in page files, moving from `Load` in `__types` to `PageLoad` in `$types` for improved type safety.
+
+SOURCE: https://github.com/sveltejs/kit/discussions/5774#_snippet_1
+
+LANGUAGE: TypeScript
+CODE:
+```
+import type { PageLoad } from './$types';
+
+export const load: PageLoad = () => {
+  // ...
+}
+```
+
+--------------------------------
+
+TITLE: Initializing Astro Load Function and Event (JavaScript)
+DESCRIPTION: This script initializes the `Astro.load` function, which is designed to asynchronously execute a provided function. After setting up this global utility, it dispatches a custom `astro:load` event on the `window` object, signaling that Astro's core loading mechanism is ready.
+
+SOURCE: https://developers.cloudflare.com/pages/
+
+LANGUAGE: JavaScript
+CODE:
+```
+(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();
+```
+
+--------------------------------
+
+TITLE: Simplifying Load Handler Return Value
+DESCRIPTION: Demonstrates the simplified return value for the `load` function. Instead of wrapping data in a `body` property, the data object is returned directly.
+
+SOURCE: https://github.com/sveltejs/kit/discussions/5774#_snippet_15
+
+LANGUAGE: JavaScript
+CODE:
+```
+export function load() {
+  return {
+    answer: 42
+  }
+}
+```
+
+--------------------------------
+
+TITLE: Styling for Loading Skeleton Element (kxHHCJ) - CSS
+DESCRIPTION: Similar to `jjSEMS`, this CSS rule defines base styles for another loading skeleton element, differing primarily in its `width`. It sets positioning, overflow, mask image, background color, border-radius, display, and dimensions for a visual loading indicator.
+
+SOURCE: https://github.com/microsoft/TypeScript/issues/13399#_snippet_30
+
+LANGUAGE: CSS
+CODE:
+```
+.kxHHCJ{position:relative;overflow:hidden;-webkit-mask-image:radial-gradient(white,black);mask-image:radial-gradient(white,black);background-color:var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5)));border-radius:3px;display:block;height:1.2em;width:40%;height:16px;}
+```
+
+--------------------------------
+
+TITLE: Basic Routing Example with Universal Router
+DESCRIPTION: This example demonstrates how to define routes using plain JavaScript objects and resolve a URL path with Universal Router. It showcases nested routes, parameter handling, and how to render content based on the resolved route, illustrating the router's flexibility.
+
+SOURCE: https://github.com/kriasoft/universal-router#_snippet_4
+
+LANGUAGE: JavaScript
+CODE:
+```
+import UniversalRouter from 'https://esm.sh/universal-router'
+
+const routes = [
+  {
+    path: '', // optional
+    action: () => `<h1>Home</h1>`,
+  },
+  {
+    path: '/posts',
+    action: () => console.log('checking child routes for /posts'),
+    children: [
+      {
+        path: '', // optional, matches both "/posts" and "/posts/"
+        action: () => `<h1>Posts</h1>`,
+      },
+      {
+        path: '/:id',
+        action: (context) => `<h1>Post #${context.params.id}</h1>`,
+      },
+    ],
+  },
+]
+
+const router = new UniversalRouter(routes)
+
+router.resolve('/posts').then((html) => {
+  document.body.innerHTML = html // renders: <h1>Posts</h1>
+})
+```
+
+--------------------------------
+
+TITLE: Explicitly Typing SvelteKit Server Load Function - TypeScript
+DESCRIPTION: This snippet demonstrates how to explicitly type a SvelteKit `load` function using `ServerLoadEvent` from `@sveltejs/kit`. It shows a common pattern for fetching data (e.g., a blog post) from a database within a server load function, highlighting how `event.params` can be accessed, though it also points out a potential typo (`post` instead of `slug`).
+
+SOURCE: https://svelte.dev/blog/zero-config-type-safety
+
+LANGUAGE: TypeScript
+CODE:
+```
+import type { ServerLoadEvent } from '@sveltejs/kit';
+
+export async function load(event: ServerLoadEvent): Promise<{
+    post: string;
+}> {
+	return {
+		post: await database.getPost(event.params.post)
+	};
+}
+```
+
+--------------------------------
+
+TITLE: Reusing a Load Function in SvelteKit Layout
+DESCRIPTION: This SvelteKit layout file defines a `load` function that imports and reuses a shared `reusableLoad` function. This pattern promotes code reuse for data fetching logic across multiple layouts or pages. Both JavaScript and TypeScript versions are provided, showing how to integrate additional logic if needed.
+
+SOURCE: https://svelte.dev/docs/kit/advanced-routing
+
+LANGUAGE: JavaScript
+CODE:
+```
+import { reusableLoad } from '$lib/reusable-load-function';
+
+/** @type {import('./$types').PageLoad} */
+export function load(event) {
+	// Add additional logic here, if needed
+	return reusableLoad(event);
+}
+```
+
+LANGUAGE: TypeScript
+CODE:
+```
+import { reusableLoad } from '$lib/reusable-load-function';
+import type { PageLoad } from './$types';
+
+export const load: PageLoad = (event) => {
+	// Add additional logic here, if needed
+	return reusableLoad(event);
+};
+```
+
+--------------------------------
+
+TITLE: Accessing Parent Data in SvelteKit Load Function
+DESCRIPTION: Explains how to access data from parent `load` functions using the `parent` function, which is now asynchronous and returns the parent's data, replacing the `stuff` parameter.
+
+SOURCE: https://github.com/sveltejs/kit/discussions/5774#_snippet_11
+
+LANGUAGE: JavaScript
+CODE:
+```
+export async function load({ parent }) {
+  const data = await parent();
+  console.log(data.a);
+
+  return {
+   b: data.a * 2
+  };
+}
+```
+
+--------------------------------
+
+TITLE: 50% Width Rectangular Skeleton Loader CSS
+DESCRIPTION: Specifies CSS for a rectangular skeleton loading bar with a width of 50% and a height of 16px, ideal for representing half-width content elements. It features a rounded border, a neutral background color, and the `crVFvv` animation for a visual loading indicator.
+
+SOURCE: https://github.com/microsoft/TypeScript/issues/13399#_snippet_16
+
+LANGUAGE: CSS
+CODE:
+```
+.jmMBqY{position:relative;overflow:hidden;-webkit-mask-image:radial-gradient(white,black);mask-image:radial-gradient(white,black);background-color:var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5)));border-radius:3px;display:block;height:1.2em;width:50%;height:16px;}.jmMBqY::after{-webkit-animation:crVFvv 1.5s infinite linear;animation:crVFvv 1.5s infinite linear;background:linear-gradient(90deg,transparent,var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5))),transparent);content:'';position:absolute;-webkit-transform:translateX(-100%);-ms-transform:translateX(-100%);transform:translateX(-100%);bottom:0;left:0;right:0;top:0;}
+```
+
+--------------------------------
+
+TITLE: Styling a Loading Skeleton Element with CSS (.ihfxfT)
+DESCRIPTION: Defines the base styles for a loading skeleton element with class `.ihfxfT`, similar to `.irithh` but with a slightly different width. The `::after` pseudo-element applies the `crVFvv` animation for a shimmering loading indicator.
+
+SOURCE: https://github.com/sveltejs/svelte/commit/198dbcf#_snippet_3
+
+LANGUAGE: CSS
+CODE:
+```
+.ihfxfT{position:relative;overflow:hidden;-webkit-mask-image:radial-gradient(white,black);mask-image:radial-gradient(white,black);background-color:var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5)));border-radius:3px;display:block;height:1.2em;width:62px;}
+.ihfxfT::after{-webkit-animation:crVFvv 1.5s infinite linear;animation:crVFvv 1.5s infinite linear;background:linear-gradient(90deg,transparent,var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5))),transparent);content:'';position:absolute;-webkit-transform:translateX(-100%);-ms-transform:translateX(-100%);transform:translateX(-100%);bottom:0;left:0;right:0;top:0;}
+```
+
+--------------------------------
+
+TITLE: Defining ServerLoad Type in SvelteKit (TypeScript)
+DESCRIPTION: This TypeScript type alias defines the `ServerLoad` function signature used in SvelteKit. It specifies generic parameters for `Params` (route parameters), `ParentData` (data from parent layouts), `OutputData` (the data returned by the load function), and `RouteId` (the ID of the current route). This type ensures correct function signatures for server-side data loading.
+
+SOURCE: https://svelte.dev/blog/zero-config-type-safety
+
+LANGUAGE: TypeScript
+CODE:
+```
+type ServerLoad<Params extends Partial<Record<string, string>>> = Partial<Record<string, string>>>, ParentData extends Record<string, any>> = Record<string, any>>, OutputData extends Record<string, any>> | void = void | Record<...>>, RouteId extends string | null = string | null>
+```
+
+--------------------------------
+
+TITLE: 46% Width Rectangular Skeleton Loader CSS
+DESCRIPTION: Specifies CSS for a rectangular skeleton loading bar with a width of 46% and a height of 16px, designed for content placeholders requiring this specific length. It includes a rounded border, a neutral background, and the `crVFvv` animation for a visual loading indicator.
+
+SOURCE: https://github.com/microsoft/TypeScript/issues/13399#_snippet_19
+
+LANGUAGE: CSS
+CODE:
+```
+.ipTHLr{position:relative;overflow:hidden;-webkit-mask-image:radial-gradient(white,black);mask-image:radial-gradient(white,black);background-color:var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5)));border-radius:3px;display:block;height:1.2em;width:46%;height:16px;}.ipTHLr::after{-webkit-animation:crVFvv 1.5s infinite linear;animation:crVFvv 1.5s infinite linear;background:linear-gradient(90deg,transparent,var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5))),transparent);content:'';position:absolute;-webkit-transform:translateX(-100%);-ms-transform:translateX(-100%);transform:translateX(-100%);bottom:0;left:0;right:0;top:0;}
+```
+
+--------------------------------
+
+TITLE: Preloading Page Data in SvelteKit (TypeScript)
+DESCRIPTION: This TypeScript function signature defines the `preloadData` function, which programmatically preloads a specified SvelteKit page. It ensures the page's code is loaded and its `load` function is called, mimicking the behavior of `data-sveltekit-preload-data` on `<a>` elements. The function returns a Promise that resolves with either loaded page data (type 'loaded') or a redirect instruction (type 'redirect'), making subsequent navigation instantaneous. The `href` parameter specifies the page to preload.
+
+SOURCE: https://svelte.dev/docs/kit/$app-navigation
+
+LANGUAGE: TypeScript
+CODE:
+```
+function preloadData(href: string): Promise<{
+type: "loaded";
+status: number;
+data: Record<string, any>;
+} | {
+type: "redirect";
+location: string;
+}>
+```
+
+--------------------------------
+
+TITLE: Preloading SvelteKit Page Data - TypeScript
+DESCRIPTION: The `preloadData` function preloads a given page by ensuring its code is loaded and its `load` function is called with appropriate options. This mirrors the behavior of `data-sveltekit-preload-data` on `<a>` elements, making navigation instantaneous if the preloaded `href` is the next destination. It returns a Promise resolving with the result of the `load` functions.
+
+SOURCE: https://svelte.dev/docs/kit/$app-navigation
+
+LANGUAGE: TypeScript
+CODE:
+```
+function preloadData(href: string): Promise<
+	| {
+			type: 'loaded';
+			status: number;
+			data: Record<string, any>;
+	  }
+	| {
+			type: 'redirect';
+			location: string;
+	  }
+>;
+```
+
+--------------------------------
+
+TITLE: Installing Universal Router with npm
+DESCRIPTION: This command installs the Universal Router library from the npm registry and adds it as a dependency to your project. It's the standard way to include the router in a Node.js or web project, ensuring all necessary files are available.
+
+SOURCE: https://github.com/kriasoft/universal-router#_snippet_3
+
+LANGUAGE: Shell
+CODE:
+```
+npm install universal-router --save
+```
+
+--------------------------------
+
+TITLE: Defining a SvelteKit Page Load Function in TypeScript
+DESCRIPTION: This snippet defines the `load` function for a SvelteKit page, which is responsible for fetching data before the page is rendered. It includes a JSDoc `@type` annotation for type checking against the `PageLoad` type from SvelteKit's generated `$types` module, ensuring correct input parameters (`event`) and return type (`MaybePromise<void | Record<string, any>>`). The `event` parameter provides access to various properties like `url`, `params`, `fetch`, etc., necessary for data loading.
+
+SOURCE: https://svelte.dev/docs/kit/advanced-routing
+
+LANGUAGE: TypeScript
+CODE:
+```
+/** @type {import('./$types').PageLoad} */
+export function load(event: LoadEvent<Record<string, any>, Record<string, any> | null, Record<string, any>, string | null>): MaybePromise<void | Record<string, any>>
+```
+
+--------------------------------
+
+TITLE: Returning Data from SvelteKit Load Function
+DESCRIPTION: Illustrates the simplified return value of the `load` function, where data is returned directly as an object, eliminating the need for a nested `props` object.
+
+SOURCE: https://github.com/sveltejs/kit/discussions/5774#_snippet_5
+
+LANGUAGE: JavaScript
+CODE:
+```
+export function load() {
+  return {
+    answer: 42
+  };
+}
+```
+
+--------------------------------
+
+TITLE: 44% Width Rectangular Skeleton Loader CSS
+DESCRIPTION: Provides CSS for a rectangular skeleton loading bar with a width of 44% and a height of 16px, offering another specific length for content placeholders. It applies a subtle background color and integrates the `crVFvv` animation to create a dynamic loading effect.
+
+SOURCE: https://github.com/microsoft/TypeScript/issues/13399#_snippet_18
+
+LANGUAGE: CSS
+CODE:
+```
+.inHxoF{position:relative;overflow:hidden;-webkit-mask-image:radial-gradient(white,black);mask-image:radial-gradient(white,black);background-color:var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5)));border-radius:3px;display:block;height:1.2em;width:44%;height:16px;}.inHxoF::after{-webkit-animation:crVFvv 1.5s infinite linear;animation:crVFvv 1.5s infinite linear;background:linear-gradient(90deg,transparent,var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5))),transparent);content:'';position:absolute;-webkit-transform:translateX(-100%);-ms-transform:translateX(-100%);transform:translateX(-100%);bottom:0;left:0;right:0;top:0;}
+```
+
+--------------------------------
+
+TITLE: Invalidating All SvelteKit Load Functions - TypeScript
+DESCRIPTION: The `invalidateAll` function forces all `load` functions belonging to the currently active page to re-execute. This is useful for ensuring the UI reflects the latest data. It returns a Promise that resolves once the page has been updated.
+
+SOURCE: https://svelte.dev/docs/kit/$app-navigation
+
+LANGUAGE: TypeScript
+CODE:
+```
+function invalidateAll(): Promise<void>;
+```
+
+--------------------------------
+
+TITLE: Preloading Page Data with SvelteKit's preloadData
+DESCRIPTION: `preloadData` programmatically loads both the code and executes the `load` function for a given page, mimicking the behavior of `data-sveltekit-preload-data` on `<a>` elements. If the next navigation is to the preloaded `href`, it enables instantaneous navigation by using the pre-fetched data.
+
+SOURCE: https://svelte.dev/docs/kit/$app-navigation
+
+LANGUAGE: TypeScript
+CODE:
+```
+function preloadData(href: string): Promise<{
+    type: "loaded";
+    status: number;
+    data: Record<string, any>;
+} | {
+    type: "redirect";
+    location: string;
+}>
+```
+
+--------------------------------
+
+TITLE: Defining a Server Load Function in SvelteKit
+DESCRIPTION: This snippet demonstrates how to define a server-side `load` function in `src/routes/+layout.server.js`. It returns an object containing a property `a` with a value of `1`, making this data available to child `load` functions within the route hierarchy.
+
+SOURCE: https://svelte.dev/tutorial/kit/await-parent
+
+LANGUAGE: JavaScript
+CODE:
+```
+export function load() {
+	return { a: 1 };
+}
+```
+
+--------------------------------
+
+TITLE: Setting Response Headers in Load Function
+DESCRIPTION: Demonstrates how to set custom response headers within the `load` function. The `setHeaders` function, provided as a parameter to `load`, is used to set header key-value pairs.
+
+SOURCE: https://github.com/sveltejs/kit/discussions/5774#_snippet_20
+
+LANGUAGE: JavaScript
+CODE:
+```
+export function load({ setHeaders }) {
+  setHeaders({
+    'x-foo': 'bar'
+  });
+}
+```
+
+--------------------------------
+
+TITLE: Defining Astro Load Function in JavaScript
+DESCRIPTION: This JavaScript IIFE defines an asynchronous function `e` that executes a given function `t` after awaiting its resolution. It then assigns this function `e` to `self.Astro.load` (initializing `self.Astro` if it doesn't exist) and dispatches a custom `astro:load` event on the window object. This pattern is typical for framework initialization and event signaling.
+
+SOURCE: https://www.cypress.io/
+
+LANGUAGE: JavaScript
+CODE:
+```
+(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();
+```
+
+--------------------------------
+
+TITLE: Styling a Loading Skeleton Element with CSS (.irithh)
+DESCRIPTION: Defines the base styles for a loading skeleton element with class `.irithh`, including its background, border-radius, and dimensions. The `::after` pseudo-element applies a linear gradient animation (`crVFvv`) to create a shimmering effect, indicating content is loading.
+
+SOURCE: https://github.com/sveltejs/svelte/commit/198dbcf#_snippet_2
+
+LANGUAGE: CSS
+CODE:
+```
+.irithh{position:relative;overflow:hidden;-webkit-mask-image:radial-gradient(white,black);mask-image:radial-gradient(white,black);background-color:var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5)));border-radius:3px;display:block;height:1.2em;width:60px;}
+.irithh::after{-webkit-animation:crVFvv 1.5s infinite linear;animation:crVFvv 1.5s infinite linear;background:linear-gradient(90deg,transparent,var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5))),transparent);content:'';position:absolute;-webkit-transform:translateX(-100%);-ms-transform:translateX(-100%);transform:translateX(-100%);bottom:0;left:0;right:0;top:0;}
+```
+
+--------------------------------
+
+TITLE: Styling for Loading Skeleton Element (jjSEMS) - CSS
+DESCRIPTION: This CSS rule defines the base styles for a loading skeleton element, including its positioning, overflow behavior, mask image for a gradient effect, background color using CSS variables, border-radius, display type, and fixed dimensions. It's part of a visual loading indicator.
+
+SOURCE: https://github.com/microsoft/TypeScript/issues/13399#_snippet_28
+
+LANGUAGE: CSS
+CODE:
+```
+.jjSEMS{position:relative;overflow:hidden;-webkit-mask-image:radial-gradient(white,black);mask-image:radial-gradient(white,black);background-color:var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5)));border-radius:3px;display:block;height:1.2em;width:47%;height:16px;}
+```
+
+--------------------------------
+
+TITLE: Loading Skeleton Animation Styles (CSS)
+DESCRIPTION: Defines the animation and background gradient for a loading skeleton's pseudo-element. It creates a shimmering effect using a linear gradient and a `translateX` animation to indicate loading state.
+
+SOURCE: https://github.com/yarnpkg/berry/issues/638#_snippet_31
+
+LANGUAGE: CSS
+CODE:
+```
+.hcMrcU::after{-webkit-animation:crVFvv 1.5s infinite linear;animation:crVFvv 1.5s infinite linear;background:linear-gradient(90deg,transparent,var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5))),transparent);content:'';position:absolute;-webkit-transform:translateX(-100%);-ms-transform:translateX(-100%);transform:translateX(-100%);bottom:0;left:0;right:0;top:0;}
+```
+
+--------------------------------
+
+TITLE: Loading Environment Variables in Vite Configuration with `loadEnv`
+DESCRIPTION: This snippet shows how to explicitly load environment variables using Vite's `loadEnv` helper within the configuration file. It demonstrates loading variables based on the current `mode` and defining them globally for the application using the `define` option.
+
+SOURCE: https://vitejs.dev/config/
+
+LANGUAGE: JavaScript
+CODE:
+```
+import { defineConfig, loadEnv } from 'vite'
+    
+    export default defineConfig(({ mode }) => {
+      // Load env file based on `mode` in the current working directory.
+      // Set the third parameter to '' to load all env regardless of the
+      // `VITE_` prefix.
+      const env = loadEnv(mode, process.cwd(), '')
+      return {
+        // vite config
+        define: {
+          __APP_ENV__: JSON.stringify(env.APP_ENV),
+        },
+      }
+    })
+```
+
+--------------------------------
+
+TITLE: Styling a Loading Skeleton Element with CSS (.kRBfod)
+DESCRIPTION: Defines the base styles for a loading skeleton element with class `.kRBfod`, similar to the others but with specific height and width adjustments. It also uses the `::after` pseudo-element and `crVFvv` animation for the loading shimmer effect.
+
+SOURCE: https://github.com/sveltejs/svelte/commit/198dbcf#_snippet_4
+
+LANGUAGE: CSS
+CODE:
+```
+.kRBfod{position:relative;overflow:hidden;-webkit-mask-image:radial-gradient(white,black);mask-image:radial-gradient(white,black);background-color:var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5)));border-radius:3px;display:block;height:1.2em;width:60px;height:22px;}
+.kRBfod::after{-webkit-animation:crVFvv 1.5s infinite linear;animation:crVFvv 1.5s infinite linear;background:linear-gradient(90deg,transparent,var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5))),transparent);content:'';position:absolute;-webkit-transform:translateX(-100%);-ms-transform:translateX(-100%);transform:translateX(-100%);bottom:0;left:0;right:0;top:0;}
+```
+
+--------------------------------
+
+TITLE: Importing Multiple Modules Concurrently with Dynamic Specifiers in JavaScript
+DESCRIPTION: This example illustrates how to use dynamic `import()` with non-literal specifiers to load multiple modules concurrently. It generates an array of module paths using a template literal and then uses `Promise.all` to wait for all imports to resolve. After all modules are loaded, it iterates through them and calls a `load()` function expected to be exported by each module.
+
+SOURCE: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import
+
+LANGUAGE: js
+CODE:
+```
+Promise.all(
+ Array.from({ length: 10 }).map(
+ (_, index) => import(`/modules/module-${index}.js`),
+ ),
+).then((modules) => modules.forEach((module) => module.load()));
+```
+
+--------------------------------
+
+TITLE: Using Generated Types for SvelteKit Server Load - TypeScript
+DESCRIPTION: This snippet illustrates the use of SvelteKit's automatically generated types, specifically `PageServerLoadEvent` from the local `$types` file. It simplifies the `load` function's type annotation and correctly infers the `event.params` structure, demonstrating how to access route parameters like `slug` with improved type safety.
+
+SOURCE: https://svelte.dev/blog/zero-config-type-safety
+
+LANGUAGE: TypeScript
+CODE:
+```
+import type { PageServerLoadEvent } from './$types';
+
+export async function load(event: PageServerLoadEvent): Promise<{
+    post: any;
+}> {
+	return {
+		post: await database.getPost(event.params.slug)
+	};
+}
+```
+
+--------------------------------
+
+TITLE: Fixed-Width Rectangular Skeleton Loader CSS
+DESCRIPTION: Provides CSS for a rectangular skeleton loading bar with a fixed width of 150px and a height of 16px, commonly used for short text lines or small content blocks. It applies a subtle background and incorporates a shimmering animation via the `crVFvv` keyframe animation.
+
+SOURCE: https://github.com/microsoft/TypeScript/issues/13399#_snippet_14
+
+LANGUAGE: CSS
+CODE:
+```
+.eyUUZI{position:relative;overflow:hidden;-webkit-mask-image:radial-gradient(white,black);mask-image:radial-gradient(white,black);background-color:var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5)));border-radius:3px;display:block;height:1.2em;width:150px;height:16px;}.eyUUZI::after{-webkit-animation:crVFvv 1.5s infinite linear;animation:crVFvv 1.5s infinite linear;background:linear-gradient(90deg,transparent,var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5))),transparent);content:'';position:absolute;-webkit-transform:translateX(-100%);-ms-transform:translateX(-100%);transform:translateX(-100%);bottom:0;left:0;right:0;top:0;}
+```
+
+--------------------------------
+
+TITLE: Loading Single Blog Post Data in SvelteKit `[slug]/+page.server.js`
+DESCRIPTION: This JavaScript snippet defines a `load` function for a dynamic route `[slug]` in SvelteKit. It imports `posts` and uses the `params` object (destructured from the `load` function's argument) to find a specific post by its `slug`. The found `post` object is then returned, making it available to the corresponding Svelte page.
+
+SOURCE: https://svelte.dev/tutorial/kit/page-data
+
+LANGUAGE: JavaScript
+CODE:
+```
+import { posts } from '../data.js';
+
+export function load({ params }) {
+	const post = posts.find((post) => post.slug === params.slug);
+
+	return {
+		post
+	};
+}
+```
+
+--------------------------------
+
+TITLE: Loading Language-Specific Greetings in SvelteKit (JavaScript)
+DESCRIPTION: This '+page.server.js' snippet demonstrates how to load language-specific greetings based on a dynamic 'lang' parameter in the URL. It defines a 'greetings' object mapping language codes to messages and uses the 'load' function to return the appropriate greeting, defaulting to English if no language is specified.
+
+SOURCE: https://svelte.dev/tutorial/kit/optional-params
+
+LANGUAGE: JavaScript
+CODE:
+```
+const greetings = {\n\ten: 'hello!',\n\tde: 'hallo!',\n\tfr: 'bonjour!'\n};\n\nexport function load({ params }) {\n\treturn {\n\t\tgreeting: greetings[params.lang ?? 'en']\n\t};\n}\n
+```
+
+--------------------------------
+
+TITLE: Loading Remix Application Modules (JavaScript)
+DESCRIPTION: This snippet handles the dynamic loading of Remix application modules. It imports a manifest file, specific route modules (`root` and `_index`), maps them to `window.__remixRouteModules`, and finally imports the client-side entry point to bootstrap the Remix application, enabling code splitting and efficient loading.
+
+SOURCE: https://workers.cloudflare.com/
+
+LANGUAGE: JavaScript
+CODE:
+```
+import "/assets/manifest-1b3c3bed.js"; import * as route0 from "/assets/root-BSw86S0_.js"; import * as route1 from "/assets/_index-1VH7ItbV.js"; window.__remixRouteModules = {"root":route0,"routes/_index":route1}; import("/assets/entry.client-CSLyTJUM.js");
+```
+
+--------------------------------
+
+TITLE: Simplified Server Load Function with Type Inference
+DESCRIPTION: This snippet shows a SvelteKit server `load` function where the `event` parameter's type is explicitly annotated with `PageServerLoadEvent` from the generated `$types.d.ts` file, demonstrating how SvelteKit's automatic type generation is utilized for type safety.
+
+SOURCE: https://svelte.dev/blog/zero-config-type-safety
+
+LANGUAGE: TypeScript
+CODE:
+```
+import type { PageServerLoadEvent } from './$types';
+
+export async function load(event: PageServerLoadEvent) {
+	return {
+		post: await database.getPost(event.params.post)
+	};
+}
+```
+
+--------------------------------
+
+TITLE: Clarifying First Child Descendant Selection with Universal Selector in CSS
+DESCRIPTION: This CSS rule explicitly uses the universal selector (`*`) with `:first-child` to target _any_ element that is the first child of an <article> element or any of its descendants. This approach significantly improves readability by clearly indicating that it applies to descendants, preventing confusion with `article:first-child` while achieving the same styling effect of `font-weight: bold;`.
+
+SOURCE: https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Basic_selectors
+
+LANGUAGE: css
+CODE:
+```
+article *:first-child {
+  font-weight: bold;
+}
+```
+
+--------------------------------
+
+TITLE: JavaScript Dynamically Loading External Script
+DESCRIPTION: This JavaScript code dynamically creates a new <script> element and appends it to the document's <head>, attempting to load main2.js. This pattern is common for loading additional scripts after initial page load, but it can be blocked by strict CSPs if not properly handled.
+
+SOURCE: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP
+
+LANGUAGE: js
+CODE:
+```
+console.log("hello");
+
+const scriptElement = document.createElement("script");
+scriptElement.src = `main2.js`;
+
+document.head.appendChild(scriptElement);
+```
+
+--------------------------------
+
+TITLE: 51% Width Rectangular Skeleton Loader CSS
+DESCRIPTION: Defines CSS for a rectangular skeleton loading bar with a width of 51% and a height of 16px, providing a slightly different length variation for content placeholders. It includes the standard visual properties for skeleton loaders, such as a muted background and the `crVFvv` animation.
+
+SOURCE: https://github.com/microsoft/TypeScript/issues/13399#_snippet_17
+
+LANGUAGE: CSS
+CODE:
+```
+.dzBZmJ{position:relative;overflow:hidden;-webkit-mask-image:radial-gradient(white,black);mask-image:radial-gradient(white,black);background-color:var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5)));border-radius:3px;display:block;height:1.2em;width:51%;height:16px;}.dzBZmJ::after{-webkit-animation:crVFvv 1.5s infinite linear;animation:crVFvv 1.5s infinite linear;background:linear-gradient(90deg,transparent,var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5))),transparent);content:'';position:absolute;-webkit-transform:translateX(-100%);-ms-transform:translateX(-100%);transform:translateX(-100%);bottom:0;left:0;right:0;top:0;}
+```
+
+--------------------------------
+
+TITLE: Installing Universal Router with npm
+DESCRIPTION: This command installs the `universal-router` package from npm and saves it as a dependency in the project's `package.json` file. It is a prerequisite for using the router in a JavaScript project.
+
+SOURCE: https://github.com/kriasoft/universal-router#_snippet_0
+
+LANGUAGE: shell
+CODE:
+```
+npm install universal-router --save
+```
+
+--------------------------------
+
+TITLE: Styling Loading Skeleton (50% Width) in CSS
+DESCRIPTION: Defines the base styles for a loading skeleton element with a width of 50% and a subtle background color. It includes properties for positioning, overflow, mask image, border-radius, and fixed height. The `::after` pseudo-element creates a linear gradient shimmer animation.
+
+SOURCE: https://github.com/sveltejs/kit/issues/2920#_snippet_52
+
+LANGUAGE: CSS
+CODE:
+```
+.jmMBqY{position:relative;overflow:hidden;-webkit-mask-image:radial-gradient(white,black);mask-image:radial-gradient(white,black);background-color:var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5)));border-radius:3px;display:block;height:1.2em;width:50%;height:16px;}.jmMBqY::after{-webkit-animation:crVFvv 1.5s infinite linear;animation:crVFvv 1.5s infinite linear;background:linear-gradient(90deg,transparent,var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5))),transparent);content:'';position:absolute;-webkit-transform:translateX(-100%);-ms-transform:translateX(-100%);transform:translateX(-100%);bottom:0;left:0;right:0;top:0;}
+```
+
+--------------------------------
+
+TITLE: 59% Width Rectangular Skeleton Loader CSS
+DESCRIPTION: Defines CSS for a rectangular skeleton loading bar with a width set to 59% and a height of 16px, suitable for representing varying lengths of content like headings or paragraphs. It includes the standard muted background and the `crVFvv` shimmering animation.
+
+SOURCE: https://github.com/microsoft/TypeScript/issues/13399#_snippet_15
+
+LANGUAGE: CSS
+CODE:
+```
+.dKZHQZ{position:relative;overflow:hidden;-webkit-mask-image:radial-gradient(white,black);mask-image:radial-gradient(white,black);background-color:var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5)));border-radius:3px;display:block;height:1.2em;width:59%;height:16px;}.dKZHQZ::after{-webkit-animation:crVFvv 1.5s infinite linear;animation:crVFvv 1.5s infinite linear;background:linear-gradient(90deg,transparent,var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5))),transparent);content:'';position:absolute;-webkit-transform:translateX(-100%);-ms-transform:translateX(-100%);transform:translateX(-100%);bottom:0;left:0;right:0;top:0;}
+```
+
+--------------------------------
+
+TITLE: Loading State Cursor for Ma-Dhb in CSS
+DESCRIPTION: This rule sets the cursor to default when an Ma-Dhb element has the data-loading attribute. This visually indicates that the element is in a loading state and not interactable.
+
+SOURCE: https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages
+
+LANGUAGE: CSS
+CODE:
+```
+.Ma-Dhb[data-loading]{cursor:default;}
+```
+
+--------------------------------
+
+TITLE: Styling Loading Skeleton (79% Width) in CSS
+DESCRIPTION: Defines the base styles for a loading skeleton element with a width of 79% and a subtle background color. It includes properties for positioning, overflow, mask image, border-radius, and fixed height. The `::after` pseudo-element creates a linear gradient shimmer animation.
+
+SOURCE: https://github.com/sveltejs/kit/issues/2920#_snippet_55
+
+LANGUAGE: CSS
+CODE:
+```
+.cShPCj{position:relative;overflow:hidden;-webkit-mask-image:radial-gradient(white,black);mask-image:radial-gradient(white,black);background-color:var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5)));border-radius:3px;display:block;height:1.2em;width:79%;height:16px;}.cShPCj::after{-webkit-animation:crVFvv 1.5s infinite linear;animation:crVFvv 1.5s infinite linear;background:linear-gradient(90deg,transparent,var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5))),transparent);content:'';position:absolute;-webkit-transform:translateX(-100%);-ms-transform:translateX(-100%);transform:translateX(-100%);bottom:0;left:0;right:0;top:0;}
+```
+
+--------------------------------
+
+TITLE: Loading Page Data with `load` Function in SvelteKit
+DESCRIPTION: This JavaScript snippet defines a `load` function within a `+page.server.js` file, which runs on the server to fetch data for a SvelteKit page. It imports `posts` from a local `data.js` file and transforms it into an array of `summaries`, each containing a post's `slug` and `title`, making this data available to the corresponding Svelte component.
+
+SOURCE: https://svelte.dev/tutorial/kit/page-data
+
+LANGUAGE: JavaScript
+CODE:
+```
+import { posts } from './data.js';
+
+export function load() {
+	return {
+		summaries: posts.map((post) => ({
+			slug: post.slug,
+			title: post.title
+		}))
+	};
+}
+```
+
+--------------------------------
+
+TITLE: Loading Montserrat Normal Web Font in CSS
+DESCRIPTION: This @font-face rule defines the normal (non-italic) variant of the 'Montserrat' font. Similar to the italic version, it supports a weight range from 100 to 900 and uses 'swap' for font display. The font source is a Google Fonts URL, and unicode-range is used to load only necessary character subsets, improving page load times.
+
+SOURCE: https://www.contentstack.com/docs/developers/sample-apps/build-a-starter-website-with-sveltekit-and-contentstack
+
+LANGUAGE: CSS
+CODE:
+```
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:100 900;font-display:swap;src:url(https://fonts.gstatic.com/s/montserrat/v30/JTUSjIg1\_i6t8kCHKm459WRhyyTh89ZNpQ.woff2) format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}
+```
+
+--------------------------------
+
+TITLE: On-Demand Module Loading on User Interaction (JavaScript)
+DESCRIPTION: This snippet shows how to dynamically load a module in response to a user action, such as a button click, and then execute a function from the imported module. The 'import()' function also supports 'await' for asynchronous loading.
+
+SOURCE: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import
+
+LANGUAGE: JavaScript
+CODE:
+```
+const main = document.querySelector("main");
+for (const link of document.querySelectorAll("nav > a")) {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    import("/modules/my-module.js")
+      .then((module) => {
+        module.loadPageInto(main);
+      })
+      .catch((err) => {
+        main.textContent = err.message;
+      });
+  });
+}
+```
+
+--------------------------------
+
+TITLE: Incorrect SvelteKit Load Function Syntax - JavaScript
+DESCRIPTION: This snippet illustrates a syntax error in a Svelte component's `_load` function. The use of `->` instead of `=>` for an arrow function is invalid JavaScript syntax, leading to a build failure during the SSR bundle compilation. This function is typically used in SvelteKit for data loading.
+
+SOURCE: https://github.com/sveltejs/kit/issues/2920#_snippet_63
+
+LANGUAGE: JavaScript
+CODE:
+```
+_load = ({page, fetch, session, stuff}) ->
+```
+
+--------------------------------
+
+TITLE: Styling Loading Skeleton (62% Width) in CSS
+DESCRIPTION: Defines the base styles for a loading skeleton element with a width of 62% and a subtle background color. It includes properties for positioning, overflow, mask image, border-radius, and fixed height. The `::after` pseudo-element creates a linear gradient shimmer animation.
+
+SOURCE: https://github.com/sveltejs/kit/issues/2920#_snippet_51
+
+LANGUAGE: CSS
+CODE:
+```
+.dqaPp{position:relative;overflow:hidden;-webkit-mask-image:radial-gradient(white,black);mask-image:radial-gradient(white,black);background-color:var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5)));border-radius:3px;display:block;height:1.2em;width:62%;height:16px;}.dqaPp::after{-webkit-animation:crVFvv 1.5s infinite linear;animation:crVFvv 1.5s infinite linear;background:linear-gradient(90deg,transparent,var(--bgColor-neutral-muted,var(--color-neutral-subtle,rgba(234,238,242,0.5))),transparent);content:'';position:absolute;-webkit-transform:translateX(-100%);-ms-transform:translateX(-100%);transform:translateX(-100%);bottom:0;left:0;right:0;top:0;}
+```
+
+--------------------------------
+
+TITLE: Invalidating SvelteKit Load Functions (TypeScript)
+DESCRIPTION: Triggers a re-run of `load` functions for the currently active page if they depend on the specified URL via `fetch` or `depends`. It returns a Promise that resolves when the page is subsequently updated. The `resource` argument can be a string, URL, or a predicate function for custom invalidation logic based on URL patterns.
+
+SOURCE: https://svelte.dev/docs/kit/$app-navigation
+
+LANGUAGE: TypeScript
+CODE:
+```
+function invalidate(resource: string | URL | ((url: URL) => boolean)): Promise<void>
+```
+
+LANGUAGE: TypeScript
+CODE:
+```
+import { invalidate } from '$app/navigation';
+
+invalidate((url) => url.pathname === '/path');
+```
+
+--------------------------------
+
+TITLE: Loading Localized Greetings in SvelteKit
+DESCRIPTION: This SvelteKit `+page.server.js` file defines a `load` function to fetch localized greetings based on the `lang` parameter from the URL. It uses a `greetings` object to map language codes to specific phrases and defaults to 'en' if the language parameter is not found.
+
+SOURCE: https://svelte.dev/tutorial/kit/optional-params
+
+LANGUAGE: JavaScript
+CODE:
+```
+const greetings = {
+	en: 'hello!',
+	de: 'hallo!',
+	fr: 'bonjour!'
+};
+
+export function load({ params }) {
+	return {
+		greeting: greetings[params.lang] ?? 'en'
+	};
+}
+```

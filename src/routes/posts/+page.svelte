@@ -1,0 +1,91 @@
+<script lang="ts">
+	import type { PageData } from './$types';
+
+	let { data }: { data: PageData } = $props();
+</script>
+
+<div class="posts-list">
+	<h1>Posts</h1>
+	{#each data.posts as post (post.slug)}
+		<article>
+			<a href="/posts/{post.slug}">
+				<h2>{post.title}</h2>
+				<p>{post.description}</p>
+				<time>{new Date(post.date).toLocaleDateString('en-US', {
+					year: 'numeric',
+					month: 'long',
+					day: 'numeric'
+				})}</time>
+			</a>
+		</article>
+	{/each}
+</div>
+
+<style>
+	.posts-list {
+		max-width: 70ch;
+		margin: 0 auto;
+		padding: 2rem 1rem;
+	}
+
+	h1 {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-bottom: 2rem;
+		text-align: center;
+	}
+
+	article {
+		margin-bottom: 2rem;
+		padding-bottom: 2rem;
+		border-bottom: 1px solid #e5e7eb;
+	}
+
+	article:last-child {
+		border-bottom: none;
+	}
+
+	article a {
+		text-decoration: none;
+		color: inherit;
+		display: block;
+		transition: transform 0.2s;
+	}
+
+	article a:hover {
+		transform: translateX(0.5rem);
+	}
+
+	h2 {
+		font-size: 1.75rem;
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+		color: #111827;
+	}
+
+	p {
+		font-size: 1rem;
+		color: #6b7280;
+		margin-bottom: 0.5rem;
+		line-height: 1.6;
+	}
+
+	time {
+		font-size: 0.875rem;
+		color: #9ca3af;
+	}
+
+	@media (min-width: 768px) {
+		.posts-list {
+			padding: 3rem 2rem;
+		}
+
+		h1 {
+			font-size: 3rem;
+		}
+
+		h2 {
+			font-size: 2rem;
+		}
+	}
+</style>

@@ -1,14 +1,12 @@
 ---
-title: "Fractals: Self‑Similarity and Infinite Detail"
-description: "A gentle introduction to fractals, core ideas, and a Mandelbrot demo."
+title: "Curation"
+description: "On the increased importance of taste and curation in 2025"
 date: 2025-09-14
 tags:
-  - math
-  - visualization
-  - fractals
+  - taste
+  - advertisements
 draft: true
 ---
-
 <script lang="ts">
 	import chevy from '$lib/assets/chevy_nova_1975.png';
 </script>
