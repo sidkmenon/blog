@@ -2,7 +2,6 @@
 title: "Home"
 description: "Sid Menon's blog"
 date: 2025-09-14
-draft: true
 ---
 <script lang="ts">
 	import trafficCone from '$lib/assets/bob_the_builder.svg';

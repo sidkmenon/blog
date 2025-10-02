@@ -5,7 +5,6 @@ date: 2025-09-14
 tags:
   - taste
   - advertisements
-draft: true
 ---
 <script lang="ts">
 	import chevy from '$lib/assets/chevy_nova_1975.png';

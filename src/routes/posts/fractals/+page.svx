@@ -6,7 +6,6 @@ tags:
   - math
   - visualization
   - fractals
-draft: true
 ---
 > Replace this lead with a one‑sentence summary of the post.
 

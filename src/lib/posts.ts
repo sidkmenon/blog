@@ -3,7 +3,6 @@ export interface PostMetadata {
 	description: string;
 	date: string;
 	tags?: string[];
-	draft?: boolean;
 }
 
 export interface Post extends PostMetadata {
@@ -27,6 +26,5 @@ export async function getAllPosts(): Promise<Post[]> {
 	});
 
 	return posts
-		.filter((p) => !p.draft)
 		.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
