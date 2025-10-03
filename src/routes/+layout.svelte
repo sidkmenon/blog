@@ -21,7 +21,6 @@
 
 {@render children?.()}
 
-
 <style>
 	@font-face {
 		font-family: 'Charter';
@@ -56,7 +55,9 @@
 	}
 
 	:global(body) {
-		font-family: 'Charter', 'Bitstream Charter', 'Charter BT', 'Book Antiqua', 'Georgia', 'Times New Roman', serif;
+		font-family:
+			'Charter', 'Bitstream Charter', 'Charter BT', 'Book Antiqua', 'Georgia', 'Times New Roman',
+			serif;
 		margin: 0;
 	}
 
