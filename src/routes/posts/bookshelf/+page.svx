@@ -1,0 +1,13 @@
+---
+title: "Bookshelf"
+description: "A list of books that I have enjoyed reading...or enjoy the idea of reading"
+date: 2025-09-14
+tags:
+  - reading
+---
+# Bookshelf
+
+I read a lot and do a pretty poor job of updating this site when I finish something. Here's essentially a random sample of books I've read:
+
+- Anna Karenina by Leo Tolstoy
+- Crime and Punishment by Fyodor Dostoevsky

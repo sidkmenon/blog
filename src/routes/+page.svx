@@ -3,37 +3,64 @@ title: "Home"
 description: "Sid Menon's blog"
 date: 2025-09-14
 ---
-<script lang="ts">
-	import trafficCone from '$lib/assets/bob_the_builder.svg';
-</script>
+<div class="container">
+	<main class="home">
+		<h1>Sidharth Menon</h1>
 
-<main class="home">
-	<h1>Sidharth Menon</h1>
+		<p>
+		 My name is Sidharth (Sid) Menon.
+		 <br />
+		 I am currently based out of San Francisco and am interested in the intersection of technology, design, and culture.
+		 <br />
+		 I grew up in Ohio and previously studied at Harvard.
+		 <br />
+		 Email: menon.sid.k [at] gmail [dot] com
+		</p>
 
-	<p>This site is under construction. Please check back later!</p>
+		<p class="quote">
+			I have had my invitation to this world's festival, and thus my life has been blessed.
+			- Tajore
+		</p>
+	</main>
 
-	<img class="mascot" src={trafficCone} alt="bob the builder" />
-
-	<p class="quote">
-		I have had my invitation to this world's festival, and thus my life has been blessed.
-		- Tajore
-	</p>
-</main>
+	<aside class="sidebar">
+		<nav>
+			<a href="/posts">posts</a>
+			<a href="/posts/bookshelf">bookshelf</a>
+			<a href="/posts/other">other</a>
+		</nav>
+	</aside>
+</div>
 
 <style>
-	.home {
+	.container {
 		display: flex;
-		flex-direction: column;
-        justify-content: center;
-        align-items: center;
-		text-align: center;
-		gap: 1.5rem;
-		min-height: 70vh;
+		gap: 2rem;
+		align-items: flex-start;
 	}
 
-	.mascot {
-		width: min(50vw, 18rem);
-		height: auto;
+	.home {
+		flex: 1;
+	}
+
+	.sidebar {
+		flex-shrink: 0;
+		min-width: 150px;
+	}
+
+	.sidebar nav {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.sidebar nav a {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.sidebar nav a:hover {
+		text-decoration: underline;
 	}
 
 	.quote {
@@ -44,6 +71,16 @@ date: 2025-09-14
     @media (min-width: 750px) {
         .home {
             padding: 3rem 1.5rem;
+        }
+    }
+
+    @media (max-width: 750px) {
+        .container {
+            flex-direction: column-reverse;
+        }
+
+        .sidebar nav {
+            flex-direction: row;
         }
     }
 </style>

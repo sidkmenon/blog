@@ -1,0 +1,22 @@
+---
+title: "Other Blogs"
+description: "A collection of other blogs that I enjoy reading."
+date: 2025-10-02
+tags:
+  - reading
+---
+# Other Blogs
+
+This post is a collection of other blogs that I enjoy reading. 
+
+## Design
+
+- [Maggie Appleton's blog](https://maggieappleton.com/): digital gardening, anthropology, and generally brilliant!
+
+## Tech
+
+- [Paul Graham](https://www.paulgraham.com/articles.html)'s blog: a classic. Lots of great startup vignettes.
+
+## Art
+
+- [Dhilan Ramaprasad](https://dhilan.xyz)'s blog: heartbreaking works of staggering genius.
