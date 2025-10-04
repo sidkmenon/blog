@@ -14,13 +14,11 @@ tags:
 
 I think now more than ever, *taste* is a vitally important differentator.
 
-This may seem trite at the surface, but I find that there's quite a bit here when we start unpacking it. 
+I think it's much more important to have a sense of what to _do_ with information than to be an information provider. Tech like Google and ChatGPT brought great search experiences to all, so asymmetry of raw information has largely ceased to be an advantage.
 
-Tech like Google and ChatGPT brought great search experiences to all, so asymmetry of raw information has largely ceased to be an advantage. Today I'd argue it's more important to have a sense of what to _do_ with that information.
+Culture has shifted to accomodate this trend, too. I love to look at advertisements to get a sense of this sort of thing, which is a habit I picked up from the brilliant [John Stilgoe](https://harvardmagazine.com/sites/default/files/pdf/1996/01-pdfs/JF96Stilgoe.pdf). Advertisments are freizes of culture, like pieces of amber; they are meant to capture attention in the context of a specific zeitgeist & time.
 
-I love to look at advertisements to get a sense of this sort of thing, which is a habit I picked up from the brilliant [John Stilgoe](https://harvardmagazine.com/sites/default/files/pdf/1996/01-pdfs/JF96Stilgoe.pdf). Advertisements have a peculiar way of capturing the attitudes of culture at a point in time; after all, their purpose is to capture attention.
-
-## Sales in 1975 vs 2025: the General Motor Company
+## Case Study: General Motor Company (GM) Ads in 1975 vs 2025
 
 In 1975, General Motors had the highest revenues of any company in the world ($50-60 billion). Let's take a look at an ad it placed in the magazine:
 
@@ -30,12 +28,18 @@ The focus of the ad below is largely a logical argument for the Nova (*'every No
 
 Let's juxtapose this ad against an ad from 2025 from the same company:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/y9LybNzBRS8?si=Xgn2giITTppjAGdB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+> TODO(smenon): add a video here.
 
 The 2025 advertisement is focused on _feelings_. It associated a group of rugged, hardworking folks with the Chevy brand. The companies that are most successful have a clear, succinct vision they communicate through their brand, and the pitch is largely emotional.
 
-## The Takeaways
+## How do you get taste?
 
-## How do you learn taste?
+Ok, so taste defines good experiences in the modern age. How does one get "good taste"? What does that even mean?
 
-I believe that taste is largely learned through exposure. People with good taste often struggle deeply with the quality of their work, since it does not hold up to the bar.
+To what extent is that nature vs. nurture? I think it's too easy to chalk up taste to natural ability and to discount the role of exposure.
+
+Artists of all forms -- designers, painters, musicians -- learn taste by imitating the work of great artists before them. Even "non-artistic" fields have elements of this: engineers learn tricks from their seniors; mathematicians copy the tricks and proofs of prior generations.
+
+There's a pretty famous [Ira Glass](https://en.wikipedia.org/wiki/Ira_Glass) quote about what to do once you _have_ good taste:
+
+> All of us who do creative work, we get into it because we have good taste. But there is this gap. For the first couple years you make stuff, it’s just not that good. It’s trying to be good, it has potential, but it’s not. But your taste, the thing that got you into the game, is still killer. And your taste is why your work disappoints you. A lot of people never get past this phase, they quit. Most people I know who do interesting, creative work went through years of this. We know our work doesn’t have this special thing that we want it to have. We all go through this. And if you are just starting out or you are still in this phase, you gotta know its normal and the most important thing you can do is do a lot of work. Put yourself on a deadline so that every week you will finish one story. It is only by going through a volume of work that you will close that gap, and your work will be as good as your ambitions.
