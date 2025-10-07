@@ -1,0 +1,708 @@
+================
+CODE SNIPPETS
+================
+TITLE: Running rure iter example
+DESCRIPTION: Commands to clone the repository, navigate to the examples directory, compile the C API examples, and run the 'iter' example using the compiled library.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-capi/README.md#_snippet_0
+
+LANGUAGE: Shell
+CODE:
+```
+$ git clone git://github.com/rust-lang/regex
+$ cd regex/regex-capi/examples
+$ ./compile
+$ LD_LIBRARY_PATH=../target/release ./iter
+```
+
+--------------------------------
+
+TITLE: Install regex-cli Tool using Cargo
+DESCRIPTION: Explains how to install the regex-cli command-line tool using the Rust package manager, Cargo. This is the standard way to get the executable.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-cli/README.md#_snippet_0
+
+LANGUAGE: Shell
+CODE:
+```
+cargo install regex-cli
+```
+
+--------------------------------
+
+TITLE: Install Rebar Benchmarking Tool - Shell
+DESCRIPTION: Provides the necessary shell commands to clone the rebar repository, navigate into its directory, and install the rebar tool using Cargo.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/README.md#_snippet_6
+
+LANGUAGE: text
+CODE:
+```
+$ git clone https://github.com/BurntSushi/rebar
+$ cd rebar
+$ cargo install --path ./
+```
+
+--------------------------------
+
+TITLE: Run Regex Compilation Tests (Shell)
+DESCRIPTION: This command sequence runs the compilation tests for the `regex` crate. It first creates a temporary directory and then executes the `regex-cli compile-test` command, piping the output to `tee` to save it to a CSV file while also displaying it. Requires the `regex-cli` tool installed from the repository root.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/record/compile-test/README.md#_snippet_0
+
+LANGUAGE: Shell
+CODE:
+```
+$ mkdir /tmp/regex-compile-test
+$ regex-cli compile-test ./ /tmp/regex-compile-test | tee record/compile-test/2023-04-19_1.7.3.csv
+```
+
+--------------------------------
+
+TITLE: Matching Multiple Regexes with RegexSet in Rust
+DESCRIPTION: Shows how to use `regex::RegexSet` to efficiently match a collection of regular expressions against a single input string in one pass. The example creates a set of patterns and uses the `matches` method to get an iterator over the indices of the patterns that matched the input string 'foobar'. It also demonstrates checking if a specific pattern index matched.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/README.md#_snippet_4
+
+LANGUAGE: Rust
+CODE:
+```
+use regex::RegexSet;
+
+let set = RegexSet::new(&[
+    r"\w+",
+    r"\d+",
+    r"\pL+",
+    r"foo",
+    r"bar",
+    r"barfoo",
+    r"foobar",
+]).unwrap();
+
+// Iterate over and collect all of the matches.
+let matches: Vec<_> = set.matches("foobar").into_iter().collect();
+assert_eq!(matches, vec![0, 2, 3, 4, 6]);
+
+// You can also test whether a particular regex matched:
+let matches = set.matches("foobar");
+assert!(!matches.matched(5));
+assert!(matches.matched(6));
+```
+
+--------------------------------
+
+TITLE: Add regex-automata Dependency (Shell)
+DESCRIPTION: Adds the `regex-automata` crate as a dependency to the Rust project using `cargo add`. Enables the `std` and `dfa-search` features required for this example.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-cli/README.md#_snippet_7
+
+LANGUAGE: shell
+CODE:
+```
+$ cargo add regex-automata --features std,dfa-search
+```
+
+--------------------------------
+
+TITLE: Find Overall Matches on File using Hybrid Engine
+DESCRIPTION: Shows how to search a file instead of a direct haystack string using regex-cli find match hybrid. It first creates a temporary file named haystack and then uses the file path as the argument. This example also uses the hybrid engine, which supports the match mode.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-cli/README.md#_snippet_5
+
+LANGUAGE: Shell
+CODE:
+```
+echo 'best_album="Blow Your Face Out"' > haystack
+regex-cli find match hybrid -p '(?m)^(?<key>[[:word:]]+)="(?<val>[^"]+)"$' -p $'(?m)^(?<key>[[:word:]]+)=\'(?<val>[^\']+)\'$' haystack
+```
+
+--------------------------------
+
+TITLE: Parsing a regex string into HIR in Rust
+DESCRIPTION: This example demonstrates how to use the `regex_syntax::parse` function to parse a regular expression string into its High-Level Intermediate Representation (Hir). It shows how to assert the structure of the resulting Hir object.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-syntax/README.md#_snippet_0
+
+LANGUAGE: Rust
+CODE:
+```
+use regex_syntax::{hir::Hir, parse};
+
+let hir = parse("a|b").unwrap();
+assert_eq!(hir, Hir::alternation(vec![
+    Hir::literal("a".as_bytes()),
+    Hir::literal("b".as_bytes()),
+]));
+```
+
+--------------------------------
+
+TITLE: Find Overall Matches using Meta Engine
+DESCRIPTION: Demonstrates performing a search using regex-cli find match meta. Similar to the capture example, it uses two patterns and a haystack string, but only prints the overall match range and text, not individual capture groups. This mode is compatible with engines that don't support captures.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-cli/README.md#_snippet_4
+
+LANGUAGE: Shell
+CODE:
+```
+regex-cli find match meta -p '(?m)^(?<key>[[:word:]]+)="(?<val>[^"]+)"$' -p $'(?m)^(?<key>[[:word:]]+)=\'(?<val>[^\']+)\'$' -y 'best_album="Blow Your Face Out"'
+```
+
+--------------------------------
+
+TITLE: View Compilation Test Results (Shell)
+DESCRIPTION: This command uses the `xsv` tool to display the contents of the generated CSV file containing the compilation test results in a human-readable table format. Requires the `xsv` tool to be installed.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/record/compile-test/README.md#_snippet_1
+
+LANGUAGE: Shell
+CODE:
+```
+$ xsv table record/compile-test/2023-04-19_1.7.3.csv
+```
+
+--------------------------------
+
+TITLE: Debug Thompson NFA for '.' Regex (UTF-8)
+DESCRIPTION: Demonstrates using regex-cli debug thompson to print the internal representation of the Thompson NFA for the regex '.'. The --no-table flag omits extra metadata. This example shows the default UTF-8 aware behavior.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-cli/README.md#_snippet_1
+
+LANGUAGE: Shell
+CODE:
+```
+regex-cli debug thompson '.' --no-table
+```
+
+--------------------------------
+
+TITLE: Matching Regex on Byte Slices in Rust
+DESCRIPTION: Demonstrates how to use the `regex::bytes::Regex` API to find patterns in arbitrary byte slices (`&[u8]`) instead of UTF-8 strings (`&str`). This example finds null-terminated strings, including non-UTF-8 bytes like `\xFF`, by disabling Unicode mode with `(?-u)`. It uses `captures_iter` to extract named capture groups (`cstr`) from each match.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/README.md#_snippet_3
+
+LANGUAGE: Rust
+CODE:
+```
+use regex::bytes::Regex;
+
+let re = Regex::new(r"(?-u)(?<cstr>[^\x00]+)\x00").unwrap();
+let text = b"foo\xFFbar\x00baz\x00";
+
+// Extract all of the strings without the null terminator from each match.
+// The unwrap is OK here since a match requires the `cstr` capture to match.
+let cstrs: Vec<&[u8]> =
+    re.captures_iter(text)
+      .map(|c| c.name("cstr").unwrap().as_bytes())
+      .collect();
+assert_eq!(vec![&b"foo\xFFbar"[..], &b"baz"[..]], cstrs);
+```
+
+--------------------------------
+
+TITLE: Initialize Rust Binary Project (Shell)
+DESCRIPTION: Creates a new directory for the project, navigates into it, and initializes a basic Rust binary project using `cargo init --bin`.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-cli/README.md#_snippet_6
+
+LANGUAGE: shell
+CODE:
+```
+$ mkdir regex-dfa-test
+$ cd regex-dfa-test
+$ cargo init --bin
+```
+
+--------------------------------
+
+TITLE: Build Regex Crate Benchmarks with Rebar - Shell
+DESCRIPTION: Executes the rebar build command to compile the benchmark harness specifically for the 'rust/regex' crate, preparing it for measurement.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/README.md#_snippet_7
+
+LANGUAGE: text
+CODE:
+```
+$ rebar build -e '^rust/regex$'
+```
+
+--------------------------------
+
+TITLE: Generate Serialized Sparse DFA (Shell)
+DESCRIPTION: Uses the `regex-cli` tool to generate a serialized sparse DFA from the pattern `\w`. Configures the generation with minimization, shrinking, anchored search, rustfmt, and safe deserialization, writing output files to the `./src/` directory.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-cli/README.md#_snippet_8
+
+LANGUAGE: shell
+CODE:
+```
+regex-cli generate serialize sparse dfa \
+  --minimize \
+  --shrink \
+  --start-kind anchored \
+  --rustfmt \
+  --safe \
+  SIMPLE_WORD_FWD \
+  ./src/ \
+  "\w"
+```
+
+--------------------------------
+
+TITLE: Run Regex Crate Benchmarks as Tests with Rebar - Shell
+DESCRIPTION: Runs all benchmarks for the 'rust/regex' crate once in test mode using rebar to verify they function correctly before recording measurements.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/README.md#_snippet_8
+
+LANGUAGE: text
+CODE:
+```
+$ rebar measure -e '^rust/regex$' -t
+```
+
+--------------------------------
+
+TITLE: List Generated DFA Files (Shell)
+DESCRIPTION: Lists the contents of the `./src/` directory after running the `regex-cli generate` command, showing the generated Rust source file and the big/little endian serialized DFA files.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-cli/README.md#_snippet_9
+
+LANGUAGE: shell
+CODE:
+```
+$ ls -l src/
+total 32
+-rw-rw-r-- 1 andrew users    45 May 28 22:04 main.rs
+-rw-rw-r-- 1 andrew users 11095 May 30 10:24 simple_word_fwd.bigendian.dfa
+-rw-rw-r-- 1 andrew users 11095 May 30 10:24 simple_word_fwd.littleendian.dfa
+-rw-rw-r-- 1 andrew users   711 May 30 10:24 simple_word_fwd.rs
+```
+
+--------------------------------
+
+TITLE: Run Rust Program Using DFA (Shell)
+DESCRIPTION: Compiles and runs the Rust program that uses the deserialized DFA. Shows the output of the anchored searches performed in the `main` function.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-cli/README.md#_snippet_11
+
+LANGUAGE: shell
+CODE:
+```
+$ cargo run
+   Compiling regex-dfa-test v0.1.0 (/home/andrew/tmp/regex-dfa-test)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.17s
+     Running `target/debug/regex-dfa-test`
+is a word: Ok(Some(HalfMatch { pattern: PatternID(0), offset: 2 }))
+not a word: Ok(None)
+```
+
+--------------------------------
+
+TITLE: Record Regex Crate Benchmark Measurements with Rebar - Shell
+DESCRIPTION: Executes all benchmarks for the 'rust/regex' crate using rebar, records the performance measurements, and saves the output to a CSV file named 'results.csv' using tee.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/README.md#_snippet_9
+
+LANGUAGE: text
+CODE:
+```
+$ rebar measure -e '^rust/regex$' | tee results.csv
+```
+
+--------------------------------
+
+TITLE: Compare Benchmark Results with Rebar - Shell
+DESCRIPTION: Uses the rebar compare command to analyze and display the benchmark timings previously saved in the 'results.csv' file.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/README.md#_snippet_10
+
+LANGUAGE: text
+CODE:
+```
+$ rebar cmp results.csv
+```
+
+--------------------------------
+
+TITLE: Generate Sparse DFA for Serialization Tests (regex-cli)
+DESCRIPTION: This shell command is similar to the dense DFA generation command but targets the creation of a sparse DFA (`sparse`). It uses the same `regex-cli` tool, input patterns, pattern set (`MULTI_PATTERN_V2`), and output directory (`tests/gen/sparse/`). It also enables the same set of options (`--rustfmt`, `--safe`, etc.) to ensure comprehensive testing of sparse DFA serialization features.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-automata/tests/gen/README.md#_snippet_1
+
+LANGUAGE: shell
+CODE:
+```
+$ regex-cli generate serialize sparse regex \
+    MULTI_PATTERN_V2 \
+    tests/gen/sparse/ \
+    --rustfmt \
+    --safe \
+    --starts-for-each-pattern \
+    --specialize-start-states \
+    --start-kind both \
+    --unicode-word-boundary \
+    --minimize \
+    '\b[a-zA-Z]+\b' \
+    '(?m)^\S+$' \
+    '(?Rm)^\S+$'
+```
+
+--------------------------------
+
+TITLE: Matching and Capturing Named Groups with regex-lite (Rust)
+DESCRIPTION: Demonstrates how to create a Regex object with named capture groups using the `regex-lite` crate and use the `captures` method to extract values from a single match. Shows accessing captured values by their defined names.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-lite/README.md#_snippet_0
+
+LANGUAGE: Rust
+CODE:
+```
+use regex_lite::Regex;
+
+fn main() {
+    let re = Regex::new(r"(?x)
+(?P<year>\d{4})  # the year
+-
+(?P<month>\d{2}) # the month
+-
+(?P<day>\d{2})   # the day
+").unwrap();
+    let caps = re.captures("2010-03-14").unwrap();
+
+    assert_eq!("2010", &caps["year"]);
+    assert_eq!("03", &caps["month"]);
+    assert_eq!("14", &caps["day"]);
+}
+```
+
+--------------------------------
+
+TITLE: Generate Dense DFA for Serialization Tests (regex-cli)
+DESCRIPTION: This shell command uses the `regex-cli` tool to generate a dense DFA (`dense`) from multiple regex patterns. It specifies the output directory (`tests/gen/dense/`), the pattern set (`MULTI_PATTERN_V2`), and enables various options like `--rustfmt`, `--safe`, `--starts-for-each-pattern`, `--specialize-start-states`, `--start-kind both`, `--unicode-word-boundary`, and `--minimize` to maximize test coverage for serialization features.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-automata/tests/gen/README.md#_snippet_0
+
+LANGUAGE: shell
+CODE:
+```
+$ regex-cli generate serialize dense regex \
+    MULTI_PATTERN_V2 \
+    tests/gen/dense/ \
+    --rustfmt \
+    --safe \
+    --starts-for-each-pattern \
+    --specialize-start-states \
+    --start-kind both \
+    --unicode-word-boundary \
+    --minimize \
+    '\b[a-zA-Z]+\b' \
+    '(?m)^\S+$' \
+    '(?Rm)^\S+$'
+```
+
+--------------------------------
+
+TITLE: Use Deserialized DFA for Searching (Rust)
+DESCRIPTION: Demonstrates how to use the lazily deserialized DFA (`SIMPLE_WORD_FWD`) generated by `regex-cli`. Imports necessary types from `regex-automata`, defines the `mod` for the generated file, and performs anchored searches on sample strings.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-cli/README.md#_snippet_10
+
+LANGUAGE: rust
+CODE:
+```
+use regex_automata::{dfa::Automaton, Anchored, Input};
+
+use crate::simple_word_fwd::SIMPLE_WORD_FWD as DFA;
+
+mod simple_word_fwd;
+
+fn main() {
+    let input = Input::new("ω").anchored(Anchored::Yes);
+    println!("is a word: {:?}", DFA.try_search_fwd(&input));
+
+    let input = Input::new("☃").anchored(Anchored::Yes);
+    println!("not a word: {:?}", DFA.try_search_fwd(&input));
+}
+```
+
+--------------------------------
+
+TITLE: Find Matches with Capture Groups using Meta Engine
+DESCRIPTION: Illustrates performing a search using regex-cli find capture meta. It uses two patterns (-p) to match key-value pairs in different quote styles and searches a provided haystack string (-y). The output includes details about the matched capture groups.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-cli/README.md#_snippet_3
+
+LANGUAGE: Shell
+CODE:
+```
+regex-cli find capture meta -p '(?m)^(?<key>[[:word:]]+)="(?<val>[^"]+)"$' -p $'(?m)^(?<key>[[:word:]]+)=\'(?<val>[^\']+)\'$' -y 'best_album="Blow Your Face Out"'
+```
+
+--------------------------------
+
+TITLE: Debug Thompson NFA for '(?-u:.)' Regex (No UTF-8)
+DESCRIPTION: Shows how to debug the Thompson NFA for the regex '(?-u:.)' using regex-cli debug thompson. The -b or --no-utf8-syntax flag is required because the pattern can match invalid UTF-8, which is forbidden by default. --no-table is used for brevity.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-cli/README.md#_snippet_2
+
+LANGUAGE: Shell
+CODE:
+```
+regex-cli debug thompson -b '(?-u:.)' --no-table
+```
+
+--------------------------------
+
+TITLE: Configuring Regex Crate Features in Cargo.toml
+DESCRIPTION: Illustrates how to configure the `regex` crate dependency in a `Cargo.toml` file to disable default features and selectively enable others. This configuration disables performance optimizations and Unicode tables by default, then explicitly enables the 'std' feature for standard library support, which is generally recommended for better performance and avoiding spin locks.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/README.md#_snippet_5
+
+LANGUAGE: TOML
+CODE:
+```
+[dependencies.regex]
+version = "1.3"
+default-features = false
+# Unless you have a specific reason not to, it's good sense to enable standard
+# library support. It enables several optimizations and avoids spin locks. It
+# also shouldn't meaningfully impact compile times or binary size.
+features = ["std"]
+```
+
+--------------------------------
+
+TITLE: Iterating Over Multiple Matches with regex (Rust)
+DESCRIPTION: Shows how to use the `captures_iter` method from the `regex` crate to find and process all occurrences of a regex pattern within a given string. Demonstrates iterating through matches and accessing captured groups by their index.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-lite/README.md#_snippet_1
+
+LANGUAGE: Rust
+CODE:
+```
+use regex::Regex;
+
+const TO_SEARCH: &'static str = "
+On 2010-03-14, foo happened. On 2014-10-14, bar happened.
+";
+
+fn main() {
+    let re = Regex::new(r"(\d{4})-(\d{2})-(\d{2})").unwrap();
+
+    for caps in re.captures_iter(TO_SEARCH) {
+        // Note that all of the unwraps are actually OK for this regex
+        // because the only way for the regex to match is if all of the
+        // capture groups match. This is not true in general though!
+        println!("year: {}, month: {}, day: {}",
+                 caps.get(1).unwrap().as_str(),
+                 caps.get(2).unwrap().as_str(),
+                 caps.get(3).unwrap().as_str());
+    }
+}
+```
+
+--------------------------------
+
+TITLE: Matching Date and Capturing Groups with regex in Rust
+DESCRIPTION: Demonstrates how to create a `Regex` object to match a specific pattern (YYYY-MM-DD) and use named capture groups to extract parts of the match (year, month, day). Shows how to access the captured values by name using the `caps` object.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/README.md#_snippet_0
+
+LANGUAGE: Rust
+CODE:
+```
+use regex::Regex;
+
+fn main() {
+    let re = Regex::new(r"(?x)
+(?P<year>\d{4})  # the year
+-
+(?P<month>\d{2}) # the month
+-
+(?P<day>\d{2})   # the day
+").unwrap();
+
+    let caps = re.captures("2010-03-14").unwrap();
+    assert_eq!("2010", &caps["year"]);
+    assert_eq!("03", &caps["month"]);
+    assert_eq!("14", &caps["day"]);
+}
+```
+
+--------------------------------
+
+TITLE: Using once_cell for Lazy Regex Initialization in Rust
+DESCRIPTION: Illustrates how to use the `once_cell` crate's `Lazy` type to ensure a `Regex` object is compiled only once, typically when it's first accessed. This is recommended to avoid the performance cost of recompiling the same regex repeatedly, especially within loops or frequently called functions. Requires the `once_cell` crate dependency.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/README.md#_snippet_2
+
+LANGUAGE: Rust
+CODE:
+```
+use {
+    once_cell::sync::Lazy,
+    regex::Regex,
+};
+
+fn some_helper_function(haystack: &str) -> bool {
+    static RE: Lazy<Regex> = Lazy::new(|| Regex::new(r"...").unwrap());
+    RE.is_match(haystack)
+}
+
+fn main() {
+    assert!(some_helper_function("abc"));
+    assert!(!some_helper_function("ac"));
+}
+```
+
+--------------------------------
+
+TITLE: Regex Hex Notation Syntax - regex
+DESCRIPTION: Demonstrates the various syntaxes supported by the regex crate for specifying Unicode code points using hexadecimal values. Includes fixed-width forms (\xNN, \uNNNN, \UNNNNNNNN) and variable-width forms (\x{...}, \u{...}, \U{...}). Also shows the behavior difference for \xFF when Unicode mode is disabled.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/UNICODE.md#_snippet_0
+
+LANGUAGE: regex
+CODE:
+```
+\x7F
+\x{10FFFF}
+\u007F
+\u{7F}
+\U0000007F
+\U{7F}
+(?-u)\xFF
+```
+
+--------------------------------
+
+TITLE: Searching Multiple Regex Patterns with Named Captures in Rust
+DESCRIPTION: This snippet demonstrates how to compile and search for multiple regular expressions simultaneously using the `regex_automata::meta::Regex` type. It shows how to define several patterns with the same named capture groups (`key`, `val`), iterate through matches in a haystack string using `captures_iter`, and extract the captured text for the named groups from each match. This requires the `regex_automata` crate.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/regex-automata/README.md#_snippet_0
+
+LANGUAGE: Rust
+CODE:
+```
+use regex_automata::{meta::Regex, PatternID};
+
+let re = Regex::new_many(&[
+    r#"(?m)^(?<key>[[:word:]]+)=(?<val>[[:word:]]+)$"#,
+    r#"(?m)^(?<key>[[:word:]]+)="(?<val>[^"]+)"$"#,
+    r#"(?m)^(?<key>[[:word:]]+)='(?<val>[^']+)'$"#,
+    r#"(?m)^(?<key>[[:word:]]+):\s*(?<val>[[:word:]]+)$"#,
+]).unwrap();
+let hay = r#"
+best_album="Blow Your Face Out"
+best_quote='"then as it was, then again it will be"'
+best_year=1973
+best_simpsons_episode: HOMR
+"#;
+let mut kvs = vec![];
+for caps in re.captures_iter(hay) {
+    // N.B. One could use capture indices '1' and '2' here
+    // as well. Capture indices are local to each pattern.
+    // (Just like names are.)
+    let key = &hay[caps.get_group_by_name("key").unwrap()];
+    let val = &hay[caps.get_group_by_name("val").unwrap()];
+    kvs.push((key, val));
+}
+assert_eq!(kvs, vec![
+    ("best_album", "Blow Your Face Out"),
+    ("best_quote", "\"then as it was, then again it will be\""),
+    ("best_year", "1973"),
+    ("best_simpsons_episode", "HOMR"),
+]);
+```
+
+--------------------------------
+
+TITLE: Rust Regex::new Compilation Fix - Rust
+DESCRIPTION: Illustrates the Rust code using `Regex::new` with the `(?-u:\B)` pattern. In regex versions prior to 1.8 and in 1.8.0-1.8.3, this would compile but could lead to issues; regex 1.8.4 now correctly prevents this from compiling.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/CHANGELOG.md#_snippet_1
+
+LANGUAGE: Rust
+CODE:
+```
+Regex::new(r"(?-u:\B)")
+```
+
+--------------------------------
+
+TITLE: Iterating Over Multiple Regex Matches with regex in Rust
+DESCRIPTION: Shows how to use the `captures_iter` method to find all non-overlapping matches of a regex pattern within a string. It demonstrates iterating through the matches, extracting the captured groups, and collecting them into a structured data type (a vector of tuples).
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/README.md#_snippet_1
+
+LANGUAGE: Rust
+CODE:
+```
+use regex::Regex;
+
+fn main() {
+    let re = Regex::new(r"(\d{4})-(\d{2})-(\d{2})").unwrap();
+    let hay = "On 2010-03-14, foo happened. On 2014-10-14, bar happened.";
+
+    let mut dates = vec![];
+    for (_, [year, month, day]) in re.captures_iter(hay).map(|c| c.extract()) {
+        dates.push((year, month, day));
+    }
+    assert_eq!(dates, vec![
+      ("2010", "03", "14"),
+      ("2014", "10", "14"),
+    ]);
+}
+```
+
+--------------------------------
+
+TITLE: Regex Pattern (?-u:\B) Behavior Fix - Regex
+DESCRIPTION: Describes the regex pattern `(?-u:\B)` which was involved in a bug in regex 1.8 where it was incorrectly allowed in Unicode regexes, potentially leading to panics due to match offsets splitting codepoints. Regex 1.8.4 fixed this by preventing its compilation in this context.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/CHANGELOG.md#_snippet_0
+
+LANGUAGE: Regex
+CODE:
+```
+(?-u:\B)
+```
+
+--------------------------------
+
+TITLE: Rust bytes::Regex Compilation - Rust
+DESCRIPTION: Notes that the `bytes::Regex` type is still capable of compiling the `(?-u:\B)` pattern, distinguishing its behavior from the standard `Regex` type after the 1.8.4 fix.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/CHANGELOG.md#_snippet_2
+
+LANGUAGE: Rust
+CODE:
+```
+bytes::Regex
+```
+
+--------------------------------
+
+TITLE: Regex Character Class Escaping - Regex
+DESCRIPTION: Mentions the specific ASCII character class `[0-9A-Za-z<>]` which remains an exception to the new rule in regex 1.8.0 allowing most other ASCII characters to be escaped even if they lack special meaning.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/CHANGELOG.md#_snippet_4
+
+LANGUAGE: Regex
+CODE:
+```
+[0-9A-Za-z<>]
+```
+
+--------------------------------
+
+TITLE: Regex Pattern Large Counted Repetition Bug - Regex
+DESCRIPTION: Highlights a regex pattern with extremely large counted repetitions that could cause a panic during compilation in debug mode in regex versions prior to 1.8.2 due to integer overflow.
+
+SOURCE: https://github.com/rust-lang/regex/blob/master/CHANGELOG.md#_snippet_3
+
+LANGUAGE: Regex
+CODE:
+```
+a{2147483516}{2147483416}{5}
+```

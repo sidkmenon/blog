@@ -1,0 +1,1499 @@
+================
+CODE SNIPPETS
+================
+TITLE: Run Serde YML Examples
+DESCRIPTION: Command to execute the example programs provided within the Serde YML project repository. This allows users to see various serialization and deserialization scenarios in action.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/README
+
+LANGUAGE: shell
+CODE:
+```
+cargo run --example example
+
+```
+
+--------------------------------
+
+TITLE: Rust Ecosystem Links
+DESCRIPTION: A collection of essential links for Rust developers, including the official Rust website, The Book, Standard Library API Reference, Rust by Example, The Cargo Guide, and Clippy Documentation.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo.toml
+
+LANGUAGE: Rust
+CODE:
+```
+https://www.rust-lang.org/
+https://doc.rust-lang.org/book/
+https://doc.rust-lang.org/std/
+https://doc.rust-lang.org/rust-by-example/
+https://doc.rust-lang.org/cargo/guide/
+https://doc.rust-lang.org/nightly/clippy
+```
+
+--------------------------------
+
+TITLE: Install Serde YML
+DESCRIPTION: Instructions for adding the serde_yml crate as a dependency in your Rust project's Cargo.toml file.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/README
+
+LANGUAGE: toml
+CODE:
+```
+[dependencies]
+serde = "1.0"
+serde_yml = "0.0.12"
+
+```
+
+--------------------------------
+
+TITLE: serde_yml Build and Test Configurations
+DESCRIPTION: Defines the build configuration for the serde_yml crate, including library settings, feature flags, and example configurations. It also specifies test targets and their corresponding file paths.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo
+
+LANGUAGE: toml
+CODE:
+```
+[[example]]
+name = "example"
+path = "examples/example.rs"
+
+[features]
+default = []
+
+[lib]
+crate-type = ["lib"]
+doc-scrape-examples = false
+name = "serde_yml"
+path = "src/lib.rs"
+required-features = []
+
+[[test]]
+name = "mod"
+path = "tests/mod.rs"
+
+[[test]]
+name = "test_anchors_and_aliases"
+path = "tests/test_anchors_and_aliases.rs"
+
+[[test]]
+name = "test_de"
+path = "tests/test_de.rs"
+
+[[test]]
+name = "test_error"
+path = "tests/test_error.rs"
+
+[[test]]
+name = "test_lib"
+path = "tests/test_lib.rs"
+
+[[test]]
+name = "test_loader"
+path = "tests/test_loader.rs"
+
+[[test]]
+name = "test_mapping"
+```
+
+--------------------------------
+
+TITLE: Serialize/Deserialize HashMap with Serde YAML
+DESCRIPTION: Shows how to serialize and deserialize a `HashMap` to and from YAML format using the `serde_yml` crate. The example inserts string key-value pairs into a HashMap and then converts it to YAML and back.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/README
+
+LANGUAGE: rust
+CODE:
+```
+use std::collections::HashMap;
+use serde_yml;
+
+fn main() -> Result<(), serde_yml::Error> {
+    let mut map = HashMap::new();
+    map.insert("name".to_string(), "John".to_string());
+    map.insert("age".to_string(), "30".to_string());
+
+    let yaml = serde_yml::to_string(&map)?;
+    println!("Serialized YAML: {}", yaml);
+
+    let deserialized_map: HashMap<String, serde_yml::Value> = serde_yml::from_str(&yaml)?;
+    println!("Deserialized map: {:?}", deserialized_map);
+
+    Ok(())
+}
+```
+
+--------------------------------
+
+TITLE: Serialize/Deserialize HashMap
+DESCRIPTION: Shows how to serialize and deserialize a `HashMap` to and from YAML format using the `serde_yml` crate. The example handles string keys and values, and deserializes into a `HashMap<String, serde_yml::Value>`.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/index
+
+LANGUAGE: rust
+CODE:
+```
+use std::collections::HashMap;
+use serde_yml;
+
+fn main() -> Result<(), serde_yml::Error> {
+    let mut map = HashMap::new();
+    map.insert("name".to_string(), "John".to_string());
+    map.insert("age".to_string(), "30".to_string());
+
+    let yaml = serde_yml::to_string(&map)?;
+    println!("Serialized YAML: {}", yaml);
+
+    let deserialized_map: HashMap<String, serde_yml::Value> = serde_yml::from_str(&yaml)?;
+    println!("Deserialized map: {:?}", deserialized_map);
+
+    Ok(())
+}
+
+```
+
+--------------------------------
+
+TITLE: Serialize and Deserialize Enums with Serde YML
+DESCRIPTION: Illustrates how to serialize and deserialize Rust enums, including those with struct variants, to and from YAML using the serde_yml crate. This example showcases handling different shapes.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/README
+
+LANGUAGE: rust
+CODE:
+```
+use serde::{Serialize, Deserialize};
+use serde_yml;
+
+#[derive(Serialize, Deserialize, PartialEq, Debug)]enum Shape {
+    Rectangle { width: u32, height: u32 },
+    Circle { radius: f64 },
+    Triangle { base: u32, height: u32 },
+}
+
+fn main() -> Result<(), serde_yml::Error> {
+    let shapes = vec![
+        Shape::Rectangle { width: 10, height: 20 },
+        Shape::Circle { radius: 5.0 },
+        Shape::Triangle { base: 8, height: 12 },
+    ];
+
+    // Serialize to YAML
+    let yaml = serde_yml::to_string(&shapes)?;
+    println!("Serialized YAML:\n{}", yaml);
+
+    // Deserialize from YAML
+    let deserialized_shapes: Vec<Shape> = serde_yml::from_str(&yaml)?;
+    assert_eq!(shapes, deserialized_shapes);
+
+    Ok(())
+}
+
+```
+
+--------------------------------
+
+TITLE: serde_yml Package Configuration
+DESCRIPTION: Details the package metadata for serde_yml, including authors, description, documentation URL, edition, keywords, license, repository, and supported Rust version. It also includes configuration for clippy and docs.rs.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo
+
+LANGUAGE: toml
+CODE:
+```
+[package]
+authors = ["Serde YML Contributors"]
+autobenches = false
+autobins = false
+autoexamples = false
+autotests = false
+build = "build.rs"
+categories = ["encoding", "parser-implementations"]
+description = """
+A robust Rust library that simplifies the serialization and deserialization of Rust data structures to and from YAML format using the widely-used Serde framework.
+"""
+documentation = "https://docs.rs/serde_yml/"
+edition = "2021"
+exclude = ["/.git/*", "/.github/*", "/.gitignore", "/.vscode/*"]
+homepage = "https://serdeyml.com"
+include = ["/CONTRIBUTING.md", "/LICENSE-APACHE", "/LICENSE-MIT", "/benches/**", "/build.rs", "/Cargo.toml", "/examples/**", "/README.md", "/src/**", "/tests/**"]
+keywords = ["yaml", "serde", "serialization"]
+license = "MIT OR Apache-2.0"
+name = "serde_yml"
+readme = "README.md"
+repository = "https://github.com/sebastienrousseau/serde_yml"
+rust-version = "1.56.0"
+version = "0.0.12"
+
+[package.metadata.clippy]
+warn-lints = ["clippy::all", "clippy::pedantic", "clippy::cargo", "clippy::nursery"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--generate-link-to-definition", "--cfg", "docsrs", "--document-private-items", "--display-warnings"]
+targets = ["x86_64-unknown-linux-gnu"]
+```
+
+--------------------------------
+
+TITLE: API Documentation Links
+DESCRIPTION: Provides links to external resources for detailed API documentation of the serde_yml crate, including the official library documentation and the docs.rs page.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/index
+
+LANGUAGE: APIDOC
+CODE:
+```
+External API Documentation:
+  - https://doc.libyml.com/serde-yaml/
+  - https://docs.rs/serde-yaml
+
+```
+
+--------------------------------
+
+TITLE: Serde YML Project Overview
+DESCRIPTION: Provides an overview of the Serde YML Rust library, its purpose, and links to various project resources and badges. It highlights the library's functionality for handling YAML data with Serde.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/README
+
+LANGUAGE: rust
+CODE:
+```
+<!-- markdownlint-disable MD033 MD041 --><!-- markdownlint-enable MD033 MD041 --># Serde YML (a fork of Serde YAML)
+[![Made With Love][made-with-rust]][11] [![Crates.io][crates-badge]][07] [![lib.rs][libs-badge]][12] [![Docs.rs][docs-badge]][08] [![Codecov][codecov-badge]][09] [![Build Status][build-badge]][10] [![GitHub][github-badge]][06]
+
+[Serde YML][00] is a Rust library for using the [Serde][01] serialization framework with data in [YAML][05] file format.
+```
+
+--------------------------------
+
+TITLE: Rust Documentation Generation Settings
+DESCRIPTION: Configuration for generating Rust documentation, specifying arguments for `rustdoc` to enhance quality, enabling all features, and setting the target platform.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo.toml
+
+LANGUAGE: toml
+CODE:
+```
+[package.metadata.docs.rs]
+rustdoc-args = [
+    "--generate-link-to-definition",
+    "--cfg", "docsrs",
+    "--document-private-items",
+    "--display-warnings"
+]
+all-features = true
+targets = ["x86_64-unknown-linux-gnu"]
+```
+
+--------------------------------
+
+TITLE: Serde YML Crate Information
+DESCRIPTION: Provides essential links and information about the serde_yml Rust crate, including its source code, build status, feature flags, and dependencies. It also lists available versions of the crate.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/index
+
+LANGUAGE: Rust
+CODE:
+```
+Crate: https://docs.rs/crate/serde_yml/latest
+Source: https://docs.rs/crate/serde_yml/latest/source/
+Builds: https://docs.rs/crate/serde_yml/latest/builds
+Feature flags: https://docs.rs/crate/serde_yml/latest/features
+Dependencies:
+    * indexmap ^2.2.4
+    * itoa ^1.0
+    * libyml ^0.0.5
+    * memchr ^2
+    * ryu ^1.0
+    * serde ^1.0.204
+Versions:
+    * 0.0.12 (2024/08/25)
+    * 0.0.11 (2024/07/21)
+    * 0.0.10 (2024/05/30)
+    * 0.0.9 (2024/05/27)
+    * 0.0.8 (2024/05/26)
+    * 0.0.7 (2024/05/14)
+    * 0.0.6 (2024/05/12)
+    * 0.0.5 (2024/05/02)
+    * 0.0.4 (2024/04/03)
+    * 0.0.3 (2024/04/01)
+    * 0.0.2 (2024/03/29)
+    * 0.0.1 (2024/03/29)
+```
+
+--------------------------------
+
+TITLE: Apache License 2.0 Terms and Conditions
+DESCRIPTION: This snippet details the core definitions and conditions of the Apache License, Version 2.0. It covers terms like 'License', 'Licensor', 'Legal Entity', and 'You', establishing the foundational understanding for using, reproducing, and distributing licensed software.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/LICENSE-APACHE
+
+LANGUAGE: APIDOC
+CODE:
+```
+Apache License, Version 2.0
+
+TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+1. Definitions.
+
+   "License" shall mean the terms and conditions for use, reproduction,
+   and distribution as defined by Sections 1 through 9 of this document.
+
+   "Licensor" shall mean the copyright owner or entity authorized by
+   the copyright owner that is granting the License.
+
+   "Legal Entity" shall mean the union of the acting entity and all
+   other entities that control, are controlled by, or are under common
+   control with that entity. For the purposes of this definition,
+   "control" means (i) the power, direct or indirect, to cause the
+   direction or management of such entity, whether by contract or
+   otherwise, or (ii) ownership of fifty percent (50%) or more of the
+   outstanding shares, or (iii) beneficial ownership of such entity.
+
+   "You" (or "Your") shall mean an individual or Legal Entity
+   exercising permissions granted by this License.
+
+   "Source" form shall mean the preferred form for making modifications,
+   including but not limited to software source code, documentation
+```
+
+--------------------------------
+
+TITLE: serde_yml Crate Overview
+DESCRIPTION: Provides an overview of the serde_yml Rust crate, its purpose, and links to its source and documentation. It simplifies YAML serialization and deserialization in Rust.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/features
+
+LANGUAGE: Rust
+CODE:
+```
+/// A robust Rust library that simplifies the serialization and deserialization of Rust data structures to and from YAML format using the widely-used Serde framework.
+///
+/// Links:
+/// - Crate: https://docs.rs/crate/serde_yml/latest
+/// - Source: https://docs.rs/crate/serde_yml/latest/source/
+/// - Builds: https://docs.rs/crate/serde_yml/latest/builds
+/// - Feature flags: https://docs.rs/crate/serde_yml/latest/features
+```
+
+--------------------------------
+
+TITLE: serde_yml Cargo.toml Source
+DESCRIPTION: Links to the Cargo.toml file for the serde_yml crate, allowing users to view the project's dependencies and configuration.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo
+
+LANGUAGE: Rust
+CODE:
+```
+https://docs.rs/crate/serde_yml/latest/source/Cargo.toml
+```
+
+--------------------------------
+
+TITLE: Rust Build Profile: Release
+DESCRIPTION: Specifies the build profile for release, optimizing for performance and size with `lto = true`, `opt-level = "s"`, and `strip = "symbols"`.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo.toml
+
+LANGUAGE: toml
+CODE:
+```
+[profile.release]
+codegen-units = 1
+debug = false
+debug-assertions = false
+incremental = false
+lto = true
+opt-level = "s"
+overflow-checks = false
+panic = "abort"
+rpath = false
+strip = "symbols"
+```
+
+--------------------------------
+
+TITLE: Cargo.toml Dependencies for serde_yml
+DESCRIPTION: Lists the build dependencies and regular dependencies for the serde_yml crate. It specifies versions for crates like version_check, indexmap, itoa, libyml, memchr, ryu, and serde.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo
+
+LANGUAGE: toml
+CODE:
+```
+[build-dependencies.version_check]
+version = "0.9.4"
+
+[dependencies.indexmap]
+version = "2.2.4"
+
+[dependencies.itoa]
+version = "1.0"
+
+[dependencies.libyml]
+version = "0.0.5"
+
+[dependencies.memchr]
+default-features = false
+version = "2"
+
+[dependencies.ryu]
+version = "1.0"
+
+[dependencies.serde]
+version = "1.0.204"
+
+[dev-dependencies.indoc]
+version = "2.0.5"
+
+[dev-dependencies.serde]
+features = ["derive"]
+version = "1.0.204"
+
+[dev-dependencies.serde_derive]
+version = "1.0.204"
+```
+
+--------------------------------
+
+TITLE: Serde YML Project Links
+DESCRIPTION: Collection of external links related to the Serde YML project, including its official website, GitHub repository, and crates.io page. These links provide access to the project's resources and community.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/index
+
+LANGUAGE: Rust
+CODE:
+```
+Website: https://serdeyml.com
+GitHub: https://github.com/sebastienrousseau/serde_yml
+crates.io: https://crates.io/crates/serde_yml
+```
+
+--------------------------------
+
+TITLE: serde_yml Crate Overview
+DESCRIPTION: Provides a high-level overview of the serde_yml crate, its purpose, and its relationship with the Serde framework for YAML processing in Rust.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/build
+
+LANGUAGE: Rust
+CODE:
+```
+/// A robust Rust library that simplifies the serialization and deserialization of Rust data structures to and from YAML format using the widely-used Serde framework.
+
+```
+
+--------------------------------
+
+TITLE: Rust Dependencies
+DESCRIPTION: Lists the development dependencies required for the Rust crate, including `indoc`, `serde`, and `serde_derive` with specific versions and features.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo.toml
+
+LANGUAGE: toml
+CODE:
+```
+[dev-dependencies]
+indoc = "2.0.5"
+serde = { version = "1.0.204", features = ["derive"] }
+serde_derive = "1.0.204"
+```
+
+--------------------------------
+
+TITLE: Build Failure Information
+DESCRIPTION: Details regarding a failed build for serde_yml version 0.0.12 on docs.rs. It suggests checking build logs, consulting documentation for fixing builds and metadata, and provides instructions for reporting issues.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/index
+
+LANGUAGE: Rust
+CODE:
+```
+docs.rs failed to build serde_yml-0.0.12
+Check build logs: https://docs.rs/crate/serde_yml/0.0.12/builds
+Fixing builds: https://docs.rs/about/builds
+Metadata configuration: https://docs.rs/about/metadata
+Report issue: https://github.com/rust-lang/docs.rs/issues/new/choose
+Last successful build: https://docs.rs/crate/serde_yml/0.0.11
+```
+
+--------------------------------
+
+TITLE: serde_yml Crate Overview
+DESCRIPTION: Provides a high-level overview and links to the serde_yml Rust crate. This crate is used for serializing and deserializing Rust data structures to and from YAML format, leveraging the Serde framework.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/README
+
+LANGUAGE: Rust
+CODE:
+```
+/// serde_yml-0.0.12
+/// A robust Rust library that simplifies the serialization and deserialization of Rust data structures to and from YAML format using the widely-used Serde framework.
+
+```
+
+--------------------------------
+
+TITLE: Serde YML Crate Metadata
+DESCRIPTION: This snippet displays the metadata for the serde_yml Rust crate, including its name, version, authors, description, repository, and dependencies. This information is typically found in the Cargo.toml file.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo.toml
+
+LANGUAGE: toml
+CODE:
+```
+[package]
+authors = ["Serde YML Contributors"]
+categories = ["encoding", "parser-implementations"]
+description = """
+A robust Rust library that simplifies the serialization and deserialization of Rust data structures to and from YAML format using the widely-used Serde framework.
+"""
+documentation = "https://docs.rs/serde_yml/"
+edition = "2021"
+exclude = ["/.git/*", "/.github/*", "/.gitignore", "/.vscode/*"]
+homepage = "https://serdeyml.com"
+keywords = ["yaml", "serde", "serialization"]
+license = "MIT OR Apache-2.0"
+name = "serde_yml"
+readme = "README.md"
+repository = "https://github.com/sebastienrousseau/serde_yml"
+rust-version = "1.56.0"
+version = "0.0.12"
+include = [
+    "/CONTRIBUTING.md",
+    "/LICENSE-APACHE",
+    "/LICENSE-MIT",
+    "/benches/**",
+    "/build.rs",
+    "/Cargo.toml",
+    "/examples/**",
+    "/README.md",
+    "/src/**",
+    "/tests/**",
+]
+
+[dependencies]
+indexmap = "2.2.4"
+itoa = "1.0"
+libyml = "0.0.5"
+memchr = { version = "2", default-features = false }
+ryu = "1.0"
+serde = { version = "1.0.204" }
+
+[build-dependencies] = ""
+```
+
+--------------------------------
+
+TITLE: Serde YML Overview
+DESCRIPTION: A brief description of Serde YML, a Rust library that integrates the Serde serialization framework with the YAML data format. It highlights its purpose and relationship with the core Serde project.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/index
+
+LANGUAGE: Rust
+CODE:
+```
+Serde YML is a Rust library for using the Serde serialization framework with data in YAML file format.
+Project links:
+- Rust website: https://www.rust-lang.org/
+- crates.io: https://crates.io/crates/serde_yml
+- lib.rs: https://lib.rs/crates/serde_yml
+- docs.rs: https://docs.rs/serde_yml
+- Codecov: https://codecov.io/gh/sebastienrousseau/serde_yml
+- GitHub Actions: https://github.com/sebastienrousseau/serde-yml/actions?query=branch%3Amaster
+- GitHub repository: https://github.com/sebastienrousseau/serde_yml
+```
+
+--------------------------------
+
+TITLE: Clippy Linting Configuration
+DESCRIPTION: Configures Clippy, a Rust linter, to enable specific sets of warnings including 'all', 'pedantic', 'cargo', and 'nursery' for comprehensive code analysis.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo.toml
+
+LANGUAGE: toml
+CODE:
+```
+[package.metadata.clippy]
+warn-lints = [
+    "clippy::all",
+    "clippy::pedantic",
+    "clippy::cargo",
+    "clippy::nursery",
+]
+```
+
+--------------------------------
+
+TITLE: Rust Build Profile: Development
+DESCRIPTION: Defines the build profile for development, optimizing for fast compilation and debugging with settings like `codegen-units = 256` and `debug = true`.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo.toml
+
+LANGUAGE: toml
+CODE:
+```
+[profile.dev]
+codegen-units = 256
+debug = true
+debug-assertions = true
+incremental = true
+lto = false
+opt-level = 0
+overflow-checks = true
+panic = 'unwind'
+rpath = false
+strip = false
+```
+
+--------------------------------
+
+TITLE: Rust Build Profile: Test
+DESCRIPTION: Details the build profile for testing, configured similarly to the development profile for effective debugging and testing with `codegen-units = 256` and `debug = true`.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo.toml
+
+LANGUAGE: toml
+CODE:
+```
+[profile.test]
+codegen-units = 256
+debug = true
+debug-assertions = true
+incremental = true
+lto = false
+opt-level = 0
+overflow-checks = true
+rpath = false
+strip = false
+```
+
+--------------------------------
+
+TITLE: serde_yml Crate Documentation
+DESCRIPTION: Provides access to the latest documentation for the serde_yml Rust crate on docs.rs. This crate simplifies YAML serialization and deserialization using the Serde framework.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo
+
+LANGUAGE: Rust
+CODE:
+```
+https://docs.rs/crate/serde_yml/latest
+```
+
+--------------------------------
+
+TITLE: Rust Linting Configuration (Standard)
+DESCRIPTION: Defines linting rules for the Rust project, categorizing them into 'Warn', 'Allow', and 'Forbid' levels to enforce code quality and style.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo.toml
+
+LANGUAGE: toml
+CODE:
+```
+[lints.rust]
+
+## Warn
+missing_copy_implementations = "warn"
+missing_docs = "warn"
+unstable_features = "warn"
+unused_extern_crates = "warn"
+
+## Allow
+bare_trait_objects = "allow"
+elided_lifetimes_in_paths = "allow"
+non_camel_case_types = "allow"
+non_upper_case_globals = "allow"
+trivial_bounds = "allow"
+unsafe_code = "allow"
+
+## Forbid
+missing_debug_implementations = "forbid"
+non_ascii_idents = "forbid"
+unreachable_pub = "forbid"
+```
+
+--------------------------------
+
+TITLE: MIT License
+DESCRIPTION: This snippet contains the MIT License text for the serde_yml crate. It grants broad permissions for using, copying, modifying, merging, publishing, distributing, and sublicensing the software.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/LICENSE-MIT
+
+LANGUAGE: text
+CODE:
+```
+Permission is hereby granted, free of charge, to any
+person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the
+Software without restriction, including without
+limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software
+is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice
+shall be included in all copies or substantial portions
+of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
+ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+```
+
+--------------------------------
+
+TITLE: serde_yml Release and Debug Profiles
+DESCRIPTION: Defines the compiler optimization profiles for the serde_yml crate, including 'dev' for development builds and 'release' for optimized production builds. It specifies settings for codegen-units, debug information, incremental compilation, and link-time optimization (LTO).
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo
+
+LANGUAGE: toml
+CODE:
+```
+[profile.dev]
+codegen-units = 256
+debug = 2
+debug-assertions = true
+incremental = true
+lto = false
+opt-level = 0
+overflow-checks = true
+panic = "unwind"
+rpath = false
+strip = false
+
+[profile.release]
+codegen-units = 1
+debug = 0
+debug-assertions = false
+incremental = false
+lto = true
+opt-level = "s"
+overflow-checks = false
+panic = "abort"
+rpath = false
+strip = "symbols"
+
+[profile.test]
+codegen-units = 256
+debug = 2
+debug-assertions = true
+incremental = true
+lto = false
+opt-level = 0
+overflow-checks = true
+rpath = false
+strip = false
+```
+
+--------------------------------
+
+TITLE: Rust Cargo.toml Dependencies
+DESCRIPTION: Specifies the necessary dependencies for using the serde_yml crate in a Rust project, including serde and serde_yml itself.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/index
+
+LANGUAGE: toml
+CODE:
+```
+[dependencies]
+serde = "1.0"
+serde_yml = "0.0.12"
+
+```
+
+--------------------------------
+
+TITLE: serde_yml Crate Overview
+DESCRIPTION: Provides core functionality for YAML serialization and deserialization in Rust, leveraging the Serde framework. This crate is designed for ease of use and robustness in handling YAML data.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/examples
+
+LANGUAGE: Rust
+CODE:
+```
+/// A robust Rust library that simplifies the serialization and deserialization of Rust data structures to and from YAML format using the widely-used Serde framework.
+///
+/// # Examples
+///
+/// ```rust
+/// use serde_yml;
+/// use serde::{Serialize, Deserialize};
+///
+/// #[derive(Serialize, Deserialize, Debug, PartialEq)]
+/// struct Point {
+///     x: i32,
+///     y: i32,
+/// }
+///
+/// let point = Point { x: 1, y: 2 };
+///
+/// // Serialize to YAML
+/// let yaml_string = serde_yml::to_string(&point).unwrap();
+/// assert_eq!(yaml_string, "x: 1\ny: 2\n");
+///
+/// // Deserialize from YAML
+/// let parsed_point: Point = serde_yml::from_str(&yaml_string).unwrap();
+/// assert_eq!(point, parsed_point);
+/// ```
+```
+
+--------------------------------
+
+TITLE: serde_yml Crate Overview
+DESCRIPTION: Provides core functionality for YAML serialization and deserialization in Rust using the Serde framework. It simplifies handling YAML data structures.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source
+
+LANGUAGE: Rust
+CODE:
+```
+/// A robust Rust library that simplifies the serialization and deserialization of Rust data structures to and from YAML format using the widely-used Serde framework.
+///
+/// # Examples
+///
+/// ```rust
+/// use serde_yml;
+/// use serde::{Serialize, Deserialize};
+///
+/// #[derive(Serialize, Deserialize, Debug, PartialEq)]
+/// struct Point {
+///     x: i32,
+///     y: i32,
+/// }
+///
+/// let point = Point { x: 1, y: 2 };
+///
+/// // Serialize to YAML
+/// let yaml_string = serde_yml::to_string(&point).unwrap();
+/// assert_eq!(yaml_string, "x: 1\ny: 2\n");
+///
+/// // Deserialize from YAML
+/// let parsed_point: Point = serde_yml::from_str(&yaml_string).unwrap();
+/// assert_eq!(point, parsed_point);
+/// ```
+```
+
+--------------------------------
+
+TITLE: Sandbox Limits for serde_yml
+DESCRIPTION: Details the resource limitations imposed on builds for the serde_yml crate within the docs.rs sandbox environment. This includes RAM, rustdoc execution time, build log size, network access, and the number of build targets. If a build fails due to these limits, users are advised to open an issue.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/builds
+
+LANGUAGE: rust
+CODE:
+```
+Available RAM | 6.44 GB
+Maximum rustdoc execution time | 15 minutes
+Maximum size of a build log | 102.4 kB
+Network access | blocked
+Maximum number of build targets | 10
+```
+
+--------------------------------
+
+TITLE: Basic Struct Serialization and Deserialization
+DESCRIPTION: Demonstrates the fundamental usage of serde_yml for converting a Rust struct to a YAML string and parsing a YAML string back into a struct. It requires the `Serialize` and `Deserialize` derive macros from the `serde` crate.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/index
+
+LANGUAGE: rust
+CODE:
+```
+use serde::{Serialize, Deserialize};
+
+#[derive(Serialize, Deserialize)]
+struct Point {
+    x: f64,
+    y: f64,
+}
+
+fn main() -> Result<(), serde_yml::Error> {
+    let point = Point { x: 1.0, y: 2.0 };
+
+    // Serialize to YAML
+    let yaml = serde_yml::to_string(&point)?;
+    assert_eq!(yaml, "x: 1.0\ny: 2.0\n");
+
+    // Deserialize from YAML
+    let deserialized_point: Point = serde_yml::from_str(&yaml)?;
+    assert_eq!(point, deserialized_point);
+
+    Ok(())
+}
+
+```
+
+--------------------------------
+
+TITLE: Serialize and Deserialize Structs with Serde YML
+DESCRIPTION: Demonstrates the basic usage of serde_yml for serializing a Rust struct to YAML format and deserializing YAML back into a Rust struct. It includes the necessary derive macros and error handling.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/README
+
+LANGUAGE: rust
+CODE:
+```
+use serde::{Serialize, Deserialize};
+
+#[derive(Serialize, Deserialize)]struct Point {
+    x: f64,
+    y: f64,
+}
+
+fn main() -> Result<(), serde_yml::Error> {
+    let point = Point { x: 1.0, y: 2.0 };
+
+    // Serialize to YAML
+    let yaml = serde_yml::to_string(&point)?;
+    assert_eq!(yaml, "x: 1.0\ny: 2.0\n");
+
+    // Deserialize from YAML
+    let deserialized_point: Point = serde_yml::from_str(&yaml)?;
+    assert_eq!(point, deserialized_point);
+
+    Ok(())
+}
+
+```
+
+--------------------------------
+
+TITLE: Rust YAML Serialization/Deserialization with serde_yml
+DESCRIPTION: This snippet demonstrates the core functionality of the serde_yml crate, which allows for the serialization and deserialization of Rust data structures to and from YAML format. It relies on the Serde framework for its operations.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/LICENSE-APACHE
+
+LANGUAGE: rust
+CODE:
+```
+use serde_yml;
+
+#[derive(Serialize, Deserialize, Debug)]
+struct MyStruct {
+    name: String,
+    value: i32,
+}
+
+fn main() {
+    let data = MyStruct { name: "example".to_string(), value: 42 };
+
+    // Serialize to YAML
+    let yaml_string = serde_yml::to_string(&data).expect("Failed to serialize to YAML");
+    println!("Serialized YAML:\n{}", yaml_string);
+
+    // Deserialize from YAML
+    let yaml_data = "name: another_example\nvalue: 100\n";
+    let deserialized_data: MyStruct = serde_yml::from_str(yaml_data).expect("Failed to deserialize from YAML");
+    println!("Deserialized data: {:?}", deserialized_data);
+}
+```
+
+--------------------------------
+
+TITLE: Serialize/Deserialize Struct with Serde derive
+DESCRIPTION: Demonstrates using Serde's `derive` macros (`Serialize`, `Deserialize`) with the `serde_yml` crate to automatically handle serialization and deserialization of a `Point` struct.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/index
+
+LANGUAGE: rust
+CODE:
+```
+use serde_derive::{Serialize, Deserialize};
+use serde_yml;
+
+#[derive(Serialize, Deserialize, PartialEq, Debug)]
+struct Point {
+    x: f64,
+    y: f64,
+}
+
+fn main() -> Result<(), serde_yml::Error> {
+    let point = Point { x: 1.0, y: 2.0 };
+
+    let yaml = serde_yml::to_string(&point)?;
+    assert_eq!(yaml, "x: 1.0\n'y': 2.0\n");
+
+    let deserialized_point: Point = serde_yml::from_str(&yaml)?;
+    assert_eq!(point, deserialized_point);
+    Ok(())
+}
+
+```
+
+--------------------------------
+
+TITLE: serde_yml Crate Overview
+DESCRIPTION: Provides core functionality for YAML serialization and deserialization in Rust using the Serde framework. This crate is essential for projects needing to handle YAML data.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/src
+
+LANGUAGE: Rust
+CODE:
+```
+/// A robust Rust library that simplifies the serialization and deserialization of Rust data structures to and from YAML format using the widely-used Serde framework.
+///
+/// # Examples
+///
+/// ```rust
+/// use serde_yml;
+/// use serde::{Serialize, Deserialize};
+///
+/// #[derive(Serialize, Deserialize, Debug, PartialEq)]
+/// struct Point {
+///     x: i32,
+///     y: i32,
+/// }
+///
+/// let point = Point { x: 1, y: 2 };
+///
+/// // Serialize to YAML
+/// let yaml_string = serde_yml::to_string(&point).unwrap();
+/// assert_eq!(yaml_string, "x: 1\ny: 2\n");
+///
+/// // Deserialize from YAML
+/// let parsed_point: Point = serde_yml::from_str(&yaml_string).unwrap();
+/// assert_eq!(point, parsed_point);
+/// ```
+```
+
+--------------------------------
+
+TITLE: Serialize/Deserialize Structs with Serde Derive and YAML
+DESCRIPTION: Illustrates using Serde's `derive` macros (`Serialize`, `Deserialize`) with the `serde_yml` crate to automatically handle the serialization and deserialization of a `Point` struct to and from YAML. It includes assertions to verify the output.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/README
+
+LANGUAGE: rust
+CODE:
+```
+use serde_derive::{Serialize, Deserialize};
+use serde_yml;
+
+#[derive(Serialize, Deserialize, PartialEq, Debug)]struct Point {
+    x: f64,
+    y: f64,
+}
+
+fn main() -> Result<(), serde_yml::Error> {
+    let point = Point { x: 1.0, y: 2.0 };
+
+    let yaml = serde_yml::to_string(&point)?;
+    assert_eq!(yaml, "x: 1.0\n'y': 2.0\n");
+
+    let deserialized_point: Point = serde_yml::from_str(&yaml)?;
+    assert_eq!(point, deserialized_point);
+    Ok(())
+}
+```
+
+--------------------------------
+
+TITLE: Cargo.toml - Project Dependencies
+DESCRIPTION: This snippet shows the essential dependency for the serde_yml crate in a Rust project's Cargo.toml file. It specifies the version of serde_yml required for YAML serialization and deserialization.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo.toml
+
+LANGUAGE: toml
+CODE:
+```
+[dependencies]
+serde_yml = "0.0.12"
+
+```
+
+--------------------------------
+
+TITLE: Rust Linting Configuration (Deny)
+DESCRIPTION: Specifies linting rules set to 'Deny' for the Rust project, covering aspects like dead code, deprecated features, and unused code elements.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo.toml
+
+LANGUAGE: toml
+CODE:
+```
+## Deny
+dead_code = "deny"
+deprecated_in_future = "deny"
+ellipsis_inclusive_range_patterns = "deny"
+explicit_outlives_requirements = "deny"
+future_incompatible = { level = "deny", priority = -1 }
+keyword_idents = { level = "deny", priority = -1 }
+macro_use_extern_crate = "deny"
+meta_variable_misuse = "deny"
+missing_fragment_specifier = "deny"
+noop_method_call = "deny"
+rust_2018_idioms = { level = "deny", priority = -1 }
+rust_2021_compatibility = { level = "deny", priority = -1 }
+single_use_lifetimes = "deny"
+trivial_casts = "deny"
+trivial_numeric_casts = "deny"
+unused = { level = "deny", priority = -1 }
+unused_features = "deny"
+unused_import_braces = "deny"
+unused_labels = "deny"
+unused_lifetimes = "deny"
+unused_macro_rules = "deny"
+unused_qualifications = "deny"
+variant_size_differences = "deny"
+```
+
+--------------------------------
+
+TITLE: Minimum Rustc Version Check
+DESCRIPTION: This build script checks if the current Rustc version meets the minimum required version for the serde_yml crate. It is used during the build process to ensure compatibility.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/build
+
+LANGUAGE: rust
+CODE:
+```
+//! This build script checks if the current Rustc version is at least the
+//! minimum required version.
+//! If the current Rustc version is less than the minimum required version,
+```
+
+--------------------------------
+
+TITLE: Cargo.toml Dependencies
+DESCRIPTION: This snippet shows the essential dependency for the serde_yml crate in a Rust project's Cargo.toml file. It specifies the version of serde_yml required for YAML serialization and deserialization.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo
+
+LANGUAGE: toml
+CODE:
+```
+[dependencies]
+serde_yml = "0.0.12"
+
+```
+
+--------------------------------
+
+TITLE: Check Minimum Rustc Version
+DESCRIPTION: Verifies if the current Rustc version is at least the minimum required version. It returns `Some(true)` if the version meets the requirement, `Some(false)` if it's lower, and `None` if the version cannot be determined. The function will exit the build process with a non-zero exit code if the version is insufficient.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/build
+
+LANGUAGE: rust
+CODE:
+```
+use std::process;
+
+/// Checks if the current Rustc version is at least the minimum required version
+///
+/// # Arguments
+///
+/// * `min_version` - The minimum required Rustc version as a string.
+///
+/// # Returns
+///
+/// * `Some(true)` - If the current Rustc version is at least the minimum
+///    required version.
+/// * `Some(false)` - If the current Rustc version is less than the minimum
+///    required version.
+/// * `None` - If the current Rustc version cannot be determined.
+///
+/// # Errors
+///
+/// This function will exit the build process with a non-zero exit code if the
+/// current Rustc version is less than the minimum required version.
+///
+/// # Examples
+///
+/// ```rust
+/// let min_version = "1.56";
+///
+/// match version_check::is_min_version(min_version) {
+///     Some(true) => println!("Rustc version is at least {}", min_version),
+///     Some(false) => {
+///         eprintln!("Rustc version is less than {}", min_version);
+///         process::exit(1);
+///     }
+///     None => {
+///         eprintln!("Unable to determine Rustc version");
+///         process::exit(1);
+///     }
+/// }
+/// ```
+fn is_min_version(min_version: &str) -> Option<bool> {
+    // Implementation details for checking Rustc version would go here.
+    // For demonstration, we'll simulate a check.
+    let current_version = "1.60"; // Placeholder for actual version check
+    if current_version >= min_version {
+        Some(true)
+    } else {
+        Some(false)
+    }
+}
+
+fn main(){
+    let min_version = "1.56";
+
+    match is_min_version(min_version) {
+        Some(true) => {} // Version is sufficient
+        _ => {
+            eprintln!("'fd' requires Rustc version >= {}", min_version);
+            process::exit(1);
+        }
+    }
+}
+```
+
+--------------------------------
+
+TITLE: serde_yml Feature Flags
+DESCRIPTION: Details the feature flags available for the serde_yml crate. This specific version has no feature flags, including no default features.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/features
+
+LANGUAGE: Rust
+CODE:
+```
+/// Feature flags
+///
+/// * [default](https://docs.rs/crate/serde_yml/latest/features#default)
+///
+/// This feature flag does not enable additional features.
+```
+
+--------------------------------
+
+TITLE: serde_yml Crate Information
+DESCRIPTION: Provides a link to the latest version of the serde_yml crate on docs.rs. This crate is used for YAML serialization and deserialization in Rust.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo.toml
+
+LANGUAGE: Rust
+CODE:
+```
+https://docs.rs/crate/serde_yml/latest
+```
+
+--------------------------------
+
+TITLE: Rust Linting Rules for serde_yml
+DESCRIPTION: Specifies the linting rules applied to the serde_yml crate using Rust's built-in linting system. It includes rules for various categories like correctness, style, and future compatibility, with specified levels of enforcement.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/Cargo
+
+LANGUAGE: toml
+CODE:
+```
+[lints.rust]
+bare_trait_objects = "allow"
+dead_code = "deny"
+deprecated_in_future = "deny"
+elided_lifetimes_in_paths = "allow"
+ellipsis_inclusive_range_patterns = "deny"
+explicit_outlives_requirements = "deny"
+macro_use_extern_crate = "deny"
+meta_variable_misuse = "deny"
+missing_copy_implementations = "warn"
+missing_debug_implementations = "forbid"
+missing_docs = "warn"
+missing_fragment_specifier = "deny"
+non_ascii_idents = "forbid"
+non_camel_case_types = "allow"
+non_upper_case_globals = "allow"
+noop_method_call = "deny"
+single_use_lifetimes = "deny"
+trivial_bounds = "allow"
+trivial_casts = "deny"
+trivial_numeric_casts = "deny"
+unreachable_pub = "forbid"
+unsafe_code = "allow"
+unstable_features = "warn"
+unused_extern_crates = "warn"
+unused_features = "deny"
+unused_import_braces = "deny"
+unused_labels = "deny"
+unused_lifetimes = "deny"
+unused_macro_rules = "deny"
+unused_qualifications = "deny"
+variant_size_differences = "deny"
+
+[lints.rust.future_incompatible]
+level = "deny"
+priority = -1
+
+[lints.rust.keyword_idents]
+level = "deny"
+priority = -1
+
+[lints.rust.rust_2018_idioms]
+level = "deny"
+priority = -1
+
+[lints.rust.rust_2021_compatibility]
+level = "deny"
+priority = -1
+
+[lints.rust.unused]
+level = "deny"
+priority = -1
+```
+
+--------------------------------
+
+TITLE: Rust Enum Serialization with Custom `singleton_map_with`
+DESCRIPTION: Demonstrates serializing and deserializing a Rust enum within a struct using `serde_yml` and a custom serialization function combined with `singleton_map_with`. This approach allows for fine-grained control over the serialization process.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/index
+
+LANGUAGE: rust
+CODE:
+```
+use serde::{Deserialize, Serialize};
+use serde_yml;
+use serde_yml::with::singleton_map_with;
+
+fn custom_serialize<T, S>(
+    value: &T,
+    serializer: S,
+) -> Result<S::Ok, S::Error>
+where
+    T: Serialize,
+    S: serde::Serializer,
+{
+    // Custom serialization logic
+    singleton_map_with::serialize(value, serializer)
+}
+
+#[derive(Serialize, Deserialize, PartialEq, Debug)]
+enum MyEnum {
+    Variant1(String),
+    Variant2 { field: i32 },
+}
+
+#[derive(Serialize, Deserialize, PartialEq, Debug)]
+struct MyStruct {
+    #[serde(
+        serialize_with = "custom_serialize",
+        deserialize_with = "singleton_map_with::deserialize"
+    )]
+    field: MyEnum,
+}
+
+fn main() -> Result<(), serde_yml::Error> {
+    let input = MyStruct {
+        field: MyEnum::Variant2 { field: 42 },
+    };
+    let yaml = serde_yml::to_string(&input).unwrap();
+    println!("\n✅ Serialized YAML:\n{}", yaml);
+
+    let output: MyStruct = serde_yml::from_str(&yaml).unwrap();
+    println!("\n✅ Deserialized YAML:\n{:#?}", output);
+    assert_eq!(input, output);
+
+    Ok(())
+}
+```
+
+--------------------------------
+
+TITLE: Serialize/Deserialize Custom Structs with Serde YAML
+DESCRIPTION: Demonstrates the process of serializing and deserializing a custom Rust struct (`Person`) to and from YAML using the `serde_yml` crate. This involves deriving `Serialize` and `Deserialize` for the struct.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/README
+
+LANGUAGE: rust
+CODE:
+```
+use serde::{Serialize, Deserialize};
+use serde_yml;
+
+#[derive(Serialize, Deserialize, Debug)]struct Person {
+    name: String,
+    age: u32,
+    city: String,
+}
+
+fn main() -> Result<(), serde_yml::Error> {
+    let person = Person {
+        name: "Alice".to_string(),
+        age: 25,
+        city: "New York".to_string(),
+    };
+
+    let yaml = serde_yml::to_string(&person)?;
+    println!("Serialized YAML: {}", yaml);
+
+    let deserialized_person: Person = serde_yml::from_str(&yaml)?;
+    println!("Deserialized person: {:?}", deserialized_person);
+
+    Ok(())
+}
+```
+
+--------------------------------
+
+TITLE: Custom Enum Serialization with singleton_map_with
+DESCRIPTION: Demonstrates serializing and deserializing an enum within a struct using a custom serialization function combined with the `singleton_map_with` attribute. This allows for fine-grained control over the serialization process.
+
+SOURCE: https://docs.rs/crate/serde_yml/latest/source/README
+
+LANGUAGE: rust
+CODE:
+```
+use serde::{Deserialize, Serialize};
+use serde_yml;
+use serde_yml::with::singleton_map_with;
+
+fn custom_serialize<T, S>(
+    value: &T,
+    serializer: S,
+) -> Result<S::Ok, S::Error>
+where
+    T: Serialize,
+    S: serde::Serializer,
+{
+    // Custom serialization logic
+    singleton_map_with::serialize(value, serializer)
+}
+
+#[derive(Serialize, Deserialize, PartialEq, Debug)]enum MyEnum {
+    Variant1(String),
+    Variant2 { field: i32 },
+}
+
+#[derive(Serialize, Deserialize, PartialEq, Debug)]struct MyStruct {
+    #[serde(
+        serialize_with = "custom_serialize",
+        deserialize_with = "singleton_map_with::deserialize"
+    )]
+    field: MyEnum,
+}
+
+fn main() -> Result<(), serde_yml::Error> {
+    let input = MyStruct {
+        field: MyEnum::Variant2 { field: 42 },
+    };
+    let yaml = serde_yml::to_string(&input).unwrap();
+    println!("\n✅ Serialized YAML:\n{}", yaml);
+
+    let output: MyStruct = serde_yml::from_str(&yaml).unwrap();
+    println!("\n✅ Deserialized YAML:\n{:#?}", output);
+    assert_eq!(input, output);
+
+    Ok(())
+}
+```

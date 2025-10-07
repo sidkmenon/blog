@@ -2,6 +2,7 @@
 title: "Posts"
 description: "Posts on Sid's Blog"
 date: 2025-10-02
+autotagging: false
 ---
 <script lang="ts">
 	import type { PageData } from './$types';
