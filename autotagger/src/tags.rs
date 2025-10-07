@@ -28,6 +28,23 @@ Requirements:
 
 Output only the tags, one per line, nothing else."#;
 
+pub fn validate(article: &Article) -> Result<()> {
+    if !article.frontmatter.autotagging {
+        return Ok(());
+    }
+
+    match article.frontmatter.tags.len() {
+        0 => Err(AutotaggerError::TagValidationError(
+            "No tags found".to_string(),
+        )),
+        n if n > MAX_TAGS => Err(AutotaggerError::TagValidationError(format!(
+            "Too many tags: {}",
+            n
+        ))),
+        _ => Ok(()),
+    }
+}
+
 /// Build the prompt for tag generation
 pub fn build_prompt(article: &Article) -> String {
     PROMPT_TEMPLATE
@@ -109,7 +126,7 @@ impl LlmGenerator for OllamaBackend {
             .post(format!("{}/api/generate", self.base_url))
             .json(&request)
             .send();
-        
+
         match res {
             Ok(response) => {
                 if !response.status().is_success() {
@@ -121,12 +138,10 @@ impl LlmGenerator for OllamaBackend {
                 let ollama_response: OllamaResponse = response.json()?;
                 Ok(ollama_response.response)
             }
-            Err(e) => {
-                Err(AutotaggerError::OllamaError(format!(
-                    "Failed to connect to Ollama: {}. Is Ollama running?",
-                    e
-                )))
-            }
+            Err(e) => Err(AutotaggerError::OllamaError(format!(
+                "Failed to connect to Ollama: {}. Is Ollama running?",
+                e
+            ))),
         }
     }
 }

@@ -1,6 +1,6 @@
+use autotagger::Result;
 use autotagger::article;
 use autotagger::tags::{self, OllamaBackend};
-use autotagger::Result;
 use clap::{Parser, Subcommand};
 use std::path::PathBuf;
 use std::process;
@@ -54,24 +54,33 @@ fn handle_generate(file_path: &PathBuf, dry_run: bool, model: String) -> Result<
         }
     } else {
         article::write_tags(&article, &generated_tags)?;
-        println!("Tagged: {} ({} tags)", file_path.display(), generated_tags.len());
+        println!(
+            "Tagged: {} ({} tags)",
+            file_path.display(),
+            generated_tags.len()
+        );
     }
 
     Ok(())
+}
+
+fn handle_verify(file_path: &PathBuf) -> Result<()> {
+    // Parse SVX file
+    let article = article::parse_svx_file(file_path)?;
+
+    tags::validate(&article)
 }
 
 fn run() -> Result<()> {
     let args = Args::parse();
 
     match args.command {
-        Command::Generate { file_path, dry_run, model } => {
-            handle_generate(&file_path, dry_run, model)
-        }
-        Command::Verify { file_path } => {
-            // TODO: Implement verify subcommand
-            eprintln!("verify subcommand not yet implemented for {}", file_path.display());
-            std::process::exit(1);
-        }
+        Command::Generate {
+            file_path,
+            dry_run,
+            model,
+        } => handle_generate(&file_path, dry_run, model),
+        Command::Verify { file_path } => handle_verify(&file_path),
     }
 }
 

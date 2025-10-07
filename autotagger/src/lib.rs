@@ -25,6 +25,9 @@ pub enum AutotaggerError {
 
     #[error("HTTP error: {0}")]
     HttpError(#[from] reqwest::Error),
+
+    #[error("Tag validation failed: {0}")]
+    TagValidationError(String),
 }
 
 pub type Result<T> = std::result::Result<T, AutotaggerError>;
