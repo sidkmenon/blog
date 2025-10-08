@@ -2,7 +2,7 @@ use autotagger::Result;
 use autotagger::article;
 use autotagger::tags::{self, OllamaBackend};
 use clap::{Parser, Subcommand};
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::process;
 
 #[derive(Parser, Debug)]
@@ -30,7 +30,7 @@ enum Command {
     },
 }
 
-fn handle_generate(file_path: &PathBuf, dry_run: bool, model: String) -> Result<()> {
+fn handle_generate(file_path: &Path, dry_run: bool, model: String) -> Result<()> {
     // Parse SVX file
     let article = article::parse_svx_file(file_path)?;
 
@@ -64,7 +64,7 @@ fn handle_generate(file_path: &PathBuf, dry_run: bool, model: String) -> Result<
     Ok(())
 }
 
-fn handle_verify(file_path: &PathBuf) -> Result<()> {
+fn handle_verify(file_path: &Path) -> Result<()> {
     // Parse SVX file
     let article = article::parse_svx_file(file_path)?;
 

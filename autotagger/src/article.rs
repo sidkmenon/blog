@@ -54,12 +54,10 @@ pub fn parse_svx_file(file_path: &std::path::Path) -> Result<Article> {
     let (frontmatter_str, body) = extract_frontmatter(&content)?;
 
     match serde_yaml::from_str(&frontmatter_str) {
-        Err(e) => {
-            return Err(AutotaggerError::InvalidFormat(format!(
-                "Invalid frontmatter YAML: {}",
-                e
-            )));
-        }
+        Err(e) => Err(AutotaggerError::InvalidFormat(format!(
+            "Invalid frontmatter YAML: {}",
+            e
+        ))),
         Ok(frontmatter) => Ok(Article {
             frontmatter,
             content: body,
