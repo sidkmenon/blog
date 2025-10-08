@@ -1,10 +1,14 @@
 ---
-title: "Curation"
-description: "On the increased importance of taste and curation in 2025 and beyond."
+title: Curation
+description: On the increased importance of taste and curation in 2025 and beyond.
 date: 2025-09-14
+autotagging: true
 tags:
-  - taste
-  - advertisements
+- curation
+- taste
+- advertising
+- brand-identity
+- creative-process
 ---
 <script lang="ts">
 	import chevy from '$lib/assets/chevy_nova_1975.png';

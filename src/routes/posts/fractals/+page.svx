@@ -2,14 +2,8 @@
 title: "Fractals"
 description: "Piddling around with fractals and WebAssembly"
 date: 2025-09-14
-tags:
-  - math
-  - visualization
-  - fractals
 ---
 ## Overview
-
-Write a short introduction that explains what fractals are and why they matter.
 
 - Self‑similarity at multiple scales
 - Fractional (non‑integer) dimension

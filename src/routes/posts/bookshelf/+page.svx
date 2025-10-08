@@ -1,9 +1,14 @@
 ---
-title: "Bookshelf"
-description: "A list of books that I have enjoyed reading...or enjoy the idea of reading"
+title: Bookshelf
+description: A list of books that I have enjoyed reading...or enjoy the idea of reading
 date: 2025-09-14
+autotagging: true
 tags:
-  - reading
+- books
+- reading
+- literature
+- dostoevsky
+- tolstoy
 ---
 # Bookshelf
 

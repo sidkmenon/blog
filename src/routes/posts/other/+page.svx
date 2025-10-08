@@ -1,9 +1,14 @@
 ---
-title: "Other Blogs"
-description: "A collection of other blogs that I enjoy reading."
+title: Other Blogs
+description: A collection of other blogs that I enjoy reading.
 date: 2025-10-02
+autotagging: true
 tags:
-  - reading
+- blog-recommendations
+- design
+- tech
+- art
+- online-communities
 ---
 # Other Blogs
 
