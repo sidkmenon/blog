@@ -4,35 +4,21 @@ description: "Sid Menon's blog"
 date: 2025-09-14
 autotagging: false
 ---
-<div>
-	<p>
-		My name is Sidharth (Sid) Menon.
-		<br />
-		I am currently based out of San Francisco and am interested in the intersection of technology,
-		design, and culture.
-		<br />
-		I grew up in Ohio and previously studied at Harvard.
-		<br />
-		Email: menon.sid.k [at] gmail [dot] com
-	</p>
+My name is Sidharth (Sid) Menon.
 
-	<p class="quote">
-		I have had my invitation to this world's festival, and thus my life has been blessed. - Tajore
-	</p>
-</div>
+I am currently based out of San Francisco and am interested in the intersection of technology, design, and culture.
+
+I grew up in Ohio and previously studied at Harvard.
+
+Email: menon.sid.k [at] gmail [dot] com
+
+> I have had my invitation to this world's festival, and thus my life has been blessed. - Tajore
 
 <style>
-	p {
-		line-height: 2.2;
-	}
-
-	.quote {
+	blockquote {
+		border-left: none;
+		padding-left: 0;
 		font-style: italic;
-	}
-
-	@media (min-width: 768px) {
-		p {
-			line-height: 2.5;
-		}
+		margin-top: 2rem;
 	}
 </style>

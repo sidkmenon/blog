@@ -3,6 +3,15 @@
 	import type { LayoutData } from './$types';
 
 	let { children, data }: { children?: any; data: LayoutData } = $props();
+	let mobileNavOpen = $state(false);
+
+	function toggleMobileNav() {
+		mobileNavOpen = !mobileNavOpen;
+	}
+
+	function closeMobileNav() {
+		mobileNavOpen = false;
+	}
 </script>
 
 <svelte:head>
@@ -21,12 +30,24 @@
 
 <header class="header">
 	<a href="/" class="brand">Sidharth Menon</a>
-	<nav>
+	<nav class="desktop-nav">
 		<a href="/posts">posts</a>
 		<a href="/posts/bookshelf">bookshelf</a>
 		<a href="/posts/other">other</a>
 	</nav>
+	<button class="hamburger" onclick={toggleMobileNav} aria-label="Toggle menu" aria-expanded={mobileNavOpen}>
+		<span class="hamburger-line"></span>
+		<span class="hamburger-line"></span>
+		<span class="hamburger-line"></span>
+	</button>
 </header>
+
+<button class="mobile-nav-backdrop" class:open={mobileNavOpen} onclick={closeMobileNav} aria-label="Close menu"></button>
+<nav class="mobile-nav" class:open={mobileNavOpen}>
+	<a href="/posts" onclick={closeMobileNav}>posts</a>
+	<a href="/posts/bookshelf" onclick={closeMobileNav}>bookshelf</a>
+	<a href="/posts/other" onclick={closeMobileNav}>other</a>
+</nav>
 
 <div class="container">
 	{@render children?.()}
@@ -91,9 +112,9 @@
 
 	:global(.header) {
 		display: flex;
-		align-items: center;
+		align-items: baseline;
 		gap: 1.5rem;
-		padding-bottom: 1rem;
+		padding: 1rem 1.5rem 1rem;
 		border-bottom: 1px solid #e5e7eb;
 	}
 
@@ -109,22 +130,136 @@
 		text-decoration: underline;
 	}
 
-	:global(.header nav) {
+	:global(.desktop-nav) {
 		display: flex;
-		gap: 1rem;
+		gap: 2rem;
 	}
 
-	:global(.header nav a) {
+	:global(.desktop-nav a) {
 		text-decoration: none;
 		color: inherit;
+		font-size: 1.125rem;
 	}
 
-	:global(.header nav a:hover) {
+	:global(.desktop-nav a:hover) {
 		text-decoration: underline;
 	}
 
+	/* Hamburger menu button */
+	.hamburger {
+		display: none;
+		flex-direction: column;
+		justify-content: space-around;
+		width: 2rem;
+		height: 2rem;
+		background: transparent;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+		margin-left: auto;
+		position: relative;
+		z-index: 1002;
+	}
+
+	.hamburger-line {
+		width: 2rem;
+		height: 0.25rem;
+		background-color: #111827;
+		border-radius: 0.25rem;
+		transition: all 0.3s ease;
+	}
+
+	.hamburger[aria-expanded='true'] .hamburger-line:nth-child(1) {
+		transform: rotate(45deg) translate(0.5rem, 0.5rem);
+	}
+
+	.hamburger[aria-expanded='true'] .hamburger-line:nth-child(2) {
+		opacity: 0;
+	}
+
+	.hamburger[aria-expanded='true'] .hamburger-line:nth-child(3) {
+		transform: rotate(-45deg) translate(0.5rem, -0.5rem);
+	}
+
+	/* Mobile nav overlay */
+	.mobile-nav-backdrop {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, 0.5);
+		z-index: 1000;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+	}
+
+	.mobile-nav-backdrop.open {
+		display: block;
+	}
+
+	.mobile-nav {
+		display: none;
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		width: 70%;
+		max-width: 300px;
+		background-color: white;
+		box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+		z-index: 1001;
+		padding: 5rem 2rem 2rem;
+	}
+
+	.mobile-nav.open {
+		display: flex;
+		flex-direction: column;
+		animation: slideIn 0.3s ease-out;
+	}
+
+	.mobile-nav a {
+		display: block;
+		padding: 1rem 0;
+		text-decoration: none;
+		color: inherit;
+		font-size: 1.25rem;
+		border-bottom: 1px solid #e5e7eb;
+	}
+
+	.mobile-nav a:hover {
+		text-decoration: underline;
+	}
+
+	@keyframes slideIn {
+		from {
+			transform: translateX(100%);
+		}
+		to {
+			transform: translateX(0);
+		}
+	}
+
+	/* Mobile responsive */
+	@media (max-width: 767px) {
+		:global(.desktop-nav) {
+			display: none;
+		}
+
+		.hamburger {
+			display: flex;
+		}
+
+		:global(.header) {
+			align-items: center;
+			padding: 1rem;
+		}
+	}
+
 	:global(.container) {
-		max-width: 75ch;
+		max-width: 120ch;
 		padding: 0.5rem 1.5rem;
 	}
 
