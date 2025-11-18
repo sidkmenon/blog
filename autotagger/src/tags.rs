@@ -105,9 +105,12 @@ pub struct OllamaBackend {
 
 impl OllamaBackend {
     pub fn new(model: String) -> Self {
+        let base_url =
+            std::env::var("OLLAMA_URL").unwrap_or_else(|_| DEFAULT_OLLAMA_URL.to_string());
+
         Self {
             client: Client::new(),
-            base_url: DEFAULT_OLLAMA_URL.to_string(),
+            base_url,
             model,
         }
     }
