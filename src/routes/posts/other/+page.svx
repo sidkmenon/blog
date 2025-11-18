@@ -3,25 +3,26 @@ title: Other Blogs
 description: A collection of other blogs that I enjoy reading.
 date: 2025-10-02
 autotagging: true
-tags:
-- blog-recommendations
-- design
-- tech
-- art
-- online-communities
 ---
-# Other Blogs
+# Other
 
-This post is a collection of other blogs that I enjoy reading. 
+## Books
 
-## Design
+I read a lot and do a pretty poor job of updating this site when I finish something. Here's essentially a random sample of books I've read:
+
+- Anna Karenina by Leo Tolstoy
+- Crime and Punishment by Fyodor Dostoevsky
+
+## Blogs
+
+### Design
 
 - [Maggie Appleton's blog](https://maggieappleton.com/): digital gardening, anthropology, and generally brilliant!
 
-## Tech
+### Tech
 
 - [Paul Graham](https://www.paulgraham.com/articles.html)'s blog: a classic. Lots of great startup vignettes.
 
-## Art
+### Art
 
 - [Dhilan Ramaprasad](https://dhilan.xyz)'s blog: heartbreaking works of staggering genius.

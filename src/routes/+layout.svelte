@@ -32,7 +32,6 @@
 	<a href="/" class="brand">Sidharth Menon</a>
 	<nav class="desktop-nav">
 		<a href="/posts">posts</a>
-		<a href="/posts/bookshelf">bookshelf</a>
 		<a href="/posts/other">other</a>
 	</nav>
 	<button class="hamburger" onclick={toggleMobileNav} aria-label="Toggle menu" aria-expanded={mobileNavOpen}>
@@ -45,7 +44,6 @@
 <button class="mobile-nav-backdrop" class:open={mobileNavOpen} onclick={closeMobileNav} aria-label="Close menu"></button>
 <nav class="mobile-nav" class:open={mobileNavOpen}>
 	<a href="/posts" onclick={closeMobileNav}>posts</a>
-	<a href="/posts/bookshelf" onclick={closeMobileNav}>bookshelf</a>
 	<a href="/posts/other" onclick={closeMobileNav}>other</a>
 </nav>
 
