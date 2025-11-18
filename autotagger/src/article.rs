@@ -41,7 +41,9 @@ pub fn parse_svx_file(file_path: &std::path::Path) -> Result<Article> {
         ));
     }
 
-    if file_path.extension().and_then(|s| s.to_str()) != Some("svx") {
+    if let Some(val) = file_path.extension()
+        && val == "svx"
+    {
         return Err(AutotaggerError::InvalidFormat(
             "File must have .svx extension".to_string(),
         ));
