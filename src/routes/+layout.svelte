@@ -470,6 +470,41 @@
 		background-color: #f9fafb;
 	}
 
+	/* Waterfall animation for sequential elements */
+	@keyframes waterfall-fade-in {
+		from {
+			opacity: 0;
+			transform: translateY(-8px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	/* Table rows */
+	:global(.container table thead tr),
+	:global(.container table tbody tr) {
+		animation: waterfall-fade-in 0.3s ease-out forwards;
+		opacity: 0;
+	}
+
+	:global(.container table thead tr) {
+		animation-delay: 0s;
+	}
+
+	:global(.container table tbody tr) {
+		animation-delay: calc(sibling-index() * 0.05s);
+	}
+
+	/* List items */
+	:global(.container ul > li),
+	:global(.container ol > li) {
+		animation: waterfall-fade-in 0.3s ease-out forwards;
+		opacity: 0;
+		animation-delay: calc(sibling-index() * 0.05s);
+	}
+
 	@media (max-width: 767px) {
 		:global(.container th),
 		:global(.container td) {
