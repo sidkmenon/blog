@@ -1,0 +1,66 @@
+---
+title: "Rent Control"
+description: "an exercise on thinking for myself"
+date: 2025-12-28
+autotagging: true
+---
+# Rent Control
+
+I find that most people don't have original opinions.
+
+This phenomena has gotten much worse since the launch of ChatGPT. We imbibe and regurgiate a cocktail of thoughts that we get from LLMs, our twitter feeds, the news, etc.
+
+I say "we" here because I catch myself doing this, too. This post is a step in the opposite direction for myself.
+
+In the NYC Mayoral Election of 2025, a big issue was rent control policies in order to combat housing affordability.
+
+Although my intuition as a city resident for three years corroborates the problem (rent is expensive!), but I wasn't sure if the data supported it. So I did some research:
+
+## NYC's housing crisis
+
+From a review of academic literature, it _does_ look like NYC has an affordability crisis. Specifically, New York suffers from a housing supply shortage. New units ("housing starts") can't keep up with rising demand and migration into the city. The city suffers from "inelastic housing supply", i.e. housing supply does not respond sufficiently to increases in price.[^1,2]
+
+In the 2010 Quarterly Journal of Economics we can see NYC's supply elasticity issues when compared to other US cities:[^3]
+
+| City | Supply Elasticity | Rank (out of 95) |
+|---|---|---|
+| **New York, NY** | **0.76** | 9 |
+| **Chicago, IL** | **0.81** | 12 |
+| **Houston, TX** | **1.99** | 67 |
+| **Atlanta, GA** | **2.21** | 74 |
+
+It doesn't look much better today; in 2023, the city's vacancy rate for housing was 1.41%, its lowest in 50 years.[^4] For reference, a healthy "natural" vacancy rate in the rental market is estimated to be between 5-10% and peer cities (DC, LA, SF) have vacancy rates of 5+%.[^5]
+
+But why? Landlords might blame the city's pro-regulation swing since 2019 (like the [Housing Stability and Tenant Protection Act](https://www.nysenate.gov/newsroom/articles/2019/new-rights-tenants-housing-stability-and-tenant-protection-act-2019-1)), but I don't find that argument convicing. Although there was a spike in vacant / warehoused / dilapidated units after the law was enacted, COVID was a significant confounding factor. By March 2024, only \< 0.2% of the rent-controlled stock was uneconomical to renovate, and only 2.7% of units were vacant that would qualify for rent stabilization.
+
+An argument that I find more convincing is that NYC's housing shortage is a symptom of what Ed Glaeser calls the "closing of the urban frontier" in America. Through most of the 20th century, Americans moved from poorer places to richer places. This was most noticable with Black Americans (e.g. the Great Migration from the Jim Crow South), but the same patterns held even for White Americans. Until ~1990, more than 6% of Americans moved across counties each year.[^6]
+
+This pattern has slowed down significantly, particularly for migration to cities like New York. First, NYC is a much older city than Atlanta or Houston and is not built around the highway and car. Thus, although attempts at retrofitting have been made, it is much more difficult for residents to live on the outskirts and commute in via the highway. This means that builders can't just build on the outskirts of the city to supply new housing. Second, builders like Robert Moses (of _Power Broker_ fame) were increasingly stopped after the 60s by activists like Shirley Hayes and Jane Jacobs, who fought for recognition of places like Washington Square Park as landmarks. Broadly speaking, local groups have become more politically powerful as they lobby against new construction with (legitimate) concerns: new construction devalues their property and can change the quality of their neighorhoods (e.g. destroying city landmarks!).
+
+In other words, new construction can be surprisingly politically difficult.
+
+## What kind of policy interventions would fix the issue?
+
+Rent control (as a price-fixing scheme) has a _depressive_ effect on housing construction, which is the opposite of what the evidence suggests that New York needs. A few ideas that seem more promising:
+
+1. **Reduced local barriers to building new housing:** the first solution would be to enable pro-housing legislation. As *Glaeser, Gyorko, & Saks (2005)* note, housing construction in big cities has become increasingly challenging as local municipal groups have increased their political influence. Pro-housing construction legislation like Eric Adams'[^7] "2024 City of Yes for Housing Opportunity" seems like a step in the right direction to adapt the 1961 Zoning Resolution to the city's current challenges.[^8]
+2. **Federal financial incentives to build:** Schwartz's 2019 _New York City's Affordable Housing Plans and the Limits of Local Initiative_ makes the argument that the city cannot solve the housing crisis without federal support. Eliminating the housing cost burden for the city's extremely-low-income (spending 50% of income on housing) would cost $3.2 billion annually. For context, the FY2019 budget allocated $2.1 billion for fire protection and $1.7 billion for sanitation.[^1] On some level I find this intuitive too: NYC's lawmakers won't represent the interests of Americans who might want to live in NYC someday, so federal support would be appropriate to compensate.[^2]
+3. **Building HSR:** a true high-speed rail system could also ease the city's housing supply issues by expanding the housing market to the city's outskirts / linking with other cities. For example, a *Harvard International Review* article found this effect in the Tokyo metropolitan area when the Shinkansen was constructed.[^9]
+4. **Target subsidies more effectively:** NYC's current housing scheme is also a suboptimal use of capital, since it does not accurately reflect who most needs housing because of distorted price signals.[^10]. Capital would be better allocated if it encouraged building more. A better scheme might be something in the spirit of the now-discontinued [421-a tax incentive](https://www.nyc.gov/site/hpd/services-and-information/tax-incentives-421-a.page) program (which suffered from its own set of problems, since developers could avoid taxation on luxury apartments as long as a small subsection was nominally "affordable").
+
+All of this said: I am glad that politicians in the city are drawing attention to the housing crisis. But given that NYC has a 1) housing _supply_ issue and 2) requires policies that compensates locals for the costs of building & migration, I am suspicious of rent control as anything but a convenient political scheme.
+
+---
+# Footnotes:
+[^1]: [Schwartz, A. (2019): New York City's Affordable Housing Plans and the Limits of Local Initiative](https://www.huduser.gov/portal/periodicals/cityscpe/vol21num3/ch19.pdf)
+[^2]: "Glaeser, E. L., Gyourko, J., & Saks, R. E. (2005). Why Have Housing Prices Gone Up?"
+[^3]: [Saiz 2010](https://fpeckert.me/teaching/readings/SaizQJE10.pdf)
+[^4]: [NYC Rent Guidelines Board: 2025 Housing Supply Report](https://rentguidelinesboard.cityofnewyork.us/wp-content/uploads/2025/05/2025-HSR.pdf)
+[^5]: [Study by Harvard Joint Center for Housing Studies](https://www.jchs.harvard.edu/sites/default/files/w07-7.pdf). See also individual data for [DC](https://fred.stlouisfed.org/series/DCRVAC), [SF](https://projects.sfplanning.org/community-stabilization/rent-stabilization-eviction-protection.htm), [LA](https://www.costar.com/article/410714092/los-angeles-is-limiting-rent-hikes-heres-how-landlords-and-apartment-tenants-will-feel-the-change).
+[^6]: "Glaeser 2020: The Closing of America's Urban Frontier". Fun fact: Glaeser taught a microeconomics class that I took in college which I still remember fondly. He is a remarkably warm and intelligent person, and I hope you have the pleasure of meeting him too, some day!
+[^7]: of [Turkish Airlines](https://www.reddit.com/r/awardtravel/comments/1fpzmfb/nyc_mayor_travel_hacking_legend/) fame
+[^8]: [2024 City of Yes](https://www.jdsupra.com/legalnews/new-york-city-council-adopts-7818667/)
+[^9]: "Harvard International Review, Vol. 40, No. 3, Mind the Gap: The Interplay of Transportation and Inequality (SUMMER 2019), pp. 28-29"
+[^10]: "Glaeser & Luttmer: The American Economic Review, Sep., 2003, Vol. 93, No. 4 (Sep., 2003), pp. 1027-1046"
+
+---

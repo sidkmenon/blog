@@ -1,0 +1,46 @@
+---
+title: Risking Ridicule
+description: Lessons learned from a war on perfectionism
+date: 2025-12-29
+autotagging: true
+---
+<script>
+	import friendship_diagram from '$lib/assets/friendship_diagram.png';
+</script>
+# Risking Ridicule
+
+Life is more fun when it's full of little, private joys: a coffee cup from a loved one, a sweatshirt which reminds you of a special place.
+
+In contrast, the spaces of my young adulthood were always decorated in a spartan, minimalist fashion. I owned items if I could easily quatify their utility. I think this was (is) in part because of a personal rationalist inclination, but also in part because of a bad perfectionist habit.
+
+Over COVID, I realized what I was missing. I lived with six boys in a house in Brookline, Massachussets. One of my roommates lived his life the opposite way: he spent weeks adorning each corner of his room lovingly. He would take his time eating lunch outside, from a special tray and bowl.
+
+I didn't conciously realize the difference between us at first, but I felt it intuitively. In the sense of "Zen and the Art of Motorcycle Maintenance", his life had more "Quality"[^1] than mine.
+
+Perhaps this is because of the way that taste flows from taste-maker to consumer; taste flows in a graph:[^2]
+
+<img alt="Diagram of friendship relationships, showing transitive dependencies between you and your friends' tastes" src={friendship_diagram} />
+
+The consumers in this graph may (unknowingly) be living life in a way which is dissonant with their values. But I don't think the answer here is a postmodern, subjectivist stance where the individual's viewpoints are prized above all. As Yuriko Saito notes in [*Everyday Aesthetics*](https://digitalcommons.risd.edu/liberalarts_contempaesthetics/vol0/iss4/5/):
+
+> Propagandists and advertising agencies guide our decisions and actions, as citizens and consumers, through various aesthetic strategies toward achieving [their agenda...However, the] rejection of simply following or conforming does not necessarily imply the rejection of listening to others and engaging in dialogue with them.
+
+We *should* think for ourselves and develop our own tastes. However, when we do this, we risk feedback, criticism, and maybe even ridicule. And our critics may be completely correct.
+
+Braving ridicule is hard! I've taken strides towards this ideal in 2025 (e.g. starting a company and learning Malayalam), but I find myself still resistant on some level, still seeking validation and avoiding risks. However, I saw a quote recently which went along the lines of:
+
+> If you're scared of doing something, do it ironically.
+
+This resonates with me, in part because I think it has (surprising) philosophical backing from Buddhist & Hindu tradition. Buddhism has the notion of [*upāya*](https://en.wikipedia.org/wiki/Upaya), which encourages a practitioner to pursue the noble path through means appropriate to their circumstances, even if the reasoning isn't "perfect"; in other words, the notion that *something is better than nothing*.
+
+I find *do it ironically* much more appealing than *do it scared*: fear is a negative emotion. On the other hand, irony is driven by several factors: when we acts ironically, we cultivate inner bliss, fearlessness, and are not attached to the outcome of our actions. These qualities are key lessons from Hindu & Buddhist philosophy on how to pursue the good life.[^3]
+
+In 2026, I resolve to do things ironically, even if (especially if) they scare me!
+
+---
+# Footnotes:
+[^1]: [Pirsig's Metaphysics of Quality](https://en.wikipedia.org/wiki/Pirsig%27s_Metaphysics_of_Quality).
+[^2]: because of transitive dependencies (friends or other associations), it can be surprisingly difficult to figure out why you appreciate certain ideas or aesthetics! For example, it would be hard for me to tell the impact or intentions that the "green" group of people have since their tastes flow through my friends.
+[^3]: See [Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/concept-emotion-india/) and [Quotations from Swami Vivekananda](https://www.vifindia.org/print/4794)
+
+---

@@ -97,6 +97,13 @@
 			'Charter', 'Bitstream Charter', 'Charter BT', 'Book Antiqua', 'Georgia', 'Times New Roman',
 			serif;
 		margin: 0;
+		padding-right: 280px; /* Make room for sidenotes on desktop */
+	}
+
+	@media (max-width: 767px) {
+		:global(body) {
+			padding-right: 0; /* Remove padding on mobile */
+		}
 	}
 
 	:global(h1),
@@ -256,9 +263,68 @@
 		}
 	}
 
+	:global(body) {
+		counter-reset: sidenote-counter;
+	}
+
 	:global(.container) {
-		max-width: 120ch;
+		max-width: 1200px;
 		padding: 0.5rem 1.5rem;
+		position: relative;
+	}
+
+	/* Sidenote reference link */
+	:global(.sidenote-ref) {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	/* Sidenote number - auto-incrementing counter */
+	:global(.sidenote-number) {
+		counter-increment: sidenote-counter;
+	}
+
+	:global(.sidenote-number:after) {
+		content: counter(sidenote-counter);
+		color: #0066cc;
+		cursor: pointer;
+	}
+
+	/* Static sidenote number for subsequent references - shows actual footnote ID */
+	:global(.sidenote-number-static) {
+		color: #0066cc;
+		cursor: pointer;
+	}
+
+	/* Sidenote content - floated to right margin on desktop */
+	:global(.sidenote) {
+		float: right;
+		clear: right;
+		margin-right: -280px;
+		width: 250px;
+		font-size: 0.9rem;
+		line-height: 1.4;
+		color: #6b7280;
+		margin-top: 0.3rem;
+		padding-left: 1rem;
+	}
+
+	/* Footnotes section - hidden on desktop, shown on mobile */
+	:global(.footnotes) {
+		display: none;
+		margin-top: 3rem;
+		padding-top: 2rem;
+		border-top: 2px solid #e5e7eb;
+		font-size: 0.875rem;
+		color: #6b7280;
+	}
+
+	:global(.footnotes ol) {
+		padding-left: 1.5rem;
+	}
+
+	:global(.footnotes li) {
+		margin: 1rem 0;
 	}
 
 	/* Headings */
@@ -301,8 +367,8 @@
 	:global(.container video),
 	:global(.container audio) {
 		display: block;
-		margin: 1.5rem 0;
-		max-width: 100%;
+		margin: 1.5rem auto;
+		max-width: 80%;
 		height: auto;
 		border-radius: 0.5rem;
 		box-shadow:
@@ -379,6 +445,47 @@
 		background-color: transparent;
 		padding: 0;
 		border-radius: 0;
+	}
+
+	/* Tables */
+	:global(.container table) {
+		width: auto;
+		border-collapse: collapse;
+		margin: 1.5rem 0;
+	}
+
+	:global(.container th),
+	:global(.container td) {
+		padding: 0.6rem 1rem;
+		text-align: left;
+		border-bottom: 1px solid #e5e7eb;
+	}
+
+	:global(.container th) {
+		font-weight: 600;
+		border-bottom: 2px solid #d1d5db;
+	}
+
+	:global(.container tbody tr:hover) {
+		background-color: #f9fafb;
+	}
+
+	@media (max-width: 767px) {
+		:global(.container th),
+		:global(.container td) {
+			padding: 0.5rem 0.75rem;
+		}
+	}
+
+	/* Mobile: hide sidenotes, show footer footnotes */
+	@media (max-width: 767px) {
+		:global(.sidenote) {
+			display: none;
+		}
+
+		:global(.footnotes) {
+			display: block;
+		}
 	}
 
 	@media (min-width: 768px) {
