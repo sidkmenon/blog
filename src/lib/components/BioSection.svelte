@@ -124,7 +124,7 @@
 			class="control-label"
 			onclick={handleShowLess}
 			disabled={isAnimating || currentLevel === 0}
-			aria-label="Show less detail">less</button
+			aria-label="Show less detail">less detail</button
 		>
 		<div class="dot-slider">
 			{#each levelIndices as level}
@@ -145,7 +145,7 @@
 			class="control-label"
 			onclick={handleShowMore}
 			disabled={isAnimating || currentLevel === maxLevel}
-			aria-label="Show more detail">more</button
+			aria-label="Show more detail">more detail</button
 		>
 	</div>
 
@@ -153,12 +153,12 @@
 	<div class="mobile-control">
 		{#if currentLevel > 0}
 			<button class="text-link" onclick={handleShowLess} disabled={isAnimating}>
-				<span class="arrow">-</span> less
+				<span class="arrow">-</span> less detail
 			</button>
 		{/if}
 		{#if currentLevel < maxLevel}
 			<button class="text-link" onclick={handleShowMore} disabled={isAnimating}>
-				more <span class="arrow">+</span>
+				more detail <span class="arrow">+</span>
 			</button>
 		{/if}
 	</div>
@@ -198,7 +198,7 @@
 	}
 
 	.control-label {
-		font-size: 0.8rem;
+		font-size: 0.9rem;
 		color: #9ca3af;
 		font-family: 'Inter', sans-serif;
 		text-transform: lowercase;

@@ -11,9 +11,9 @@ autotagging: true
 
 Life is more fun when it's full of little, private joys: a coffee cup from a loved one, a sweatshirt which reminds you of a special place.
 
-In contrast, the spaces of my young adulthood were always decorated in a spartan, minimalist fashion. I owned items if I could easily quatify their utility. I think this was (is) in part because of a personal rationalist inclination, but also in part because of a bad perfectionist habit.
+In contrast, the spaces of my young adulthood were always decorated in a spartan, minimalist fashion. I owned items if I could easily quantify their utility. I think this was (is) in part because of a personal rationalist inclination, but also in part because of a bad perfectionist habit.
 
-Over COVID, I started to realize what I was missing. I lived with six boys in a house in Brookline, Massachussets, and one of my roommates lived his life the opposite way: he spent weeks adorning each corner of his room lovingly. He would take his time eating lunch outside, from a special tray and bowl.
+Over COVID, I started to realize what I was missing. I lived with six friends in a house in Brookline, Massachussets, and one of my roommates lived his life the opposite way: he spent weeks adorning each corner of his room lovingly. He would take his time eating lunch outside, from a special tray and bowl.
 
 I didn't conciously realize the difference between us at first, but I felt it intuitively. In the sense of "Zen and the Art of Motorcycle Maintenance", his life had more "Quality"[^1] than mine.
 

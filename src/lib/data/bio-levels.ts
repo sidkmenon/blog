@@ -12,32 +12,32 @@ export const bioLevels: string[] = [
 
 I am currently based out of San Francisco and am interested in the intersection of technology, design, and culture.
 
-I grew up in Ohio and previously studied at Harvard.`,
+I grew up in Ohio and studied at Harvard.`,
 
 	// Level 1: + NYC
 	`My name is Sidharth (Sid) Menon.
 
 I am currently based out of San Francisco and am interested in the intersection of technology, design, and culture.
 
-I grew up in Ohio and previously studied computer science at Harvard. Before SF, I lived in NYC for three years.`,
+I grew up in Ohio and studied computer science at Harvard. Before SF, I lived in NYC for three years.`,
 
 	// Level 2: + Company & Role
 	`My name is Sidharth (Sid) Menon.
 
 I am currently based out of San Francisco and am interested in the intersection of technology, design, and culture.
 
-I grew up in Ohio and previously studied computer science at Harvard. Before SF, I lived in NYC for three years, where was I was a tech lead on an infrastructure team at Palantir.
+I grew up in Ohio and studied computer science at Harvard. Before SF, I lived in NYC for three years, where was I was a tech lead on an infrastructure team at Palantir.
 
-Currently, the co-founder of fix.fast (YC W26), where we're working on AI-based self-healing software.`,
+Currently, I'm the co-founder of fix.fast (YC W26), where we're working on self-healing software using AI.`,
 
 	// Level 3: + Hobbies
 	`My name is Sidharth (Sid) Menon.
 
 I am currently based out of San Francisco and am interested in the intersection of technology, design, and culture.
 
-I grew up in Ohio and previously studied computer science at Harvard. Before SF, I lived in NYC for three years, where was I was a tech lead on an infrastructure team at Palantir.
+I grew up in Ohio and studied computer science at Harvard. Before SF, I lived in NYC for three years, where was I was a tech lead on an infrastructure team at Palantir.
 
-Currently, the co-founder of fix.fast (YC W26), where we're working on AI-based self-healing software.
+Currently, I'm the co-founder of fix.fast (YC W26), where we're working on self-healing software using AI.
 
 In my free time, I like to travel, cook, read, and play tennis.`,
 
@@ -46,9 +46,9 @@ In my free time, I like to travel, cook, read, and play tennis.`,
 
 I am currently based out of San Francisco and am interested in the intersection of technology, design, and culture.
 
-I grew up in Ohio and previously studied computer science at Harvard. Before SF, I lived in NYC for three years, where was I was a tech lead on an infrastructure team at Palantir.
+I grew up in Ohio and studied computer science at Harvard. Before SF, I lived in NYC for three years, where was I was a tech lead on an infrastructure team at Palantir.
 
-Currently, the co-founder of fix.fast (YC W26), where we're working on AI-based self-healing software.
+Currently, I'm the co-founder of fix.fast (YC W26), where we're working on self-healing software using AI.
 
 In my free time, I like to travel, cook, read, and play tennis. In 2026, I'm exploring some new hobbies (dance, improv, learning Malayalam and Spanish) and looking forward to meeting some great folks in SF!`
 ];
