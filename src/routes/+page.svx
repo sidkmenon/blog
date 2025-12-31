@@ -4,21 +4,20 @@ description: "Sid Menon's blog"
 date: 2025-09-14
 autotagging: false
 ---
-My name is Sidharth (Sid) Menon.
+<script>
+	import BioSection from '$lib/components/BioSection.svelte';
+	import { bioLevels } from '$lib/data/bio-levels';
+</script>
 
-I am currently based out of San Francisco and am interested in the intersection of technology, design, and culture.
-
-I grew up in Ohio and previously studied at Harvard.
-
-Email: menon.sid.k [at] gmail [dot] com
-
-> I have had my invitation to this world's festival, and thus my life has been blessed. - Tajore
+<BioSection levels={bioLevels} defaultLevel={0}>
+	<p class="email">Email: menon.sid.k [at] gmail [dot] com</p>
+	<blockquote>I have had my invitation to this world's festival, and thus my life has been blessed. - Tajore</blockquote>
+</BioSection>
 
 <style>
 	blockquote {
 		border-left: none;
 		padding-left: 0;
 		font-style: italic;
-		margin-top: 2rem;
 	}
 </style>
