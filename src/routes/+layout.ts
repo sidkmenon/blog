@@ -1,9 +1,17 @@
-export const load = async ({ url }) => {
-	// Construct the path to the .svx file for this route
-	const pathname = url.pathname === '/' ? '' : url.pathname;
-	const svxPath = `/src/routes${pathname}/+page.svx`;
+const svxModules = import.meta.glob<{ metadata: { title: string; description: string } }>(
+	'./**/+page.svx',
+	{ eager: true }
+);
 
-	const module = await import(/* @vite-ignore */ svxPath);
+export const load = async ({ url }) => {
+	const pathname = url.pathname === '/' ? '' : url.pathname;
+	const svxPath = `.${pathname}/+page.svx`;
+
+	const module = svxModules[svxPath];
+
+	if (!module) {
+		throw new Error(`No .svx module found for path: ${svxPath}`);
+	}
 
 	return {
 		metadata: {
