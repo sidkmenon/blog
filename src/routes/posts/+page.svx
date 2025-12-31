@@ -12,29 +12,39 @@ autotagging: false
 
 <div class="posts-list">
 	<h1>Posts</h1>
-	{#each data.posts as post (post.slug)}
-		<article>
-			<a href="/posts/{post.slug}">
-				<h2>{post.title}</h2>
-				<p>{post.description}</p>
-				<time>{new Date(post.date).toLocaleDateString('en-US', {
-					year: 'numeric',
-					month: 'long',
-					day: 'numeric'
-				})}</time>
-			</a>
-		</article>
-	{/each}
+	<ul>
+		{#each data.posts as post (post.slug)}
+			<li>
+				<article>
+					<a href="/posts/{post.slug}">
+						<span class="post-title">{post.title}</span>
+						<p>{post.description}</p>
+						<time>{new Date(post.date).toLocaleDateString('en-US', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric'
+						})}</time>
+					</a>
+				</article>
+			</li>
+		{/each}
+	</ul>
 </div>
 
 <style>
-	article {
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	li {
 		margin-bottom: 2rem;
 		padding-bottom: 2rem;
 		border-bottom: 1px solid #e5e7eb;
 	}
 
-	article:last-child {
+	li:last-child {
 		border-bottom: none;
 	}
 
@@ -49,9 +59,12 @@ autotagging: false
 		transform: translateX(0.5rem);
 	}
 
-	article h2 {
+	.post-title {
+		display: block;
 		margin-bottom: 0.5rem;
 		color: #111827;
+		font-size: 1.5rem;
+		font-weight: 700;
 	}
 
 	article p {
