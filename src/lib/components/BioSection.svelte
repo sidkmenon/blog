@@ -34,8 +34,8 @@
 	let displayedText = $state(levels[defaultLevel] || '');
 	let isAnimating = $state(false);
 
-	const TYPING_SPEED = 6;
-	const DELETE_SPEED = 9;
+	const TYPING_SPEED = 5;
+	const DELETE_SPEED = 10;
 
 	let animationFrame: number | null = null;
 
