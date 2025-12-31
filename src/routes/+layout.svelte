@@ -494,7 +494,7 @@
 	}
 
 	:global(.container table tbody tr) {
-		animation-delay: calc(sibling-index() * 0.05s);
+		animation-delay: calc(sibling-index() * 50ms);
 	}
 
 	/* List items */
@@ -502,7 +502,7 @@
 	:global(.container ol > li) {
 		animation: waterfall-fade-in 0.3s ease-out forwards;
 		opacity: 0;
-		animation-delay: calc(sibling-index() * 0.05s);
+		animation-delay: calc(sibling-index() * 50ms);
 	}
 
 	@media (max-width: 767px) {
