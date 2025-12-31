@@ -8,17 +8,17 @@ autotagging: true
 
 I find that most people don't have original opinions.
 
-This phenomena has gotten much worse since the launch of ChatGPT. We imbibe and regurgiate a cocktail of thoughts that we get from LLMs, our twitter feeds, the news, etc.
+This phenomena has gotten much worse since the launch of ChatGPT. We imbibe and regurgiate a cocktail of thoughts that we get from LLMs, our twitter feeds, the news, and politicians.
 
 I say "we" here because I catch myself doing this, too. This post is a step in the opposite direction for myself.
 
 In the NYC Mayoral Election of 2025, a big issue was rent control policies in order to combat housing affordability.
 
-Although my intuition as a city resident for three years corroborates the problem (rent is expensive!), but I wasn't sure if the data supported it. So I did some research:
+Although my intuition as an NYC resident for three years says that affordability is an issue (rent is expensive!), I wasn't sure if the data supported this. So I did some research:
 
 ## NYC's housing crisis
 
-From a review of academic literature, it _does_ look like NYC has an affordability crisis. Specifically, New York suffers from a housing supply shortage. New units ("housing starts") can't keep up with rising demand and migration into the city. The city suffers from "inelastic housing supply", i.e. housing supply does not respond sufficiently to increases in price.[^1,2]
+From a review of academic literature, it looks like New York _does_ suffer from a housing supply shortage. New units ("housing starts") can't keep up with rising demand and migration into the city. The city suffers from "inelastic housing supply", i.e. housing supply does not respond sufficiently to increases in price.[^1,2]
 
 In the 2010 Quarterly Journal of Economics we can see NYC's supply elasticity issues when compared to other US cities:[^3]
 
@@ -31,11 +31,11 @@ In the 2010 Quarterly Journal of Economics we can see NYC's supply elasticity is
 
 It doesn't look much better today; in 2023, the city's vacancy rate for housing was 1.41%, its lowest in 50 years.[^4] For reference, a healthy "natural" vacancy rate in the rental market is estimated to be between 5-10% and peer cities (DC, LA, SF) have vacancy rates of 5+%.[^5]
 
-But why? Landlords might blame the city's pro-regulation swing since 2019 (like the [Housing Stability and Tenant Protection Act](https://www.nysenate.gov/newsroom/articles/2019/new-rights-tenants-housing-stability-and-tenant-protection-act-2019-1)), but I don't find that argument convicing. Although there was a spike in vacant / warehoused / dilapidated units after the law was enacted, COVID was a significant confounding factor. By March 2024, only \< 0.2% of the rent-controlled stock was uneconomical to renovate, and only 2.7% of units were vacant that would qualify for rent stabilization.
+But why is this the case? Landlords might blame the city's pro-regulation swing since 2019 (like the [Housing Stability and Tenant Protection Act](https://www.nysenate.gov/newsroom/articles/2019/new-rights-tenants-housing-stability-and-tenant-protection-act-2019-1)), but I don't find that argument convicing. Although there was a spike in vacant / warehoused / dilapidated units after the law was enacted, COVID was a significant confounding factor. By March 2024, only \< 0.2% of the rent-controlled stock was uneconomical to renovate, and only 2.7% of units were vacant that would qualify for rent stabilization.
 
-An argument that I find more convincing is that NYC's housing shortage is a symptom of what Ed Glaeser calls the "closing of the urban frontier" in America. Through most of the 20th century, Americans moved from poorer places to richer places. This was most noticable with Black Americans (e.g. the Great Migration from the Jim Crow South), but the same patterns held even for White Americans. Until ~1990, more than 6% of Americans moved across counties each year.[^6]
+An argument that I find more convincing is that NYC's housing shortage is a symptom of what Ed Glaeser calls the "closing of the American urban frontier". Through most of the 20th century, Americans moved from poorer places to richer places because they could enrich themselves doing so (and could find affordable housing!). This was most noticable with Black Americans, especially with the Great Migration from the Jim Crow South, but the same patterns held even for White Americans. Until ~1990, more than 6% of Americans moved across counties each year.[^6]
 
-This pattern has slowed down significantly, particularly for migration to cities like New York. First, NYC is a much older city than Atlanta or Houston and is not built around the highway and car. Thus, although attempts at retrofitting have been made, it is much more difficult for residents to live on the outskirts and commute in via the highway. This means that builders can't just build on the outskirts of the city to supply new housing. Second, builders like Robert Moses (of _Power Broker_ fame) were increasingly stopped after the 60s by activists like Shirley Hayes and Jane Jacobs, who fought for recognition of places like Washington Square Park as landmarks. Broadly speaking, local groups have become more politically powerful as they lobby against new construction with (legitimate) concerns: new construction devalues their property and can change the quality of their neighorhoods (e.g. destroying city landmarks!).
+This pattern has slowed down significantly, particularly for cities like New York. First, NYC is a much older city than Atlanta or Houston and is not built around the highway and car. Thus, despite attempts to retrofit highways to the city, it is much more difficult for residents to live on the outskirts and commute in via automobile. Therefore to supply new housing, builders can't just build on the outskirts of the city. Second, builders like Robert Moses (of _Power Broker_ fame) were increasingly stopped after the 60s by activists like Shirley Hayes and Jane Jacobs, who fought for recognition of places like Washington Square Park as landmarks. Broadly speaking, local groups have become more politically powerful as they lobby against new construction with (many legitimate) concerns: new construction devalues their property and can change the quality of their neighorhoods (e.g. destroying city landmarks!).
 
 In other words, new construction can be surprisingly politically difficult.
 
