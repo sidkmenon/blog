@@ -39,7 +39,7 @@ I grew up in Ohio and studied computer science at Harvard. Before SF, I lived in
 
 Currently, I'm the co-founder of fix.fast (YC W26), where we're working on self-healing software using AI.
 
-In my free time, I like to travel, cook, read, and play tennis.`,
+My hobbies include friendship, travel, and fine dining.`,
 
 	// Level 4: + 2026 Goals
 	`My name is Sidharth (Sid) Menon.
@@ -50,5 +50,5 @@ I grew up in Ohio and studied computer science at Harvard. Before SF, I lived in
 
 Currently, I'm the co-founder of fix.fast (YC W26), where we're working on self-healing software using AI.
 
-In my free time, I like to travel, cook, read, and play tennis. In 2026, I'm exploring some new hobbies (dance, improv, learning Malayalam and Spanish) and looking forward to meeting some great folks in SF!`
+My hobbies include friendship, travel, and fine dining. In 2026, I'm exploring some new hobbies (dance, improv, learning Malayalam and Spanish) and looking forward to meeting some great folks in SF!`
 ];
