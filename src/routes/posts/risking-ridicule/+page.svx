@@ -4,43 +4,51 @@ description: Lessons learned from a war on perfectionism
 date: 2025-12-29
 autotagging: true
 ---
-<script>
-	import friendship_diagram from '$lib/assets/friendship_diagram.png';
-</script>
 # Risking Ridicule
 
-Life is more fun when it's full of little, private joys: a coffee cup from a loved one, a sweatshirt which reminds you of a special place.
+Like most of us, I've felt fear and anxiety when approaching something difficult or unknown, whether speaking in front of large crowds or taking on unfamilar physical challenges. For most of this time, I've treated these feelings with a "man up" and stiff pat-on-the-back.
 
-In contrast, the spaces of my young adulthood were always decorated in a spartan, minimalist fashion. I owned items if I could easily quantify their utility. I think this was (is) in part because of a personal rationalist inclination, but also in part because of a bad perfectionist habit.
+Cutting edge stuff, I know.
 
-Over COVID, I started to realize what I was missing. I lived with six friends in a house in Brookline, Massachussets, and one of my roommates lived his life the opposite way: he spent weeks adorning each corner of his room lovingly. He would take his time eating lunch outside, from a special tray and bowl.
+In 2025 I started a company for the first time, however, and my tried-and-true method started to slip up. I am certain that we will succeed, but nevertheless, persistent, nagging thoughts sit in my mind:
 
-I didn't conciously realize the difference between us at first, but I felt it intuitively. In the sense of "Zen and the Art of Motorcycle Maintenance", his life had more "Quality"[^1] than mine.
+> Are we growing fast enough? What more could I be doing? I'm sure I'm messing lots of things up...
 
-Perhaps this is because of the way that taste flows from taste-maker to consumer; taste flows in a graph:[^2]
+In many ways I think these thoughts are healthy; I use them as fuel and motivation. But when we do scary things and take risks, we risk feedback, criticism, and maybe even ridicule. And our critics may be completely correct.
 
-<img alt="Diagram of friendship relationships, showing transitive dependencies between you and your friends' tastes" src={friendship_diagram} />
-
-The consumers in this graph may (unknowingly) be living life in a way which is dissonant with their values. But I don't think the answer here is a subjectivist stance where the individual's viewpoints are prized above all. As Yuriko Saito notes in [*Everyday Aesthetics*](https://digitalcommons.risd.edu/liberalarts_contempaesthetics/vol0/iss4/5/):
-
-> Propagandists and advertising agencies guide our decisions and actions, as citizens and consumers, through various aesthetic strategies toward achieving [their agenda...However, the] rejection of simply following or conforming does not necessarily imply the rejection of listening to others and engaging in dialogue with them.
-
-We *should* think for ourselves and develop our own tastes. However, when we do this, we risk feedback, criticism, and maybe even ridicule. And our critics may be completely correct.
-
-Braving ridicule is hard! I've taken strides towards this ideal in 2025 (e.g. starting a company), but I find myself still resistant on some level, still seeking validation and avoiding risks. However, I saw a quote recently which went along the lines of:
+Braving ridicule is hard! I've been searching for a framework on what to do with these feelings, so I've been diving into Buddhist and Hindu philiosophy. On this exploration, I saw a quote which went along the lines of:
 
 > If you're scared of doing something, do it ironically.
 
-This resonates with me, in part because I think it has (surprising) philosophical backing from Buddhist & Hindu tradition. Buddhism has the notion of [*upāya*](https://en.wikipedia.org/wiki/Upaya), which encourages a practitioner to pursue the noble path through means appropriate to their circumstances, even if the reasoning isn't "perfect"; in other words, the notion that *something is better than nothing*.
+Irony normally connotes some cynicism, which I wouldn't ordinarily expect to be productive from a philosophical or spiritual standpoint. Buddhism, however, has the notion of [*upāya*](https://en.wikipedia.org/wiki/Upaya), which encourages a practitioner to pursue the noble path through means appropriate to their circumstances, even if the reasoning isn't "perfect"; in other words, the notion that *something is better than nothing*.
 
-I find *do it ironically* much more appealing than *do it scared*. Fear is a negative emotion. On the other hand, irony is driven by several factors: when we act ironically, we can act with joy instead and are not attached to the outcome of our actions. These qualities are key lessons from Hindu & Buddhist philosophy on how to pursue the good life.[^3]
+When we strive to replace fear with an ironic inner state, we are (at the minimum) detaching ourselves from the outcome of our actions, which is a net-positive in the Buddhist lens.[^1] We can achieve this detachment by acting in one of two ways:
 
-In 2026, I resolve to do things ironically, even if (especially if) they scare me!
+- Case 1: Replacing fear with cynicism to protect our egos. Although this sort of attitude is negative, we could do the big, scary thing as per the _upāya_ teaching anyways and discover new boundaries about what we're capable of (eliminating fear for next time!)[^2]
+- Case 2: Reframing the fear we feel with whimsical detachment, much in the same sense as an ironic joke. In this case, our inner world is already positive, and we are acting with joy. This mental state embodies several key lessons from Hindu & Buddhist philosophy on how to pursue the good life.[^3]
+
+I think this provides an interesting framing for an ultimate mental state to progress towards when feeling fear. But it doesn't quite address how to _transition_ to this mental state when one is nervous or anxious!
+
+## Mindset
+
+ In Buddhism, when confronting a negative feeling (fear, anger, etc.), our goal is to accept fear or anxiety as an _anticipatory_ feeling of a future which may or may not come to pass. It's a conditioned, bodily reaction to a fundamentally stochastic world. The goal is to encompass the feelings of fear / anxiety with mindfulness and warmth.
+
+I adapted the Buddhist concept of [_samatha-vipassana_](https://en.wikipedia.org/wiki/Samatha-vipassan%C4%81) to this situation to construct a runbook of sorts:
+
+1. The first step is to bring _samatha_, or tranquility, to the mind, so we can assess a situation with a clear head:
+  - First, gently assess and focus on the touchpoints with the physical world: our feet on the ground, our back in a chair. These feelings are usually neutral and calming.
+  - Then, some positive thoughts on our better nature can guide our mind to a more neutral place (_"may I be compassionate, may I be at peace with what is"_).
+2. The next step is to build _vipassana_, or insight over the situation. We can assess the feelings of fear that we had previously.
+  - In this situation, we can look to cultivate a joyful, whimsical outlook to the task at hand.
+  - If that doesn't work, as we've established above, even a cynical, ironic view can work: _"do it ironically!"_
+
+I'm going to give this runbook a spin in 2026 - let me know your thoughts or feedback!
 
 ---
 # Footnotes:
-[^1]: [Pirsig's Metaphysics of Quality](https://en.wikipedia.org/wiki/Pirsig%27s_Metaphysics_of_Quality).
-[^2]: because of transitive dependencies (friends or other associations), it can be surprisingly difficult to figure out why you appreciate certain ideas or aesthetics! For example, it would be hard for me to tell the impact or intentions that the "green" group of people have since their tastes flow through my friends.
+[^1]: Attachment disrupts ["the sense of embodied freedom"](https://plato.stanford.edu/entries/japanese-zen/) that Zen provides.
+[^2]: Thanks to Ketan Agrawal for this lovely idea.
 [^3]: See [Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/concept-emotion-india/) and [Quotations from Swami Vivekananda](https://www.vifindia.org/print/4794)
+[^4]: See [verse on Fear & Terror](https://www.dhammatalks.org/suttas/MN/MN4.html) from the Buddha's teachings.
 
 ---

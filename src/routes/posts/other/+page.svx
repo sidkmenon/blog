@@ -45,6 +45,7 @@ I read a lot and do a pretty poor job of updating this site when I finish someth
 ### Design
 
 - [Maggie Appleton's blog](https://maggieappleton.com/): digital gardening, anthropology, and generally brilliant!
+- [Ketan Agrawal](https://ketan.me/): lovely vignettes on design, tech, philosophy. A gem!
 
 ### Tech
 
