@@ -11,13 +11,16 @@ autotagging: false
 
 <BioSection levels={bioLevels} defaultLevel={0}>
 	<p class="email">Email: menon.sid.k [at] gmail [dot] com</p>
-	<blockquote>I have had my invitation to this world's festival, and thus my life has been blessed. - Tajore</blockquote>
+	<blockquote>I have had my invitation to this world's festival, and thus my life has been blessed. - Tagore</blockquote>
 </BioSection>
 
 <style>
+    .email {
+		color: #6b7280;
+    }
 	blockquote {
 		border-left: none;
 		padding-left: 0;
-		font-style: italic;
+		color: #9ca3af;
 	}
 </style>

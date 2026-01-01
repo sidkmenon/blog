@@ -194,11 +194,16 @@
 		justify-content: center;
 		gap: 0.75rem;
 		margin-top: 1.5rem;
-		padding-top: 1rem;
+		padding: 0.5rem 1.25rem;
+		background: #f9fafb;
+		border-radius: 100px;
+		width: fit-content;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.control-label {
-		font-size: 0.9rem;
+		font-size: 0.85rem;
 		color: #9ca3af;
 		font-family: 'Inter', sans-serif;
 		text-transform: lowercase;
@@ -210,13 +215,23 @@
 		transition: color 0.2s ease;
 	}
 
-	.control-label:hover:not(:disabled) {
-		color: #374151;
+	.control-label:not(:disabled) {
+		color: #4b5563;
+	}
+
+	@media (hover: hover) {
+		.control-label:hover:not(:disabled) {
+			color: #111827;
+		}
+	}
+
+	.control-label:active:not(:disabled) {
+		color: #111827;
 	}
 
 	.control-label:disabled {
 		cursor: not-allowed;
-		opacity: 0.4;
+		opacity: 0.5;
 	}
 
 	.dot-slider {
@@ -271,23 +286,35 @@
 		display: none;
 		flex-direction: row;
 		justify-content: center;
-		gap: 1.5rem;
-		margin-top: 1rem;
+		gap: 1.25rem;
+		margin-top: 1.25rem;
+		padding: 0.5rem 1rem;
+		background: #f9fafb;
+		border-radius: 100px;
+		width: fit-content;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.text-link {
 		background: none;
 		border: none;
-		color: #6b7280;
-		font-size: 0.9rem;
+		color: #4b5563;
+		font-size: 0.875rem;
 		cursor: pointer;
-		padding: 0.5rem 0;
+		padding: 0.25rem 0;
 		font-family: inherit;
 		transition: color 0.2s ease;
 	}
 
-	.text-link:hover:not(:disabled) {
-		color: #0066cc;
+	@media (hover: hover) {
+		.text-link:hover:not(:disabled) {
+			color: #111827;
+		}
+	}
+
+	.text-link:active:not(:disabled) {
+		color: #111827;
 	}
 
 	.text-link:disabled {
