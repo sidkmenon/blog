@@ -11,7 +11,8 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint ."
+		"lint": "prettier --check . && eslint .",
+		"test": "vitest"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
@@ -37,7 +38,8 @@
 		"typescript": "^5.0.0",
 		"typescript-eslint": "^8.20.0",
 		"unified": "^11.0.5",
-		"vite": "^7.0.4"
+		"vite": "^7.0.4",
+		"vitest": "^4.0.16"
 	},
 	"dependencies": {
 		"papaparse": "^5.5.3",
