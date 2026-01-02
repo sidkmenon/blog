@@ -14,7 +14,7 @@ I say "we" here because I catch myself doing this, too. This post is a step in t
 
 In the NYC Mayoral Election of 2025, Zohran Mamdani proposed rent stabilization policies to combat the city's housing affordability crisis. As an NYC resident for three years, I can attest that rent is expensive, and I appreciate the principles and charisma Zohran brought to the mayoral race.
 
-However, I don't want to parrot politicians' policy proposals without doing my own research first, so I did some digging.
+However, I don't want to parrot politicians' positions without doing my own research first, so I did some digging.
 
 ## NYC's housing crisis
 
@@ -63,7 +63,7 @@ I am suspicious of rent control as anything but a convenient political scheme. I
 [^4]: [NYC Rent Guidelines Board: 2025 Housing Supply Report](https://rentguidelinesboard.cityofnewyork.us/wp-content/uploads/2025/05/2025-HSR.pdf)
 [^5]: [Study by Harvard Joint Center for Housing Studies](https://www.jchs.harvard.edu/sites/default/files/w07-7.pdf). See also individual data for [DC](https://fred.stlouisfed.org/series/DCRVAC), [SF](https://projects.sfplanning.org/community-stabilization/rent-stabilization-eviction-protection.htm), [LA](https://www.costar.com/article/410714092/los-angeles-is-limiting-rent-hikes-heres-how-landlords-and-apartment-tenants-will-feel-the-change).
 [^6]: "Glaeser 2020: The Closing of America's Urban Frontier". Fun fact: Glaeser taught a microeconomics class that I took in college which I still remember fondly. He is a remarkably warm and intelligent person, and I hope you have the pleasure of meeting him too, someday!
-[^7]: a famous [Turkish Airlines travel hacker](https://www.reddit.com/r/awardtravel/comments/1fpzmfb/nyc_mayor_travel_hacking_legend/)
+[^7]: the critically acclaimed [Turkish Airlines travel hacker](https://www.reddit.com/r/awardtravel/comments/1fpzmfb/nyc_mayor_travel_hacking_legend/)
 [^8]: [2024 City of Yes](https://www.jdsupra.com/legalnews/new-york-city-council-adopts-7818667/)
 [^9]: "Harvard International Review, Vol. 40, No. 3, Mind the Gap: The Interplay of Transportation and Inequality (SUMMER 2019), pp. 28-29"
 [^10]: "Glaeser & Luttmer: The American Economic Review, Sep., 2003, Vol. 93, No. 4 (Sep., 2003), pp. 1027-1046"
