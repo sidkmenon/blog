@@ -39,7 +39,7 @@ I grew up in Ohio and studied computer science at Harvard. Before SF, I lived in
 
 Currently, I'm the co-founder of fix.fast (YC W26), where we're working on self-healing software using AI.
 
-My hobbies include friendship, travel, and fine dining.`,
+My hobbies include <a style="color: #000000" href="https://en.wikipedia.org/wiki/Convergent_evolution">friendship, travel, and fine dining</a>.`,
 
 	// Level 4: + 2026 Goals
 	`My name is Sidharth (Sid) Menon.
@@ -50,5 +50,5 @@ I grew up in Ohio and studied computer science at Harvard. Before SF, I lived in
 
 Currently, I'm the co-founder of fix.fast (YC W26), where we're working on self-healing software using AI.
 
-My hobbies include friendship, travel, and fine dining. In 2026, I'm exploring some new hobbies (dance, improv, learning Malayalam and Spanish) and looking forward to meeting some great folks in SF!`
+My hobbies include <a style="color: #000000" href="https://en.wikipedia.org/wiki/Convergent_evolution">friendship, travel, and fine dining</a>. In 2026, I'm exploring some new hobbies (dance, improv, learning Malayalam and Spanish) and looking forward to meeting some great folks in SF!`
 ];

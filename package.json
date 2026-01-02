@@ -42,6 +42,7 @@
 		"vitest": "^4.0.16"
 	},
 	"dependencies": {
+		"htmlparser2": "^10.0.0",
 		"papaparse": "^5.5.3",
 		"unist-util-visit": "^5.0.0"
 	}

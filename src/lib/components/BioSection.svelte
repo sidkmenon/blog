@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import { Parser } from 'htmlparser2';
 
 	interface Props {
 		levels: string[];
@@ -34,10 +35,67 @@
 	let displayedText = $state(levels[defaultLevel] || '');
 	let isAnimating = $state(false);
 
-	const TYPING_SPEED = 5;
-	const DELETE_SPEED = 10;
+	const TYPING_SPEED = 10;
+	const DELETE_SPEED = 15;
 
 	let animationFrame: number | null = null;
+
+	/**
+	 * Tokenize HTML text into typing units using htmlparser2.
+	 * Regular characters become individual tokens, HTML tags become single tokens.
+	 */
+	function tokenizeHtml(html: string): string[] {
+		const tagRanges: Array<{ start: number; end: number }> = [];
+
+		const parser = new Parser(
+			{
+				onopentag() {
+					tagRanges.push({ start: parser.startIndex!, end: parser.endIndex! + 1 });
+				},
+				onclosetag() {
+					tagRanges.push({ start: parser.startIndex!, end: parser.endIndex! + 1 });
+				}
+			},
+			{ recognizeSelfClosing: true }
+		);
+
+		parser.write(html);
+		parser.end();
+
+		// Sort by start position (should already be sorted, but be safe)
+		tagRanges.sort((a, b) => a.start - b.start);
+
+		// Build tokens: individual characters for text, full strings for tags
+		const tokens: string[] = [];
+		let pos = 0;
+
+		for (const range of tagRanges) {
+			// Add text characters before this tag
+			for (let i = pos; i < range.start; i++) {
+				tokens.push(html[i]);
+			}
+			// Add the tag as one unit
+			tokens.push(html.slice(range.start, range.end));
+			pos = range.end;
+		}
+
+		// Add remaining text characters
+		for (let i = pos; i < html.length; i++) {
+			tokens.push(html[i]);
+		}
+
+		return tokens;
+	}
+
+	// Convert character position to token count
+	function charPosToTokenCount(tokens: string[], charPos: number): number {
+		let len = 0;
+		for (let i = 0; i < tokens.length; i++) {
+			if (len >= charPos) return i;
+			len += tokens[i].length;
+		}
+		return tokens.length;
+	}
 
 	function animateToLevel(targetLevel: number) {
 		if (isAnimating || targetLevel === currentLevel || targetLevel < 0 || targetLevel > maxLevel)
@@ -48,7 +106,15 @@
 
 		isAnimating = true;
 
-		const commonLength = prefixMatrix[currentLevel][targetLevel];
+		// Tokenize current and target text
+		const currentTokens = tokenizeHtml(displayedText);
+		const targetTokens = tokenizeHtml(targetText);
+
+		// Convert character-based common length to token count
+		const commonCharLength = prefixMatrix[currentLevel][targetLevel];
+		const commonTokenCount = charPosToTokenCount(currentTokens, commonCharLength);
+
+		let tokenPosition = currentTokens.length;
 		let lastTime = 0;
 		let phase: 'deleting' | 'typing' = 'deleting';
 
@@ -64,16 +130,18 @@
 			lastTime = timestamp;
 
 			if (phase === 'deleting') {
-				if (displayedText.length > commonLength) {
-					displayedText = displayedText.slice(0, -1);
+				if (tokenPosition > commonTokenCount) {
+					tokenPosition--;
+					displayedText = currentTokens.slice(0, tokenPosition).join('');
 					animationFrame = requestAnimationFrame(step);
 				} else {
 					phase = 'typing';
 					animationFrame = requestAnimationFrame(step);
 				}
 			} else {
-				if (displayedText.length < targetText.length) {
-					displayedText = targetText.slice(0, displayedText.length + 1);
+				if (tokenPosition < targetTokens.length) {
+					tokenPosition++;
+					displayedText = targetTokens.slice(0, tokenPosition).join('');
 					animationFrame = requestAnimationFrame(step);
 				} else {
 					currentLevel = targetLevel;
@@ -188,6 +256,14 @@
 
 	.bio-text {
 		margin-bottom: 1rem;
+	}
+
+	.bio-text :global(a) {
+		text-decoration: none;
+	}
+
+	.bio-text :global(a:hover) {
+		text-decoration: underline;
 	}
 
 	/* Desktop dot slider */
