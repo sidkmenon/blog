@@ -22,7 +22,7 @@ enum Command {
         dry_run: bool,
 
         /// Ollama model to use
-        #[arg(long, default_value = "gemma3:4b")]
+        #[arg(long, default_value = "qwen3:8b")]
         model: String,
     },
     Verify {

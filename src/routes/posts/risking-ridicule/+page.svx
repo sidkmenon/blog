@@ -3,6 +3,10 @@ title: Risking Ridicule
 description: Lessons learned from a war on perfectionism
 date: 2025-12-29
 autotagging: true
+tags:
+- philosophy
+- buddhism
+- happiness
 ---
 # Risking Ridicule
 

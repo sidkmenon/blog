@@ -1,8 +1,13 @@
 ---
-title: "Rent Control"
-description: "an exercise on thinking for myself"
+title: Rent Control
+description: an exercise on thinking for myself
 date: 2025-12-28
 autotagging: true
+tags:
+- rent-control
+- housing-policy
+- urban-economics
+- political-economy
 ---
 # Rent Control
 
