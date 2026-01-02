@@ -124,15 +124,17 @@
 			class="control-label"
 			onclick={handleShowLess}
 			disabled={isAnimating || currentLevel === 0}
+			title="Show less detail in the bio"
 			aria-label="Show less detail">less detail</button
 		>
 		<div class="dot-slider">
-			{#each levelIndices as level}
+			{#each levelIndices as level (level)}
 				<button
 					class="dot"
 					class:active={currentLevel >= level}
 					class:current={currentLevel === level}
 					onclick={() => handleLevelClick(level)}
+					title="Set the bio detail level to {level + 1} / {levels.length}"
 					disabled={isAnimating}
 					aria-label="Detail level {level + 1} of {levels.length}"
 				></button>
@@ -145,6 +147,7 @@
 			class="control-label"
 			onclick={handleShowMore}
 			disabled={isAnimating || currentLevel === maxLevel}
+			title="Show more detail in the bio"
 			aria-label="Show more detail">more detail</button
 		>
 	</div>
