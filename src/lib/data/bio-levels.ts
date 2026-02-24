@@ -28,7 +28,7 @@ I am currently based out of San Francisco and am interested in the intersection 
 
 I grew up in Ohio and studied computer science at Harvard. Before SF, I lived in NYC for three years, where was I was a tech lead on an infrastructure team at Palantir.
 
-Currently, I'm the co-founder of fix.fast (YC W26), where we're working on self-healing software using AI.`,
+Currently, I'm the co-founder of Carson (YC W26), where we're building the future of human-computer interfaces.`,
 
 	// Level 3: + Hobbies
 	`My name is Sidharth (Sid) Menon.
@@ -37,7 +37,7 @@ I am currently based out of San Francisco and am interested in the intersection 
 
 I grew up in Ohio and studied computer science at Harvard. Before SF, I lived in NYC for three years, where was I was a tech lead on an infrastructure team at Palantir.
 
-Currently, I'm the co-founder of fix.fast (YC W26), where we're working on self-healing software using AI.
+Currently, I'm the co-founder of Carson (YC W26), where we're building the future of human-computer interfaces.
 
 In my free time, I like to travel, cook, read, and play tennis.`,
 
@@ -48,7 +48,7 @@ I am currently based out of San Francisco and am interested in the intersection 
 
 I grew up in Ohio and studied computer science at Harvard. Before SF, I lived in NYC for three years, where was I was a tech lead on an infrastructure team at Palantir.
 
-Currently, I'm the co-founder of fix.fast (YC W26), where we're working on self-healing software using AI.
+Currently, I'm the co-founder of Carson (YC W26), where we're building the future of human-computer interfaces.
 
 In my free time, I like to travel, cook, read, and play tennis. In 2026, I'm exploring some new hobbies (dance, improv, learning Malayalam and Spanish) and looking forward to meeting some great folks in SF!`
 ];
