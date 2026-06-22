@@ -65,7 +65,7 @@
 	<span>© Sidharth Menon, 2025.</span>
 	<div class="footer-links">
 		<a href="https://www.linkedin.com/in/sidkmenon/">LinkedIn</a>
-		<a href="https://github.com/sidkmenon">Github</a>
+		<a href="https://dev.fast">/dev/fast</a>
 	</div>
 </footer>
 
