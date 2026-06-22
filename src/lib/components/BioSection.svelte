@@ -31,8 +31,16 @@
 	const maxLevel = $derived(levels.length - 1);
 	const levelIndices = $derived(Array.from({ length: levels.length }, (_, i) => i));
 
-	let currentLevel = $state(defaultLevel);
-	let displayedText = $state(levels[defaultLevel] || '');
+	function getInitialLevel() {
+		return defaultLevel;
+	}
+
+	function getInitialText() {
+		return levels[defaultLevel] || '';
+	}
+
+	let currentLevel = $state(getInitialLevel());
+	let displayedText = $state(getInitialText());
 	let isAnimating = $state(false);
 
 	const AVERAGE_WORD_LENGTH = 5;
@@ -209,6 +217,7 @@
 <div class="bio-section">
 	<div class="bio-content">
 		<div class="bio-text">
+			<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 			{@html displayedText.replace(/\n\n/g, '</p><p>').replace(/^/, '<p>').replace(/$/, '</p>')}
 		</div>
 		{#if children}

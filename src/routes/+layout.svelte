@@ -1,8 +1,10 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import favicon from '$lib/assets/favicon.svg';
+	import type { Snippet } from 'svelte';
 	import type { LayoutData } from './$types';
 
-	let { children, data }: { children?: any; data: LayoutData } = $props();
+	let { children, data }: { children?: Snippet; data: LayoutData } = $props();
 	let mobileNavOpen = $state(false);
 
 	function toggleMobileNav() {
@@ -29,10 +31,10 @@
 </svelte:head>
 
 <header class="header">
-	<a href="/" class="brand">Sidharth Menon</a>
+	<a href={resolve('/')} class="brand">Sidharth Menon</a>
 	<nav class="desktop-nav">
-		<a href="/posts">posts</a>
-		<a href="/posts/other">other</a>
+		<a href={resolve('/posts')}>posts</a>
+		<a href={resolve('/posts/other')}>other</a>
 	</nav>
 	<button
 		class="hamburger"
@@ -53,8 +55,8 @@
 	aria-label="Close menu"
 ></button>
 <nav class="mobile-nav" class:open={mobileNavOpen}>
-	<a href="/posts" onclick={closeMobileNav}>posts</a>
-	<a href="/posts/other" onclick={closeMobileNav}>other</a>
+	<a href={resolve('/posts')} onclick={closeMobileNav}>posts</a>
+	<a href={resolve('/posts/other')} onclick={closeMobileNav}>other</a>
 </nav>
 
 <div class="container">
@@ -64,7 +66,9 @@
 <footer class="footer-content">
 	<span>© Sidharth Menon, 2025.</span>
 	<div class="footer-links">
+		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 		<a href="https://www.linkedin.com/in/sidkmenon/">LinkedIn</a>
+		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 		<a href="https://dev.fast">/dev/fast</a>
 	</div>
 </footer>

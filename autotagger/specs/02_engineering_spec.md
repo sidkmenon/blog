@@ -38,6 +38,7 @@ tempfile = "3.10"
 ```
 
 ### External Dependencies
+
 - **Ollama**: Local LLM runtime (must be running at `http://localhost:11434`)
 - **Git**: For pre-push hook integration
 
@@ -571,11 +572,13 @@ While clear error messages are prioritized, these exit codes provide programmati
 ### Error Messages
 
 All errors should:
+
 1. Print to stderr
 2. Include context (file path, what operation failed)
 3. Provide actionable guidance
 
 Examples:
+
 ```
 Error: Ollama error: Failed to connect to Ollama: connection refused. Is Ollama running?
 → Run `ollama serve` to start Ollama
@@ -630,6 +633,7 @@ exit 0
 ```
 
 Make executable:
+
 ```bash
 chmod +x .git/hooks/pre-push
 ```
@@ -662,10 +666,12 @@ cp target/release/autotagger /usr/local/bin/
 ## Performance Considerations
 
 ### Target Performance
+
 - **Goal**: <10s per file (currently aspirational)
 - **Baseline**: Measure actual performance first
 
 ### Optimization Strategies (if needed)
+
 1. **Caching**: Cache Ollama responses for identical content
 2. **Parallel Processing**: Process multiple files concurrently (future enhancement)
 3. **Model Selection**: Allow faster models for quicker tagging
@@ -686,6 +692,7 @@ prompt_template: custom_prompt.txt
 ## Development Workflow
 
 ### Phase 1: Scaffolding (Top-Down)
+
 1. Create Cargo project: `cargo new autotagger`
 2. Add dependencies to `Cargo.toml`
 3. Create module files: `article.rs`, `tags.rs`
@@ -696,18 +703,21 @@ prompt_template: custom_prompt.txt
 8. Wire up `lib.rs` and `main.rs`
 
 ### Phase 2: Core Implementation
+
 1. Implement article parsing and writing with tests (`article.rs`)
 2. Implement tag parsing/validation with tests (`tags.rs`)
 3. Implement Ollama backend in `tags.rs`
 4. Wire up CLI orchestration in `main.rs`
 
 ### Phase 3: Testing & Refinement
+
 1. Manual end-to-end testing with real blog posts
 2. Performance measurement (baseline)
 3. Error message refinement
 4. Edge case handling
 
 ### Phase 4: Git Integration (we will do this after determining the cli works correctly).
+
 1. Create pre-push hook script
 2. Test hook with actual git workflow
 3. Documentation (README, usage examples)
@@ -735,12 +745,12 @@ Implementation is complete when:
 
 1. ✅ All unit tests pass
 2. ✅ CLI can process a real blog post end-to-end
-4. ✅ Error messages are clear and actionable
-5. ✅ Documentation is complete (README, usage examples)
+3. ✅ Error messages are clear and actionable
+4. ✅ Documentation is complete (README, usage examples)
 
 ## Next Steps
 
 1. Review this spec and provide feedback
 2. Gather agent docs for dependencies (serde_yaml, clap, reqwest)
 3. Begin Phase 1 implementation (scaffolding)
-3. Pre-push hook successfully tags modified files
+4. Pre-push hook successfully tags modified files

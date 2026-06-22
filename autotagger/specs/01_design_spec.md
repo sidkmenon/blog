@@ -13,12 +13,14 @@ The autotagger solves this by automating tag generation while maintaining qualit
 ## Goals
 
 ### Primary Goals
+
 1. **Automatic Tag Generation**: Generate up to 5 semantically relevant tags for blog posts based on their content
 2. **Opt-in/Opt-out Mechanism**: Allow individual posts to disable autotagging via frontmatter flag
 3. **Git Integration**: Function as a pre-push hook to ensure all posts are tagged before publishing
 4. **Non-destructive**: Preserve existing frontmatter structure and only modify the `tags` field
 
 ### Secondary Goals
+
 1. **Reliable**: Fail gracefully with clear error messages
 2. **Testable**: Core logic separated into library functions with comprehensive test coverage
 3. **Fast Execution**: Complete tagging within reasonable time (<10s per file) for smooth git workflow. if this is not possible we can figure out workarounds - don't hold this as a constraint for now until we've measured.
@@ -33,31 +35,37 @@ The autotagger solves this by automating tag generation while maintaining qualit
 ## User Stories
 
 ### Story 1: Automatic Tagging on Push
+
 **As a** blog author
 **I want** my posts to be automatically tagged when I push to git
 **So that** I don't have to manually categorize my content
 
 **Acceptance Criteria:**
+
 - Pre-push hook invokes autotagger on modified `.svx` files
 - Tags are inserted into frontmatter before push completes
 - If tagging fails, push is aborted with clear error message
 
 ### Story 2: Opt-out of Autotagging
+
 **As a** blog author
 **I want** to disable autotagging for specific posts
 **So that** I can manually curate tags when needed
 
 **Acceptance Criteria:**
+
 - Setting `autotagging: false` in frontmatter skips that file
 - CLI logs that file was skipped
 - Default behavior (no flag or `autotagging: true`) enables tagging
 
 ### Story 3: Standalone Usage
+
 **As a** blog author
 **I want** to run autotagger on a specific file manually
 **So that** I can preview tags before committing
 
 **Acceptance Criteria:**
+
 - CLI accepts file path as argument
 - Generates tags and displays them
 - Can optionally write back to file with `--write` flag
@@ -94,11 +102,13 @@ For each file:
 ### Components
 
 #### 1. CLI Layer (Orchestration)
+
 - Parse command-line arguments + marshal to library functions.
 - Pass file path to 'svx' parser library function (see 2.)
 - Handle errors and exit codes
 
 #### 2. 'svx' Parser library function
+
 - Parse a raw 'svx' file into:
 - typed keys from YAML frontmatter from `.svx` file ('title', 'description', 'autotagging' keys -- n.b. is the 'autotagging' key is true by default).
 - string / text body of the rest of the article (which is markdown + svelte components). Clean the markdown appropriately for LLM input.
@@ -107,12 +117,14 @@ For each file:
 - e.g. for this impl, i'd expect a library function to take in a raw path and return an 'Article' type for later use (where 'Article' is defined below).
 
 #### 4. Tag Generator
+
 - Interface with Ollama CLI
 - Format prompt for tag generation
 - Parse LLM response into tag list
 - Validate tag count (<5) and format
 
 #### 5. Frontmatter Writer
+
 - Merge generated tags into frontmatter structure
 - Preserve original formatting where possible
 - Write updated content back to file
@@ -147,7 +159,9 @@ struct GeneratedTags {
 ## Tag Generation Strategy
 
 ### LLM Prompt Design
+
 The prompt to Ollama should:
+
 1. Provide the article title and description for context
 2. Include the full article content
 3. Request exactly 5 or fewer tags
@@ -155,6 +169,7 @@ The prompt to Ollama should:
 5. Encourage specificity over generic tags
 
 Example prompt structure:
+
 ```
 You are a content tagging assistant. Given the following blog post, generate up to 5 semantic tags that capture the main topics and themes.
 
@@ -174,6 +189,7 @@ Output only the tags, one per line, nothing else.
 ```
 
 ### Tag Format
+
 - Lowercase
 - Hyphen-separated for multi-word tags
 - 2-30 characters per tag
@@ -182,19 +198,23 @@ Output only the tags, one per line, nothing else.
 ## CLI Interface
 
 ### Command Syntax
+
 ```bash
 autotagger <file-path> [options]
 ```
 
 ### Arguments
+
 - `<file-path>`: Path to `.svx` file (required)
 
 ### Options
+
 - `--dry-run`: Generate tags but don't write to file (print to stdout)
 - `--model <name>`: Ollama model to use (default: `gemma3` or configurable)
 - `--max-tags <n>`: Maximum number of tags (default: 5)
 
 ### Exit Codes
+
 - `0`: Success (tags generated and written)
 - `1`: File not found or invalid path
 - `2`: Invalid file format (not `.svx` or malformed frontmatter)
@@ -203,6 +223,7 @@ autotagger <file-path> [options]
 - `5`: Tag parsing/validation error
 
 ### Example Usage
+
 ```bash
 # Generate and write tags
 autotagger src/routes/posts/my-post/+page.svx
@@ -217,6 +238,7 @@ autotagger src/routes/posts/my-post/+page.svx --model llama3
 ## Git Hook Integration
 
 ### Pre-push Hook Script
+
 ```bash
 #!/bin/bash
 
@@ -242,9 +264,11 @@ exit 0
 ## Error Handling
 
 ### Graceful Degradation
+
 I don't care about exit codes too much - the errors that the CLI returns should always just be clear (e.g. clear errors printed to stderr).
 
 ### User Feedback
+
 - All errors should print to stderr
 - Include actionable guidance (e.g., "Run `ollama serve` to start Ollama")
 - Log file path for context
@@ -252,11 +276,13 @@ I don't care about exit codes too much - the errors that the CLI returns should 
 ## Testing Strategy
 
 ### Unit Tests
+
 1. **svx Parser**: Valid/invalid YAML, various frontmatter structures
-3. **Tag Generator**: Mock Ollama responses, parsing logic
-4. **Frontmatter Writer**: Preservation of formatting, tag insertion
+2. **Tag Generator**: Mock Ollama responses, parsing logic
+3. **Frontmatter Writer**: Preservation of formatting, tag insertion
 
 ### Test Data
+
 - Sample `.svx` files with various frontmatter structures
 - Mock Ollama responses (valid and invalid)
 - Files with `autotagging: false`
@@ -280,10 +306,12 @@ I don't care about exit codes too much - the errors that the CLI returns should 
 ## Dependencies
 
 ### External Tools
+
 - **Ollama**: LLM runtime (required at execution time)
 - **Git**: For pre-push hook integration
 
 ### Rust Crates (Preliminary)
+
 - `clap`: CLI argument parsing
 - `serde` + `serde_yaml`: YAML parsing
 - `regex`: Content extraction and validation
@@ -295,23 +323,24 @@ I don't care about exit codes too much - the errors that the CLI returns should 
 ## Appendix: Example File Transformation
 
 ### Before
+
 ```yaml
 ---
-title: "My Blog Post"
-description: "A post about Rust and LLMs"
+title: 'My Blog Post'
+description: 'A post about Rust and LLMs'
 date: 2025-10-06
 ---
-
 # My Blog Post
 
 This post explores how to build CLI tools in Rust that integrate with LLMs...
 ```
 
 ### After
+
 ```yaml
 ---
-title: "My Blog Post"
-description: "A post about Rust and LLMs"
+title: 'My Blog Post'
+description: 'A post about Rust and LLMs'
 date: 2025-10-06
 tags:
   - rust
@@ -319,7 +348,6 @@ tags:
   - cli-tools
   - ollama
 ---
-
 # My Blog Post
 
 This post explores how to build CLI tools in Rust that integrate with LLMs...
