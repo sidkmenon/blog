@@ -10,49 +10,57 @@ tags:
 ---
 # Risking Ridicule
 
-Like most of us, I've felt fear and anxiety when approaching something difficult or unknown, whether speaking in front of large crowds or taking on unfamiliar physical challenges. For most of this time, I've treated these feelings with a tried and tested tonic: a 'man up' and a stiff pat on the back.
+Like most of us, I've felt fear and anxiety when approaching something difficult or unknown, whether speaking in front of crowds or taking on unfamiliar physical challenges. For most of this time, I've treated these feelings with a tried and tested tonic: a 'man up' and a stiff pat on the back.
 
 Cutting edge stuff, I know.
 
-In 2025 I started a company for the first time, however, and I found myself a little bit lost. I know that we will succeed, but nevertheless, persistent, nagging thoughts sit in my mind:
+In late 2025 I started [a company](https://dev.fast/) for the first time, and I've found myself a bit lost. I know that we will succeed. Nevertheless, nagging thoughts sit in my mind:
 
-> Are we growing fast enough? What more could I be doing? I'm sure I'm messing lots of things up...
+> What more could I be doing? I'm sure I'm messing lots of things up...
 
-In many ways I think these thoughts are healthy; I use them as fuel and motivation. But when we do scary things and take risks, we risk feedback, criticism, and maybe even ridicule. And our critics may be completely correct.
+In some ways I think these thoughts are healthy, at least as fuel.
 
-Braving ridicule is hard! I've been searching for a framework to handle these feelings, so I've been diving into Buddhist and Hindu philosophy. During this exploration, I saw a quote like:
+When we take risks, we risk feedback, criticism, and maybe even ridicule. And our critics may be completely correct.
 
-> If you're scared of doing something, do it ironically.
+This is especially hard medicine for a chronic perfectionist like me to swallow. To combat this tendency, I draw on two wells of personal experience:
 
-Irony normally connotes cynicism, which is not what I'd expect from spiritual teachings. Buddhism, however, has the notion of [*upāya*](https://en.wikipedia.org/wiki/Upaya), which encourages a practitioner to pursue the noble path through means appropriate to their circumstances, even if the reasoning isn't "perfect"; in other words, the notion that *something is better than nothing*.
+## Sports
 
-When we strive to replace fear with an ironic inner state, we are detaching ourselves from the outcome of our actions (at a minimum), which is a net-positive in the Buddhist lens.[^1] We can achieve this detachment by acting in one of two ways:
+I grew up a huge tennis fan, particularly of Roger Federer. This was not just because he shook my hand at the 2008 Cincinnati Masters, and arch rival Nadal did not, breaking my then-tiny heart. I fell in love with what David Foster Wallace [coined](https://www.nytimes.com/2006/08/20/sports/playmagazine/20federer.html) 'Federer moments': when he hit a shot so brilliant your "jaw drops and eyes protrude and sounds are made that bring spouses in from other rooms to see if you’re O.K." ([a favorite example](https://youtu.be/fK2i-Jo3CNA?si=uf0-bRnTkZfJH84S&t=323)).
 
-- Case 1: Replacing fear with cynicism to protect our egos. Although this sort of attitude is negative, we could do the big, scary thing as per the _upāya_ teaching anyway and discover new boundaries about what we're capable of (eliminating fear for next time!)[^2]
-- Case 2: Reframing the fear we feel with whimsical detachment, much like an ironic joke. In this case, our inner world is already positive, and we are acting with joy. This mental state embodies several key lessons from Hindu & Buddhist philosophy on how to pursue the good life.[^3]
+Against the backdrop of Federer and Nadal, there was a distant third wheel who grew to outshine both: Novak Djokovic. I couldn't stomach the defeats he handed Federer late in his career. Djokovic was too young, too fast, too strong.
 
-I think this provides an interesting framing for an ultimate mental state to progress towards when feeling fear. But it doesn't quite address how to _transition_ to this mental state when one is nervous or anxious!
+But I've realized over the last year that I respect Djokovic more philosophically. He won, he _wins_ because he is mentally stronger. Because he could shake off doubts, fears, and failures better than the rest. He was written off as third string to two otherworldly titans. He was told to quit. He didn't care. Crowds booed him, pundits dismissed him, and he won anyways. In the words of the 26th US President:
 
-## Mindset
+> It is not the critic who counts... The credit belongs to the man who is actually in the arena, whose face is marred by dust and sweat and blood; who strives valiantly... who spends himself in a worthy cause; who at the best knows in the end the triumph of high achievement, and who at the worst, if he fails, at least fails while daring greatly
 
- In Buddhism, when confronting a negative feeling (fear, anger, etc.), our goal is to accept fear or anxiety as an _anticipatory_ feeling of a future which may or may not come to pass. It's a conditioned, bodily reaction to a fundamentally stochastic world. We should strive to process feelings of fear and anxiety with mindfulness and warmth.
+Djokovic teaches us that everything good is on the other side of trying, failing, trying again, and failing better.
 
-I adapted the Buddhist concept of [_samatha-vipassana_](https://en.wikipedia.org/wiki/Samatha-vipassan%C4%81) to this situation to construct a runbook of sorts:
+## Philosophy
+
+I've also started to consult Buddhist and Hindu philosophy. In Buddhism, when confronting a negative feeling (fear, anger, etc.), our goal is to accept fear or anxiety as a conditioned, bodily reaction — an _anticipatory_ feeling of a future which may or may not come to pass. I adapted the Buddhist concept of [_samatha-vipassana_](https://en.wikipedia.org/wiki/Samatha-vipassan%C4%81) to this situation to construct a runbook of sorts:
 
 1. The first step is to bring _samatha_, or tranquility, to the mind, so we can assess a situation with a clear head:
   - First, gently assess and focus on the touchpoints with the physical world: our feet on the ground, our back in a chair. These feelings are usually neutral and calming.
-  - Then, positive thoughts about our better nature can guide our mind to a more neutral place (_"may I be compassionate, may I be at peace with what is"_[^4]).
-2. The next step is to build _vipassana_, or insight over the situation. We can assess the feelings we felt before.
+  - Then, positive thoughts about our better nature can guide our mind to a more neutral place (_"may I be compassionate, may I be at peace with what is"_[^1]).
+2. The next step is to build _vipassana_, or insight into the situation. We can assess the feelings we felt before.
   - Here, we can cultivate a joyful, whimsical outlook to the task at hand.
-  - If that doesn't work, as we've established above, even a cynical, ironic view can work: _"do it ironically!"_
+  - If that doesn't work, an ironic, even cynical view can work too, as long as it's a useful motivational tool towards your goal.
 
-I'm going to give this runbook a spin in 2026 - let me know your thoughts or feedback!
+I found the last bit of advice confusing. Irony normally connotes cynicism, which is not what I'd expect from spiritual teachings. Buddhism, however, has the notion of [*upāya*](https://en.wikipedia.org/wiki/Upaya), which encourages a practitioner to pursue the noble path through means appropriate to their circumstances, even if the reasoning isn't "perfect"; in other words, *something is better than nothing*.
+
+When we replace fear with an ironic inner state, we are detaching ourselves from the outcome of our actions, which is a net-positive in the Buddhist lens.[^2] We can achieve this detachment by acting in one of two ways:
+
+- Case 1: Replacing fear with cynicism to protect our egos. Although this attitude is negative, we could do the big, scary thing as per the _upāya_ teaching anyway and discover new boundaries about what we're capable of (eliminating fear for next time!)[^3]
+- Case 2: Reframing fear with whimsical detachment, much like an ironic joke. In this case, our inner world is already positive, and we are acting with joy. This mental state embodies several key lessons from Hindu & Buddhist philosophy on how to pursue the good life.[^4]
+
+All of this is easier said than done, but these ideas provide some tools for a better 2026. Let me know your thoughts or feedback!
 
 ---
 # Footnotes:
-[^1]: Attachment disrupts ["the sense of embodied freedom"](https://plato.stanford.edu/entries/japanese-zen/) that Zen provides.
-[^2]: Thanks to Ketan Agrawal for this lovely idea.
-[^3]: See [Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/concept-emotion-india/) and [Quotations from Swami Vivekananda](https://www.vifindia.org/print/4794)
-[^4]: See [verse on Fear & Terror](https://www.dhammatalks.org/suttas/MN/MN4.html) from the Buddha's teachings.
+[^1]: See [verse on Fear & Terror](https://www.dhammatalks.org/suttas/MN/MN4.html) from the Buddha's teachings.
+[^2]: Attachment disrupts ["the sense of embodied freedom"](https://plato.stanford.edu/entries/japanese-zen/) that Zen provides.
+[^3]: Thanks to Ketan Agrawal for this lovely idea.
+[^4]: See [Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/concept-emotion-india/) and [Quotations from Swami Vivekananda](https://www.vifindia.org/print/4794)
 
 ---
