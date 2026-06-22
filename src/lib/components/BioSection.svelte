@@ -35,8 +35,16 @@
 	let displayedText = $state(levels[defaultLevel] || '');
 	let isAnimating = $state(false);
 
-	const TYPING_SPEED = 10;
-	const DELETE_SPEED = 15;
+	const AVERAGE_WORD_LENGTH = 5;
+	const TYPING_WPM = 400;
+	const DELETE_WPM = 600;
+
+	function wpmToTokenDelay(wpm: number): number {
+		return 60000 / (wpm * AVERAGE_WORD_LENGTH);
+	}
+
+	const TYPING_TOKEN_DELAY = wpmToTokenDelay(TYPING_WPM);
+	const DELETE_TOKEN_DELAY = wpmToTokenDelay(DELETE_WPM);
 
 	let animationFrame: number | null = null;
 
@@ -116,31 +124,53 @@
 
 		let tokenPosition = currentTokens.length;
 		let lastTime = 0;
+		let accumulatedTime = 0;
 		let phase: 'deleting' | 'typing' = 'deleting';
 
 		function step(timestamp: number) {
-			const elapsed = timestamp - lastTime;
-			const speed = phase === 'deleting' ? DELETE_SPEED : TYPING_SPEED;
+			if (!lastTime) lastTime = timestamp;
 
-			if (elapsed < speed) {
-				animationFrame = requestAnimationFrame(step);
-				return;
-			}
+			const elapsed = timestamp - lastTime;
+			const tokenDelay = phase === 'deleting' ? DELETE_TOKEN_DELAY : TYPING_TOKEN_DELAY;
 
 			lastTime = timestamp;
+			accumulatedTime += elapsed;
 
 			if (phase === 'deleting') {
 				if (tokenPosition > commonTokenCount) {
-					tokenPosition--;
+					const tokensToDelete = Math.min(
+						Math.floor(accumulatedTime / tokenDelay),
+						tokenPosition - commonTokenCount
+					);
+
+					if (tokensToDelete === 0) {
+						animationFrame = requestAnimationFrame(step);
+						return;
+					}
+
+					accumulatedTime -= tokensToDelete * tokenDelay;
+					tokenPosition -= tokensToDelete;
 					displayedText = currentTokens.slice(0, tokenPosition).join('');
 					animationFrame = requestAnimationFrame(step);
 				} else {
 					phase = 'typing';
+					accumulatedTime = 0;
 					animationFrame = requestAnimationFrame(step);
 				}
 			} else {
 				if (tokenPosition < targetTokens.length) {
-					tokenPosition++;
+					const tokensToType = Math.min(
+						Math.floor(accumulatedTime / tokenDelay),
+						targetTokens.length - tokenPosition
+					);
+
+					if (tokensToType === 0) {
+						animationFrame = requestAnimationFrame(step);
+						return;
+					}
+
+					accumulatedTime -= tokensToType * tokenDelay;
+					tokenPosition += tokensToType;
 					displayedText = targetTokens.slice(0, tokenPosition).join('');
 					animationFrame = requestAnimationFrame(step);
 				} else {
