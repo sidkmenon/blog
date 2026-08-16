@@ -5,15 +5,6 @@
 	import type { LayoutData } from './$types';
 
 	let { children, data }: { children?: Snippet; data: LayoutData } = $props();
-	let mobileNavOpen = $state(false);
-
-	function toggleMobileNav() {
-		mobileNavOpen = !mobileNavOpen;
-	}
-
-	function closeMobileNav() {
-		mobileNavOpen = false;
-	}
 </script>
 
 <svelte:head>
@@ -23,594 +14,362 @@
 	<meta property="og:description" content={data.metadata.description} />
 	<link rel="icon" href={favicon} />
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
 	<link
 		rel="stylesheet"
-		href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..900;1,14..32,400..900&display=swap"
+		href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&amp;display=swap"
 	/>
 </svelte:head>
 
-<header class="header">
-	<a href={resolve('/')} class="brand">Sidharth Menon</a>
-	<nav class="desktop-nav">
-		<a href={resolve('/posts')}>posts</a>
-		<a href={resolve('/posts/other')}>other</a>
-	</nav>
-	<button
-		class="hamburger"
-		onclick={toggleMobileNav}
-		aria-label="Toggle menu"
-		aria-expanded={mobileNavOpen}
-	>
-		<span class="hamburger-line"></span>
-		<span class="hamburger-line"></span>
-		<span class="hamburger-line"></span>
-	</button>
-</header>
-
-<button
-	class="mobile-nav-backdrop"
-	class:open={mobileNavOpen}
-	onclick={closeMobileNav}
-	aria-label="Close menu"
-></button>
-<nav class="mobile-nav" class:open={mobileNavOpen}>
-	<a href={resolve('/posts')} onclick={closeMobileNav}>posts</a>
-	<a href={resolve('/posts/other')} onclick={closeMobileNav}>other</a>
-</nav>
-
-<div class="container">
-	{@render children?.()}
-</div>
-
-<footer class="footer-content">
-	<span>© Sidharth Menon, 2025.</span>
-	<div class="footer-links">
-		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-		<a href="https://www.linkedin.com/in/sidkmenon/">LinkedIn</a>
-		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-		<a href="https://dev.fast">/dev/fast</a>
+{#if data.isArticle}
+	<div class="article-page">
+		<header class="article-header">
+			<a href={resolve('/')}>← SID MENON</a>
+		</header>
+		<main class="article-content">
+			{@render children?.()}
+		</main>
+		<footer class="article-footer">
+			<a href={resolve('/')}>HOME →</a>
+			<nav aria-label="External links">
+				<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+				<a href="https://www.linkedin.com/in/sidkmenon/">LinkedIn</a>
+				<span aria-hidden="true">·</span>
+				<a href="mailto:menon.sid.k@gmail.com">Email</a>
+				<span aria-hidden="true">·</span>
+				<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+				<a href="https://dev.fast">/dev/fast</a>
+			</nav>
+		</footer>
 	</div>
-</footer>
+{:else}
+	{@render children?.()}
+{/if}
 
 <style>
-	/* Declare layer order - unlayered styles (page components) will override base */
-	@layer base;
-
-	/* Font faces - outside layers, not cascade-affected */
-	@font-face {
-		font-family: 'Charter';
-		src: url('/fonts/charter/charter_regular-webfont.woff') format('woff');
-		font-weight: 400;
-		font-style: normal;
-		font-display: swap;
+	:global(:root) {
+		font-family: 'Source Serif 4', Georgia, serif;
+		font-synthesis: none;
+		color: #1a1c1e;
+		background: #fcfcfa;
+		--paper: #fcfcfa;
+		--ink: #1a1c1e;
+		--graphite: #6b7078;
+		--hairline: #e4e2db;
+		--row-line: #eeece6;
+		--leader: #b8b5ac;
+		--blue: #2f44c8;
+		--serif: 'Source Serif 4', Georgia, serif;
+		--mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
 	}
 
-	@font-face {
-		font-family: 'Charter';
-		src: url('/fonts/charter/charter_italic-webfont.woff') format('woff');
-		font-weight: 400;
+	:global(*) {
+		box-sizing: border-box;
+	}
+
+	:global(html) {
+		background: var(--paper);
+		scroll-behavior: smooth;
+	}
+
+	:global(body) {
+		margin: 0;
+		min-width: 320px;
+		background: var(--paper);
+		color: var(--ink);
+		counter-reset: sidenote-counter;
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+	}
+
+	:global(button),
+	:global(input) {
+		font: inherit;
+	}
+
+	:global(a) {
+		color: inherit;
+		text-underline-offset: 0.16em;
+	}
+
+	:global(::selection) {
+		background: #dfe3ff;
+	}
+
+	.article-page {
+		width: min(100%, 1200px);
+		margin: 0 auto;
+		padding: 64px 0 52px;
+	}
+
+	.article-header,
+	.article-footer {
+		font-family: var(--mono);
+		font-size: 12px;
+		line-height: 16px;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+
+	.article-header a,
+	.article-footer > a {
+		color: var(--blue);
+		text-decoration: none;
+	}
+
+	.article-content {
+		width: min(100%, 760px);
+		margin-top: 72px;
+		font-size: 19px;
+		line-height: 1.62;
+	}
+
+	.article-footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 32px;
+		margin-top: 84px;
+		padding-top: 18px;
+		border-top: 1px solid var(--hairline);
+	}
+
+	.article-footer nav {
+		display: flex;
+		align-items: center;
+		gap: 9px;
+		color: var(--graphite);
+		text-transform: none;
+	}
+
+	.article-footer nav a {
+		text-decoration: none;
+	}
+
+	:global(.article-content h1),
+	:global(.article-content h2),
+	:global(.article-content h3),
+	:global(.article-content h4),
+	:global(.article-content h5),
+	:global(.article-content h6) {
+		font-family: var(--serif);
+		font-weight: 600;
+		color: var(--ink);
+	}
+
+	:global(.article-content h1) {
+		margin: 0 0 42px;
+		font-size: clamp(42px, 5vw, 58px);
+		line-height: 1.02;
+		letter-spacing: -0.035em;
+	}
+
+	:global(.article-content h2) {
+		margin: 58px 0 18px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid var(--hairline);
+		font-size: 30px;
+		line-height: 1.14;
+		letter-spacing: -0.02em;
+	}
+
+	:global(.article-content h3) {
+		margin: 38px 0 14px;
+		font-size: 24px;
+		line-height: 1.2;
+	}
+
+	:global(.article-content p),
+	:global(.article-content ul),
+	:global(.article-content ol),
+	:global(.article-content blockquote),
+	:global(.article-content table) {
+		margin: 1.1em 0;
+	}
+
+	:global(.article-content ul),
+	:global(.article-content ol) {
+		padding-left: 1.4em;
+	}
+
+	:global(.article-content li) {
+		margin: 0.45em 0;
+	}
+
+	:global(.article-content blockquote) {
+		margin-left: 0;
+		padding: 2px 0 2px 22px;
+		border-left: 2px solid var(--hairline);
+		color: var(--graphite);
 		font-style: italic;
-		font-display: swap;
 	}
 
-	@font-face {
-		font-family: 'Charter';
-		src: url('/fonts/charter/charter_bold-webfont.woff') format('woff');
-		font-weight: 700;
-		font-style: normal;
-		font-display: swap;
+	:global(.article-content a) {
+		color: var(--blue);
 	}
 
-	@font-face {
-		font-family: 'Charter';
-		src: url('/fonts/charter/charter_bold_italic-webfont.woff') format('woff');
-		font-weight: 700;
-		font-style: italic;
-		font-display: swap;
+	:global(.article-content img),
+	:global(.article-content iframe),
+	:global(.article-content video) {
+		display: block;
+		max-width: 100%;
+		height: auto;
+		margin: 32px 0;
 	}
 
-	/* Base layer - global styles that pages can override */
-	@layer base {
-		:global(body) {
-			font-family:
-				'Charter', 'Bitstream Charter', 'Charter BT', 'Book Antiqua', 'Georgia', 'Times New Roman',
-				serif;
-			margin: 0;
-			padding-right: 280px;
-			counter-reset: sidenote-counter;
-		}
+	:global(.article-content iframe) {
+		width: 100%;
+		aspect-ratio: 16 / 9;
+	}
 
-		:global(h1),
-		:global(h2),
-		:global(h3),
-		:global(h4),
-		:global(h5),
-		:global(h6) {
-			font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-		}
+	:global(.article-content code) {
+		padding: 0.12em 0.28em;
+		border-radius: 2px;
+		background: #f1f0eb;
+		font-family: var(--mono);
+		font-size: 0.82em;
+	}
 
-		:global(.header) {
-			display: flex;
-			align-items: baseline;
-			gap: 1.5rem;
-			padding: 1rem 1.5rem 1rem;
-			border-bottom: 1px solid #e5e7eb;
-		}
+	:global(.article-content pre) {
+		overflow-x: auto;
+		padding: 18px;
+		border: 1px solid var(--hairline);
+		background: #f7f6f2;
+	}
 
-		:global(.brand) {
-			font-weight: 700;
-			font-size: 2rem;
-			text-decoration: none;
-			color: inherit;
-			font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-		}
+	:global(.article-content pre code) {
+		padding: 0;
+		background: transparent;
+	}
 
-		:global(.brand:hover) {
+	:global(.article-content table) {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.9em;
+	}
+
+	:global(.article-content th),
+	:global(.article-content td) {
+		padding: 10px 12px;
+		border-bottom: 1px solid var(--row-line);
+		text-align: left;
+		vertical-align: top;
+	}
+
+	:global(.article-content th) {
+		border-color: var(--hairline);
+		font-weight: 600;
+	}
+
+	:global(.sidenote-ref) {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	:global(.sidenote-number) {
+		counter-increment: sidenote-counter;
+	}
+
+	:global(.sidenote-number::after) {
+		content: counter(sidenote-counter);
+		color: var(--blue);
+		cursor: pointer;
+	}
+
+	:global(.sidenote-number-static) {
+		color: var(--blue);
+		cursor: pointer;
+	}
+
+	:global(.sidenote) {
+		float: right;
+		clear: right;
+		width: 250px;
+		margin: 0.35rem -330px 0 0;
+		padding-left: 20px;
+		color: var(--graphite);
+		font-size: 14px;
+		line-height: 1.45;
+	}
+
+	:global(.footnotes) {
+		display: none;
+		margin-top: 52px;
+		padding-top: 20px;
+		border-top: 1px solid var(--hairline);
+		color: var(--graphite);
+		font-size: 15px;
+	}
+
+	@media (hover: hover) {
+		.article-header a:hover,
+		.article-footer a:hover,
+		.article-footer nav a:hover {
 			text-decoration: underline;
 		}
+	}
 
-		:global(.desktop-nav) {
-			display: flex;
-			gap: 2rem;
+	@media (max-width: 1320px) {
+		.article-page {
+			width: auto;
+			margin: 0 60px;
 		}
+	}
 
-		:global(.desktop-nav a) {
-			text-decoration: none;
-			color: inherit;
-			font-size: 1.125rem;
-		}
-
-		:global(.desktop-nav a:hover) {
-			text-decoration: underline;
-		}
-
-		:global(.container) {
-			max-width: 1200px;
-			padding: 0.5rem 1.5rem;
-			position: relative;
-		}
-
-		/* Sidenote styles */
-		:global(.sidenote-ref) {
-			text-decoration: none;
-			color: inherit;
-		}
-
-		:global(.sidenote-number) {
-			counter-increment: sidenote-counter;
-		}
-
-		:global(.sidenote-number:after) {
-			content: counter(sidenote-counter);
-			color: #0066cc;
-			cursor: pointer;
-		}
-
-		:global(.sidenote-number-static) {
-			color: #0066cc;
-			cursor: pointer;
-		}
-
+	@media (max-width: 1120px) {
 		:global(.sidenote) {
-			float: right;
-			clear: right;
-			margin-right: -280px;
-			width: 250px;
-			font-size: 0.9rem;
-			line-height: 1.4;
-			color: #6b7280;
-			margin-top: 0.3rem;
-			padding-left: 1rem;
+			display: none;
 		}
 
 		:global(.footnotes) {
-			display: none;
-			margin-top: 3rem;
-			padding-top: 2rem;
-			border-top: 2px solid #e5e7eb;
-			font-size: 0.875rem;
-			color: #6b7280;
-		}
-
-		:global(.footnotes ol) {
-			padding-left: 1.5rem;
-		}
-
-		:global(.footnotes li) {
-			margin: 1rem 0;
-		}
-
-		/* Headings */
-		:global(.container h1) {
-			font-size: 2.5rem;
-			font-weight: 700;
-			margin-bottom: 1rem;
-		}
-
-		:global(.container h2) {
-			font-size: 1.875rem;
-			margin: 1rem 0;
-			padding: 0.75rem 0;
-			border-bottom: 2px solid #e5e7eb;
-		}
-
-		:global(.container h3) {
-			font-size: 1.5rem;
-			margin-top: 1.5rem;
-			margin-bottom: 0.75rem;
-		}
-
-		:global(.container h4) {
-			font-size: 1.25rem;
-			margin-top: 1.25rem;
-			margin-bottom: 0.5rem;
-		}
-
-		:global(.container h5),
-		:global(.container h6) {
-			font-size: 1.125rem;
-			margin-top: 1rem;
-			margin-bottom: 0.5rem;
-		}
-
-		/* Media elements */
-		:global(.container img),
-		:global(.container iframe),
-		:global(.container video),
-		:global(.container audio) {
 			display: block;
-			margin: 1.5rem auto;
-			max-width: 80%;
-			height: auto;
-			border-radius: 0.5rem;
-			box-shadow:
-				0 4px 6px -1px rgba(0, 0, 0, 0.1),
-				0 2px 4px -1px rgba(0, 0, 0, 0.06);
+		}
+	}
+
+	@media (max-width: 700px) {
+		.article-page {
+			margin: 0;
+			padding: 28px 24px 24px;
 		}
 
-		:global(.container iframe) {
-			width: 100%;
-			height: auto;
-			aspect-ratio: 16 / 9;
+		.article-header,
+		.article-footer {
+			font-size: 11px;
+			line-height: 15px;
 		}
 
-		/* Text content */
-		:global(.container p),
-		:global(.container ul),
-		:global(.container ol),
-		:global(.container blockquote) {
-			margin: 1rem 0;
-			line-height: 1.7;
+		.article-content {
+			margin-top: 52px;
+			font-size: 17px;
+			line-height: 1.58;
 		}
 
-		:global(.container blockquote) {
-			border-left: 4px solid #e5e7eb;
-			padding-left: 1rem;
-			font-style: italic;
-			color: #6b7280;
-			margin: 1.5rem 0;
+		:global(.article-content h1) {
+			margin-bottom: 32px;
+			font-size: 38px;
 		}
 
-		/* Lists */
-		:global(.container ul),
-		:global(.container ol) {
-			padding-left: 1.5rem;
-			margin: 1.25rem 0;
+		:global(.article-content h2) {
+			margin-top: 46px;
+			font-size: 27px;
 		}
 
-		:global(.container li) {
-			margin: 0.5rem 0;
-			line-height: 1.6;
-		}
-
-		/* Emphasis */
-		:global(.container em) {
-			font-style: italic;
-			color: #374151;
-		}
-
-		:global(.container strong) {
-			font-weight: 600;
-			color: #111827;
-		}
-
-		/* Code */
-		:global(.container code) {
-			background-color: #f3f4f6;
-			padding: 0.125rem 0.25rem;
-			border-radius: 0.25rem;
-			font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-			font-size: 0.875rem;
-		}
-
-		:global(.container pre) {
-			background-color: #f8fafc;
-			padding: 1rem;
-			border-radius: 0.5rem;
+		:global(.article-content table) {
+			display: block;
 			overflow-x: auto;
-			margin: 1.5rem 0;
-			border: 1px solid #e5e7eb;
+			font-size: 14px;
 		}
 
-		:global(.container pre code) {
-			background-color: transparent;
-			padding: 0;
-			border-radius: 0;
+		.article-footer {
+			align-items: flex-start;
+			margin-top: 64px;
 		}
 
-		/* Tables */
-		:global(.container table) {
-			width: auto;
-			border-collapse: collapse;
-			margin: 1.5rem 0;
-		}
-
-		:global(.container th),
-		:global(.container td) {
-			padding: 0.6rem 1rem;
-			text-align: left;
-			border-bottom: 1px solid #e5e7eb;
-		}
-
-		:global(.container th) {
-			font-weight: 600;
-			border-bottom: 2px solid #d1d5db;
-		}
-
-		:global(.container tbody tr:hover) {
-			background-color: #f9fafb;
-		}
-
-		/* Table rows */
-		:global(.container table thead tr),
-		:global(.container table tbody tr) {
-			animation: waterfall-fade-in 0.3s ease-out forwards;
-			opacity: 0;
-		}
-
-		:global(.container table thead tr) {
-			animation-delay: 0s;
-		}
-
-		:global(.container table tbody tr) {
-			animation-delay: calc(sibling-index() * 50ms);
-		}
-
-		/* List items */
-		:global(.container ul > li),
-		:global(.container ol > li) {
-			animation: waterfall-fade-in 0.3s ease-out forwards;
-			opacity: 0;
-			animation-delay: calc(sibling-index() * 50ms);
-		}
-	}
-
-	/* Waterfall animation - outside layer (keyframes not cascade-affected) */
-	@keyframes waterfall-fade-in {
-		from {
-			opacity: 0;
-			transform: translateY(-8px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	/* Mobile responsive - base layer */
-	@layer base {
-		@media (max-width: 767px) {
-			:global(body) {
-				padding-right: 0;
-			}
-
-			:global(.desktop-nav) {
-				display: none;
-			}
-
-			:global(.header) {
-				align-items: center;
-				padding: 1rem;
-			}
-
-			:global(.container th),
-			:global(.container td) {
-				padding: 0.5rem 0.75rem;
-			}
-
-			:global(.sidenote) {
-				display: none;
-			}
-
-			:global(.footnotes) {
-				display: block;
-			}
-		}
-
-		@media (min-width: 768px) {
-			:global(.container) {
-				padding: 1rem 2rem;
-			}
-
-			:global(.container h1) {
-				font-size: 3rem;
-				margin-bottom: 1rem;
-			}
-
-			:global(.container h2) {
-				font-size: 2.25rem;
-				margin: 1rem 0;
-				padding: 1rem 0;
-			}
-
-			:global(.container h3) {
-				font-size: 1.75rem;
-				margin: 1rem;
-			}
-
-			:global(.container h4) {
-				font-size: 1.5rem;
-				margin: 0.75rem;
-			}
-
-			:global(.container h5),
-			:global(.container h6) {
-				font-size: 1.25rem;
-				margin: 0.75rem;
-			}
-
-			:global(.container img),
-			:global(.container iframe),
-			:global(.container video),
-			:global(.container audio) {
-				margin: 2rem 0;
-			}
-		}
-
-		@media (min-width: 1024px) {
-			:global(.container) {
-				padding: 1.5rem 3rem;
-			}
-		}
-	}
-
-	/* Layout-scoped styles - outside layer */
-	.hamburger {
-		display: none;
-		flex-direction: column;
-		justify-content: space-around;
-		width: 2rem;
-		height: 2rem;
-		background: transparent;
-		border: none;
-		cursor: pointer;
-		padding: 0;
-		margin-left: auto;
-		position: relative;
-		z-index: 1002;
-	}
-
-	.hamburger-line {
-		width: 2rem;
-		height: 0.25rem;
-		background-color: #111827;
-		border-radius: 0.25rem;
-		transition: all 0.3s ease;
-	}
-
-	.hamburger[aria-expanded='true'] .hamburger-line:nth-child(1) {
-		transform: rotate(45deg) translate(0.5rem, 0.5rem);
-	}
-
-	.hamburger[aria-expanded='true'] .hamburger-line:nth-child(2) {
-		opacity: 0;
-	}
-
-	.hamburger[aria-expanded='true'] .hamburger-line:nth-child(3) {
-		transform: rotate(-45deg) translate(0.5rem, -0.5rem);
-	}
-
-	.mobile-nav-backdrop {
-		display: none;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-color: rgba(0, 0, 0, 0.5);
-		z-index: 1000;
-		border: none;
-		padding: 0;
-		cursor: pointer;
-	}
-
-	.mobile-nav-backdrop.open {
-		display: block;
-	}
-
-	.mobile-nav {
-		display: none;
-		position: fixed;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		width: 70%;
-		max-width: 300px;
-		background-color: white;
-		box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
-		z-index: 1001;
-		padding: 5rem 2rem 2rem;
-	}
-
-	.mobile-nav.open {
-		display: flex;
-		flex-direction: column;
-		animation: slideIn 0.3s ease-out;
-	}
-
-	.mobile-nav a {
-		display: block;
-		padding: 1rem 0;
-		text-decoration: none;
-		color: inherit;
-		font-size: 1.25rem;
-		border-bottom: 1px solid #e5e7eb;
-	}
-
-	.mobile-nav a:hover {
-		text-decoration: underline;
-	}
-
-	@keyframes slideIn {
-		from {
-			transform: translateX(100%);
-		}
-		to {
-			transform: translateX(0);
-		}
-	}
-
-	@media (max-width: 767px) {
-		.hamburger {
-			display: flex;
-		}
-	}
-
-	footer {
-		padding: clamp(1.5rem, 3vw, 2rem) clamp(1rem, 2vw, 1.5rem);
-		text-align: center;
-		border-top: 1px solid #e0e0e0;
-		font-size: 0.9rem;
-		color: #666;
-	}
-
-	.footer-content {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-		align-items: center;
-	}
-
-	.footer-links {
-		display: flex;
-		gap: 1rem;
-	}
-
-	footer a {
-		color: #0066cc;
-		text-decoration: none;
-	}
-
-	footer a:hover {
-		text-decoration: underline;
-	}
-
-	@media (min-width: 640px) {
-		.footer-content {
-			flex-direction: row;
-			justify-content: center;
-			gap: 1rem;
+		.article-footer nav {
+			flex-wrap: wrap;
+			justify-content: flex-end;
+			font-size: 10px;
+			letter-spacing: 0;
 		}
 	}
 </style>

@@ -14,6 +14,7 @@ export const load = async ({ url }) => {
 	}
 
 	return {
+		isArticle: pathname.startsWith('/posts/'),
 		metadata: {
 			title: module.metadata.title,
 			description: module.metadata.description
