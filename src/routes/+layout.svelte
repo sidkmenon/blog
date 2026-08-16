@@ -30,7 +30,7 @@
 			{@render children?.()}
 		</main>
 		<footer class="article-footer">
-			<a href={resolve('/')}>HOME →</a>
+			<a href={resolve('/')}>← HOME</a>
 			<nav aria-label="External links">
 				<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 				<a href="https://www.linkedin.com/in/sidkmenon/">LinkedIn</a>

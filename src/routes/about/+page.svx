@@ -82,25 +82,21 @@ autotagging: false
 			<h2 id="blogs-heading">BLOGS</h2>
 			<div class="blog-list">
 				{#each blogs as blog (blog.href)}
-					<article class="blog-row">
+					<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+					<a class="blog-row" href={blog.href} aria-label="Visit {blog.name}">
 						<span class="category">{blog.showCategory ? blog.category : ''}</span>
 						<div class="blog-name-line">
-							<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-							<a class="blog-name" href={blog.href}>{blog.name}</a>
-							<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-							<a class="visit-link mobile-visit" href={blog.href} aria-label="Visit {blog.name}">visit →</a>
+							<span class="blog-name">{blog.name}</span>
 						</div>
 						<p>{blog.description}</p>
-						<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-						<a class="visit-link desktop-visit" href={blog.href} aria-label="Visit {blog.name}">visit →</a>
-					</article>
+					</a>
 				{/each}
 			</div>
 		</section>
 	</main>
 
 	<footer class="site-footer">
-		<a class="home-link" href={resolve('/')}>HOME →</a>
+		<a class="home-link" href={resolve('/')}>← HOME</a>
 		<nav aria-label="External links">
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 			<a href="https://www.linkedin.com/in/sidkmenon/">LinkedIn</a>
@@ -124,7 +120,6 @@ autotagging: false
 	.about-header,
 	.collection h2,
 	.category,
-	.visit-link,
 	.book-year,
 	.mobile-year,
 	.site-footer {
@@ -240,6 +235,7 @@ autotagging: false
 		align-items: center;
 		min-height: 64px;
 		border-bottom: 1px solid var(--row-line);
+		text-decoration: none;
 	}
 
 	.category {
@@ -262,33 +258,12 @@ autotagging: false
 		text-decoration: none;
 	}
 
-	.visit-link {
-		color: var(--blue);
-		font-size: 11px;
-		line-height: 15px;
-		text-decoration: none;
-		white-space: nowrap;
-	}
-
-	.mobile-visit {
-		display: none;
-	}
-
 	.blog-row p {
 		margin: 0;
 		color: var(--graphite);
 		font-size: 15px;
 		font-style: italic;
 		line-height: 21px;
-	}
-
-	.desktop-visit {
-		justify-self: end;
-	}
-
-	.blog-row {
-		grid-template-columns: 104px 250px minmax(260px, 1fr) auto;
-		column-gap: 20px;
 	}
 
 	.site-footer {
@@ -318,7 +293,6 @@ autotagging: false
 		.about-header a:hover,
 		.home-link:hover,
 		.bio a:hover,
-		.blog-name:hover,
 		.site-footer nav a:hover {
 			text-decoration: underline;
 		}
@@ -335,7 +309,7 @@ autotagging: false
 		}
 
 		.blog-row {
-			grid-template-columns: 90px 220px minmax(220px, 1fr) auto;
+			grid-template-columns: 90px 220px minmax(220px, 1fr);
 		}
 	}
 
@@ -447,14 +421,6 @@ autotagging: false
 		.blog-name {
 			font-size: 18px;
 			line-height: 23px;
-		}
-
-		.mobile-visit {
-			display: block;
-		}
-
-		.desktop-visit {
-			display: none;
 		}
 
 		.blog-row p {
