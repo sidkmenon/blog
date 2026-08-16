@@ -80,6 +80,7 @@ autotagging: false
 
 <style>
 	.home-page {
+		--home-content-width: min(100%, clamp(680px, 64vw, 960px));
 		display: flex;
 		flex-direction: column;
 		width: min(calc(100% - 240px), 1200px);
@@ -89,7 +90,7 @@ autotagging: false
 	}
 
 	.home-main {
-		width: 100%;
+		width: var(--home-content-width);
 	}
 
 	.identity-row {
@@ -126,7 +127,7 @@ autotagging: false
 	}
 
 	.bio {
-		width: min(100%, 640px);
+		width: 100%;
 		margin-top: 28px;
 		font-size: 19px;
 		line-height: 30px;
@@ -211,6 +212,7 @@ autotagging: false
 
 	.subscribe {
 		display: flex;
+		width: var(--home-content-width);
 		align-items: center;
 		justify-content: space-between;
 		gap: 40px;
@@ -270,6 +272,7 @@ autotagging: false
 
 	.site-footer {
 		display: flex;
+		width: var(--home-content-width);
 		align-items: flex-end;
 		justify-content: space-between;
 		gap: 48px;
