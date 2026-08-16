@@ -148,7 +148,7 @@ autotagging: false
 	}
 
 	.bio {
-		width: min(100%, 680px);
+		width: min(100%, clamp(680px, 56vw, 860px));
 		margin-top: 28px;
 		font-size: 19px;
 		line-height: 30px;
@@ -181,7 +181,7 @@ autotagging: false
 	}
 
 	.section-intro {
-		width: min(100%, 700px);
+		width: min(100%, clamp(700px, 58vw, 900px));
 		margin: 22px 0 30px;
 		color: var(--graphite);
 		font-size: 17px;
