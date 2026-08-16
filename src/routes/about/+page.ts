@@ -23,13 +23,12 @@ export const load: PageLoad = () => {
 	});
 
 	const books: Book[] = parsed.data.map((row) => {
-		const yearStr = row['Original Publication Year'];
-		const year = yearStr ? parseInt(yearStr, 10) : null;
+		const year = Number.parseInt(row['Original Publication Year'], 10);
 
 		return {
-			title: cleanTitle(row.Title),
+			title: row.Title.replace(/\s*\([^)]*#\d+\)$/, ''),
 			author: row.Author,
-			originalPublicationYear: isNaN(year!) ? null : year
+			originalPublicationYear: Number.isNaN(year) ? null : year
 		};
 	});
 
@@ -37,7 +36,3 @@ export const load: PageLoad = () => {
 
 	return { books };
 };
-
-function cleanTitle(title: string): string {
-	return title.replace(/\s*\([^)]*#\d+\)$/, '');
-}

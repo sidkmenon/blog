@@ -9,15 +9,11 @@ export const load = async ({ url }) => {
 
 	const module = svxModules[svxPath];
 
-	if (!module) {
-		throw new Error(`No .svx module found for path: ${svxPath}`);
-	}
-
 	return {
 		isArticle: pathname.startsWith('/posts/'),
-		metadata: {
-			title: module.metadata.title,
-			description: module.metadata.description
+		metadata: module?.metadata ?? {
+			title: 'Page not found · Sid Menon',
+			description: "This page doesn't exist."
 		}
 	};
 };
