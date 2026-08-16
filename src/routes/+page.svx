@@ -37,20 +37,16 @@ autotagging: false
 			<div class="post-list">
 				{#each data.posts as post, index (post.slug)}
 					{@const date = dateParts(post.date)}
-					<article class="post-row">
-						<div class="post-meta">
-							<span class="year">{index === 0 || dateParts(data.posts[index - 1].date).year !== date.year ? date.year : ''}</span>
-							<time datetime={post.date}>{date.compact}</time>
-						</div>
+					<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+					<a class="post-row" href="/posts/{post.slug}" aria-label="Read {post.title}">
+						<span class="year">{index === 0 || dateParts(data.posts[index - 1].date).year !== date.year ? date.year : ''}</span>
 						<div class="post-copy">
-							<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-							<a class="post-title" href="/posts/{post.slug}">{post.title}</a>
+							<span class="post-title">{post.title}</span>
 							<p>{post.description}</p>
 						</div>
 						<span class="leader" aria-hidden="true"></span>
-						<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-						<a class="read-link" href="/posts/{post.slug}" aria-label="Read {post.title}">read →</a>
-					</article>
+						<time class="post-date" datetime={post.date}>{date.compact}</time>
+					</a>
 				{/each}
 			</div>
 		</section>
@@ -115,8 +111,8 @@ autotagging: false
 	.writing h2,
 	.subscribe h2,
 	.subscribe-meta span,
-	.post-meta,
-	.read-link,
+	.year,
+	.post-date,
 	.site-footer nav {
 		font-family: var(--mono);
 	}
@@ -164,24 +160,23 @@ autotagging: false
 
 	.post-row {
 		display: grid;
-		grid-template-columns: 104px minmax(360px, 600px) minmax(40px, 1fr) auto;
+		grid-template-columns: 104px minmax(360px, 600px) minmax(40px, 1fr) 64px;
 		align-items: center;
 		min-height: 92px;
 		border-bottom: 1px solid var(--row-line);
+		text-decoration: none;
 	}
 
-	.post-meta {
-		display: grid;
-		grid-template-columns: 42px auto;
-		align-self: stretch;
-		align-items: center;
+	.year,
+	.post-date {
 		color: var(--graphite);
 		font-size: 13px;
 		line-height: 18px;
+		white-space: nowrap;
 	}
 
-	.post-meta time {
-		white-space: nowrap;
+	.post-date {
+		text-align: right;
 	}
 
 	.post-copy {
@@ -212,14 +207,6 @@ autotagging: false
 		background-image: radial-gradient(circle, var(--leader) 1px, transparent 1.2px);
 		background-position: center;
 		background-size: 6px 2px;
-	}
-
-	.read-link {
-		color: var(--blue);
-		font-size: 12px;
-		line-height: 16px;
-		text-decoration: none;
-		white-space: nowrap;
 	}
 
 	.subscribe {
@@ -327,10 +314,12 @@ autotagging: false
 
 	@media (hover: hover) {
 		.identity-row a:hover,
-		.post-title:hover,
-		.read-link:hover,
 		.site-footer a:hover {
 			text-decoration: underline;
+		}
+
+		.post-row:hover .post-title {
+			color: var(--blue);
 		}
 	}
 
@@ -341,7 +330,7 @@ autotagging: false
 		}
 
 		.post-row {
-			grid-template-columns: 104px minmax(320px, 600px) minmax(20px, 1fr) auto;
+			grid-template-columns: 104px minmax(320px, 600px) minmax(20px, 1fr) 64px;
 		}
 	}
 
@@ -388,19 +377,31 @@ autotagging: false
 		}
 
 		.post-row {
-			display: block;
+			display: grid;
+			grid-template-columns: 1fr auto;
 			min-height: 0;
 			padding: 15px 0 17px;
 		}
 
-		.post-meta {
-			display: flex;
-			justify-content: space-between;
+		.year,
+		.post-date {
 			font-size: 11px;
 			line-height: 15px;
 		}
 
+		.year {
+			grid-column: 1;
+			grid-row: 1;
+		}
+
+		.post-date {
+			grid-column: 2;
+			grid-row: 1;
+		}
+
 		.post-copy {
+			grid-column: 1 / -1;
+			grid-row: 2;
 			padding: 7px 0 9px;
 		}
 
@@ -417,11 +418,6 @@ autotagging: false
 
 		.leader {
 			display: none;
-		}
-
-		.read-link {
-			font-size: 11px;
-			line-height: 15px;
 		}
 
 		.subscribe {
