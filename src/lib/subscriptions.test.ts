@@ -51,9 +51,8 @@ describe('subscription tokens', () => {
 
 describe('handleSubscribe', () => {
 	it('sends a confirmation email without storing an unconfirmed contact', async () => {
-		const fetcher = vi.fn(
-			async (_input: RequestInfo | URL, _init?: RequestInit) => new Response('{}', { status: 200 })
-		);
+		const fetcher = vi.fn<typeof fetch>();
+		fetcher.mockResolvedValue(new Response('{}', { status: 200 }));
 		const response = await handleSubscribe(
 			subscriptionRequest('SID@example.com'),
 			env,
@@ -100,9 +99,8 @@ describe('handleSubscribe', () => {
 describe('handleConfirm', () => {
 	it('creates a confirmed contact in the newsletter segment', async () => {
 		const token = await createSubscriptionToken('sid@example.com', env.SUBSCRIBE_TOKEN_SECRET, now);
-		const fetcher = vi.fn(
-			async (_input: RequestInfo | URL, _init?: RequestInit) => new Response('{}', { status: 201 })
-		);
+		const fetcher = vi.fn<typeof fetch>();
+		fetcher.mockResolvedValue(new Response('{}', { status: 201 }));
 		const response = await handleConfirm(
 			new Request(`https://sidharthkmenon.com/api/subscribe/confirm?token=${token}`),
 			env,
