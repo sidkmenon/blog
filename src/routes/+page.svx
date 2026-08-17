@@ -55,7 +55,7 @@ autotagging: false
 	<section class="subscribe" aria-labelledby="subscribe-heading">
 		<div class="subscribe-meta">
 			<h2 id="subscribe-heading">NEW ESSAYS</h2>
-			<span>rss</span>
+			<a href={resolve('/rss.xml')}>rss</a>
 		</div>
 		<div class="subscribe-form">
 			<label class="sr-only" for="subscribe-email">Email address</label>
@@ -111,7 +111,7 @@ autotagging: false
 	.identity-row a,
 	.writing h2,
 	.subscribe h2,
-	.subscribe-meta span,
+	.subscribe-meta a,
 	.year,
 	.post-date,
 	.site-footer nav {
@@ -227,7 +227,7 @@ autotagging: false
 		gap: 22px;
 	}
 
-	.subscribe-meta span {
+	.subscribe-meta a {
 		color: var(--graphite);
 		font-size: 11px;
 		line-height: 16px;

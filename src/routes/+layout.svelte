@@ -12,6 +12,7 @@
 	<meta name="description" content={data.metadata.description} />
 	<meta property="og:title" content={data.metadata.title} />
 	<meta property="og:description" content={data.metadata.description} />
+	<link rel="alternate" type="application/rss+xml" title="Sid Menon" href={resolve('/rss.xml')} />
 	<link rel="icon" href={favicon} />
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
