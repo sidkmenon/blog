@@ -32,6 +32,17 @@ The signup endpoint emails a signed confirmation link. A contact is only created
 the link is opened. The link expires after 24 hours, and Resend handles subsequent broadcast
 unsubscribes.
 
+## Publishing an essay by email
+
+Create a Resend draft from an existing post, review it in Resend, and send it from there:
+
+```sh
+npm run newsletter -- risking-ridicule --draft
+```
+
+Use `--dry-run` to inspect the payload without contacting Resend. Use `--send` instead of `--draft`
+only when the broadcast should go to the entire configured Segment immediately.
+
 ## Cloudflare Pages
 
 For a Git-connected Pages project, use:
