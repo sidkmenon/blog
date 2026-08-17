@@ -3,6 +3,8 @@ const svxModules = import.meta.glob<{ metadata: { title: string; description: st
 	{ eager: true }
 );
 
+export const prerender = true;
+
 export const load = async ({ url }) => {
 	const pathname = url.pathname === '/' ? '' : url.pathname;
 	const svxPath = `.${pathname}/+page.svx`;
