@@ -6,9 +6,54 @@ autotagging: false
 ---
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
+	let subscriptionState = $state<'idle' | 'submitting' | 'pending' | 'confirmed' | 'error'>(
+		'idle'
+	);
+	let subscriptionMessage = $state('');
+
+	onMount(() => {
+		const status = new URL(window.location.href).searchParams.get('subscription');
+		if (status === 'confirmed') {
+			subscriptionState = 'confirmed';
+			subscriptionMessage = "You're subscribed. The next essay will arrive by email.";
+		} else if (status === 'invalid') {
+			subscriptionState = 'error';
+			subscriptionMessage = 'That confirmation link is invalid or expired. Try subscribing again.';
+		} else if (status === 'error') {
+			subscriptionState = 'error';
+			subscriptionMessage = 'Something went wrong while confirming. Try again in a moment.';
+		}
+	});
+
+	async function subscribe(event: SubmitEvent) {
+		event.preventDefault();
+		const form = event.currentTarget as HTMLFormElement;
+		subscriptionState = 'submitting';
+		subscriptionMessage = '';
+
+		try {
+			const response = await fetch(form.action, {
+				method: 'POST',
+				body: new FormData(form),
+				headers: { Accept: 'application/json' }
+			});
+			const result = (await response.json()) as { message?: string };
+
+			if (!response.ok) throw new Error(result.message || 'Unable to subscribe right now.');
+
+			form.reset();
+			subscriptionState = 'pending';
+			subscriptionMessage = result.message || 'Check your inbox to confirm your subscription.';
+		} catch (error) {
+			subscriptionState = 'error';
+			subscriptionMessage =
+				error instanceof Error ? error.message : 'Unable to subscribe right now.';
+		}
+	}
 
 	function dateParts(date: string) {
 		const parsed = new Date(date);
@@ -57,10 +102,32 @@ autotagging: false
 			<h2 id="subscribe-heading">NEW ESSAYS</h2>
 			<a href={resolve('/rss.xml')}>rss</a>
 		</div>
-		<div class="subscribe-form">
-			<label class="sr-only" for="subscribe-email">Email address</label>
-			<input id="subscribe-email" type="email" autocomplete="email" placeholder="you@example.com" />
-			<button type="button">subscribe →</button>
+		<div class="subscribe-action">
+			{#if subscriptionState === 'pending' || subscriptionState === 'confirmed'}
+				<p class="subscribe-status" aria-live="polite">{subscriptionMessage}</p>
+			{:else}
+				<form class="subscribe-form" method="post" action="/api/subscribe" onsubmit={subscribe}>
+					<label class="sr-only" for="subscribe-email">Email address</label>
+					<input
+						id="subscribe-email"
+						name="email"
+						type="email"
+						autocomplete="email"
+						placeholder="you@example.com"
+						required
+					/>
+					<label class="website-field" aria-hidden="true">
+						Website
+						<input name="website" type="text" tabindex="-1" autocomplete="off" />
+					</label>
+					<button type="submit" disabled={subscriptionState === 'submitting'}>
+						{subscriptionState === 'submitting' ? 'sending…' : 'subscribe →'}
+					</button>
+				</form>
+				{#if subscriptionState === 'error'}
+					<p class="subscribe-error" aria-live="polite">{subscriptionMessage}</p>
+				{/if}
+			{/if}
 		</div>
 	</section>
 
@@ -235,10 +302,14 @@ autotagging: false
 		text-underline-offset: 3px;
 	}
 
+	.subscribe-action {
+		width: min(100%, 430px);
+	}
+
 	.subscribe-form {
 		display: flex;
 		align-items: stretch;
-		width: min(100%, 430px);
+		width: 100%;
 		border-bottom: 1px solid var(--ink);
 	}
 
@@ -268,6 +339,37 @@ autotagging: false
 		font-size: 12px;
 		line-height: 16px;
 		cursor: pointer;
+	}
+
+	.subscribe-form button:disabled {
+		cursor: wait;
+		opacity: 0.65;
+	}
+
+	.website-field {
+		position: absolute;
+		left: -10000px;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+	}
+
+	.subscribe-status,
+	.subscribe-error {
+		margin: 0;
+		font-family: var(--mono);
+		font-size: 11px;
+		line-height: 17px;
+	}
+
+	.subscribe-status {
+		color: var(--graphite);
+		text-align: right;
+	}
+
+	.subscribe-error {
+		margin-top: 7px;
+		color: #9f2f2f;
 	}
 
 	.site-footer {
@@ -433,9 +535,13 @@ autotagging: false
 			justify-content: space-between;
 		}
 
-		.subscribe-form {
+		.subscribe-action {
 			width: 100%;
 			margin-top: 12px;
+		}
+
+		.subscribe-status {
+			text-align: left;
 		}
 
 		.subscribe-form input,
