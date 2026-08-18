@@ -97,6 +97,24 @@
 		background: #dfe3ff;
 	}
 
+	:global(.waterfall-list > *) {
+		opacity: 0;
+		animation: waterfall-fade-in 0.3s ease-out forwards;
+		animation-delay: calc(sibling-index() * 50ms);
+	}
+
+	@keyframes waterfall-fade-in {
+		from {
+			opacity: 0;
+			transform: translateY(-8px);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
 	.article-page {
 		width: min(100%, 1200px);
 		margin: 0 auto;
@@ -307,6 +325,13 @@
 		.article-footer a:hover,
 		.article-footer nav a:hover {
 			text-decoration: underline;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		:global(.waterfall-list > *) {
+			opacity: 1;
+			animation: none;
 		}
 	}
 

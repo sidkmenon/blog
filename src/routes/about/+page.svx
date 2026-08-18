@@ -63,7 +63,7 @@ autotagging: false
 			<h2 id="books-heading">BOOKS</h2>
 			<p class="section-intro">I read a lot and do a pretty poor job of updating this site when I finish something. Here's essentially a random sample of books I've read in the last twelve months that I've really enjoyed:</p>
 
-			<div class="book-list">
+			<div class="book-list waterfall-list">
 				{#each data.books as book (book.title)}
 					<div class="book-row">
 						<div class="book-title-line">
@@ -80,7 +80,7 @@ autotagging: false
 
 		<section class="collection blogs" aria-labelledby="blogs-heading">
 			<h2 id="blogs-heading">BLOGS</h2>
-			<div class="blog-list">
+			<div class="blog-list waterfall-list">
 				{#each blogs as blog (blog.href)}
 					<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 					<a class="blog-row" href={blog.href} aria-label="Visit {blog.name}">

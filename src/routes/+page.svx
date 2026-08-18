@@ -79,7 +79,7 @@ autotagging: false
 
 		<section class="writing" aria-labelledby="writing-heading">
 			<h2 id="writing-heading">WRITING</h2>
-			<div class="post-list">
+			<div class="post-list waterfall-list">
 				{#each data.posts as post, index (post.slug)}
 					{@const date = dateParts(post.date)}
 					<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
