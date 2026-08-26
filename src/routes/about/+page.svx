@@ -1,0 +1,448 @@
+---
+title: "About · Sid Menon"
+description: "About Sid Menon, plus books and blogs worth reading."
+date: 2026-08-16
+autotagging: false
+---
+<script lang="ts">
+	import { resolve } from '$app/paths';
+	import type { PageData } from './$types';
+
+	let { data }: { data: PageData } = $props();
+
+	const blogs = [
+		{
+			category: 'Design',
+			showCategory: true,
+			name: "Maggie Appleton's blog",
+			description: 'digital gardening, anthropology, and generally brilliant!',
+			href: 'https://maggieappleton.com/'
+		},
+		{
+			category: 'Design',
+			showCategory: false,
+			name: 'Ketan Agrawal',
+			description: 'lovely vignettes on design, tech, philosophy. A gem!',
+			href: 'https://ketan.me/'
+		},
+		{
+			category: 'Tech',
+			showCategory: true,
+			name: "Julia Evans's blog",
+			description: 'tons of useful content, and Julia is a wonderful teacher.',
+			href: 'https://jvns.ca/'
+		},
+		{
+			category: 'Art',
+			showCategory: true,
+			name: "Dhilan Ramaprasad's blog",
+			description: 'heartbreaking works of staggering genius.',
+			href: 'https://dhilan.xyz'
+		}
+	];
+</script>
+
+<div class="about-page">
+	<header class="about-header">
+		<a href={resolve('/')}>← SID MENON</a>
+	</header>
+
+	<main>
+		<section class="intro" aria-labelledby="about-heading">
+			<h1 id="about-heading">About</h1>
+			<div class="bio">
+				<p>My name is Sidharth (Sid) Menon.</p>
+				<p>I am currently based out of San Francisco and am interested in the intersection of technology, design, and culture.</p>
+				<p>I grew up in Ohio and studied computer science at Harvard. Before SF, I lived in NYC for three years.</p>
+				<p>Currently, I'm the co-founder of <a href="https://dev.fast">/dev/fast (YC W26)</a>, a next-generation, AI-native code forge.</p>
+				<p>In my free time, I like to travel, cook, read, and play tennis. In 2026, I'm exploring some new hobbies (dance, improv, learning Malayalam and Spanish) and looking forward to meeting some great folks in SF!</p>
+			</div>
+		</section>
+
+		<section class="collection books" aria-labelledby="books-heading">
+			<h2 id="books-heading">BOOKS</h2>
+			<p class="section-intro">I read a lot and do a pretty poor job of updating this site when I finish something. Here's essentially a random sample of books I've read in the last twelve months that I've really enjoyed:</p>
+
+			<div class="book-list waterfall-list">
+				{#each data.books as book (book.title)}
+					<div class="book-row">
+						<div class="book-title-line">
+							<span class="book-title">{book.title}</span>
+							<span class="mobile-year">{book.originalPublicationYear ?? '—'}</span>
+						</div>
+						<span class="leader" aria-hidden="true"></span>
+						<span class="author">{book.author}</span>
+						<span class="book-year">{book.originalPublicationYear ?? '—'}</span>
+					</div>
+				{/each}
+			</div>
+		</section>
+
+		<section class="collection blogs" aria-labelledby="blogs-heading">
+			<h2 id="blogs-heading">BLOGS</h2>
+			<div class="blog-list waterfall-list">
+				{#each blogs as blog (blog.href)}
+					<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+					<a class="blog-row" href={blog.href} aria-label="Visit {blog.name}">
+						<span class="category">{blog.showCategory ? blog.category : ''}</span>
+						<div class="blog-name-line">
+							<span class="blog-name">{blog.name}</span>
+						</div>
+						<p>{blog.description}</p>
+					</a>
+				{/each}
+			</div>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<a class="home-link" href={resolve('/')}>← HOME</a>
+		<nav aria-label="External links">
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+			<a href="https://www.linkedin.com/in/sidkmenon/">LinkedIn</a>
+			<span aria-hidden="true">·</span>
+			<a href="mailto:menon.sid.k@gmail.com">Email</a>
+			<span aria-hidden="true">·</span>
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+			<a href="https://dev.fast">/dev/fast</a>
+		</nav>
+	</footer>
+</div>
+
+<style>
+	.about-page {
+		--about-content-width: min(100%, clamp(680px, 64vw, 960px));
+		width: min(calc(100% - 240px), 1200px);
+		min-height: 100svh;
+		margin: 0 auto;
+		padding: 64px 0 52px;
+	}
+
+	.about-header,
+	.collection h2,
+	.category,
+	.book-year,
+	.mobile-year,
+	.site-footer {
+		font-family: var(--mono);
+	}
+
+	.about-header a,
+	.home-link {
+		color: var(--blue);
+		font-size: 12px;
+		line-height: 16px;
+		letter-spacing: 0.05em;
+		text-decoration: none;
+	}
+
+	main {
+		width: var(--about-content-width);
+		margin-top: 54px;
+	}
+
+	h1 {
+		margin: 0;
+		font-size: 46px;
+		font-weight: 600;
+		line-height: 50px;
+		letter-spacing: -0.028em;
+	}
+
+	.bio {
+		width: 100%;
+		margin-top: 28px;
+		font-size: 19px;
+		line-height: 30px;
+	}
+
+	.bio p {
+		margin: 0 0 12px;
+	}
+
+	.bio p:last-child {
+		margin-bottom: 0;
+	}
+
+	.bio a {
+		color: var(--blue);
+	}
+
+	.collection {
+		margin-top: 72px;
+	}
+
+	.collection h2 {
+		margin: 0;
+		padding-bottom: 14px;
+		border-bottom: 1px solid var(--hairline);
+		font-size: 12px;
+		font-weight: 500;
+		line-height: 16px;
+		letter-spacing: 0.08em;
+	}
+
+	.section-intro {
+		width: 100%;
+		margin: 22px 0 30px;
+		color: var(--graphite);
+		font-size: 17px;
+		line-height: 26px;
+	}
+
+	.book-row {
+		display: grid;
+		grid-template-columns: minmax(240px, auto) minmax(30px, 1fr) 260px 48px;
+		align-items: baseline;
+		gap: 16px;
+		min-height: 48px;
+		padding: 12px 0;
+		border-bottom: 1px solid var(--row-line);
+	}
+
+	.book-title {
+		font-size: 19px;
+		font-weight: 500;
+		line-height: 24px;
+	}
+
+	.mobile-year {
+		display: none;
+	}
+
+	.leader {
+		height: 1px;
+		background-image: radial-gradient(circle, var(--leader) 1px, transparent 1.2px);
+		background-position: center;
+		background-size: 6px 2px;
+	}
+
+	.author {
+		color: var(--graphite);
+		font-size: 15px;
+		font-style: italic;
+		line-height: 21px;
+	}
+
+	.book-year {
+		color: var(--graphite);
+		font-size: 11px;
+		line-height: 16px;
+		text-align: right;
+	}
+
+	.blog-row {
+		display: grid;
+		grid-template-columns: 104px 250px minmax(260px, 1fr);
+		align-items: center;
+		min-height: 64px;
+		border-bottom: 1px solid var(--row-line);
+		text-decoration: none;
+	}
+
+	.category {
+		color: var(--graphite);
+		font-size: 11px;
+		line-height: 15px;
+		text-transform: uppercase;
+	}
+
+	.blog-name-line {
+		display: flex;
+		align-items: baseline;
+		gap: 16px;
+	}
+
+	.blog-name {
+		font-size: 19px;
+		font-weight: 500;
+		line-height: 24px;
+		text-decoration: none;
+	}
+
+	.blog-row p {
+		margin: 0;
+		color: var(--graphite);
+		font-size: 15px;
+		font-style: italic;
+		line-height: 21px;
+	}
+
+	.site-footer {
+		display: flex;
+		width: var(--about-content-width);
+		align-items: center;
+		justify-content: space-between;
+		gap: 40px;
+		margin-top: 72px;
+		padding-top: 18px;
+		border-top: 1px solid var(--hairline);
+	}
+
+	.site-footer nav {
+		display: flex;
+		align-items: center;
+		gap: 9px;
+		color: var(--graphite);
+		font-size: 11px;
+		line-height: 16px;
+	}
+
+	.site-footer nav a {
+		text-decoration: none;
+	}
+
+	@media (hover: hover) {
+		.about-header a:hover,
+		.home-link:hover,
+		.bio a:hover,
+		.site-footer nav a:hover {
+			text-decoration: underline;
+		}
+
+		.blog-row:hover .blog-name {
+			color: var(--blue);
+		}
+	}
+
+	@media (max-width: 1100px) {
+		.about-page {
+			width: auto;
+			margin: 0 60px;
+		}
+
+		.blog-row {
+			grid-template-columns: 90px 220px minmax(220px, 1fr);
+		}
+	}
+
+	@media (max-width: 700px) {
+		.about-page {
+			width: auto;
+			margin: 0;
+			padding: 28px 24px;
+		}
+
+		.about-header a,
+		.home-link {
+			font-size: 11px;
+			line-height: 15px;
+		}
+
+		main {
+			margin-top: 42px;
+		}
+
+		h1 {
+			font-size: 34px;
+			line-height: 38px;
+		}
+
+		.bio {
+			margin-top: 22px;
+			font-size: 16px;
+			line-height: 24px;
+		}
+
+		.bio p {
+			margin-bottom: 12px;
+		}
+
+		.collection {
+			margin-top: 52px;
+		}
+
+		.collection h2 {
+			padding-bottom: 12px;
+			font-size: 11px;
+			line-height: 15px;
+		}
+
+		.section-intro {
+			margin: 18px 0 24px;
+			font-size: 15px;
+			line-height: 22px;
+		}
+
+		.book-row {
+			display: block;
+			min-height: 0;
+			padding: 11px 0 12px;
+		}
+
+		.book-title-line {
+			display: flex;
+			align-items: baseline;
+			justify-content: space-between;
+			gap: 16px;
+		}
+
+		.book-title {
+			font-size: 18px;
+			line-height: 23px;
+		}
+
+		.mobile-year {
+			display: block;
+			flex: none;
+			color: var(--graphite);
+			font-size: 10px;
+			line-height: 14px;
+		}
+
+		.book-row .leader,
+		.book-year {
+			display: none;
+		}
+
+		.author {
+			display: block;
+			margin-top: 2px;
+			font-size: 14px;
+			line-height: 19px;
+		}
+
+		.blog-row {
+			display: block;
+			min-height: 0;
+			padding: 12px 0 13px;
+		}
+
+		.category {
+			display: block;
+			min-height: 14px;
+			font-size: 10px;
+			line-height: 14px;
+		}
+
+		.blog-name-line {
+			justify-content: space-between;
+			gap: 16px;
+			margin-top: 3px;
+		}
+
+		.blog-name {
+			font-size: 18px;
+			line-height: 23px;
+		}
+
+		.blog-row p {
+			margin-top: 3px;
+			font-size: 14px;
+			line-height: 20px;
+		}
+
+		.site-footer {
+			align-items: flex-start;
+			margin-top: 52px;
+			padding-top: 14px;
+		}
+
+		.site-footer nav {
+			flex-wrap: wrap;
+			justify-content: flex-end;
+			font-size: 10px;
+			line-height: 14px;
+		}
+	}
+</style>

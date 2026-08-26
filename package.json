@@ -6,7 +6,9 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"preview": "vite preview",
+		"preview": "npm run build && wrangler pages dev",
+		"deploy": "npm run build && wrangler pages deploy",
+		"newsletter": "node --env-file-if-exists=.dev.vars scripts/newsletter.mjs",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -17,7 +19,7 @@
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
 		"@eslint/js": "^9.18.0",
-		"@sveltejs/adapter-auto": "^6.0.0",
+		"@sveltejs/adapter-static": "^3.0.10",
 		"@sveltejs/kit": "^2.22.0",
 		"@sveltejs/vite-plugin-svelte": "^6.0.0",
 		"@types/node": "^24.10.0",
@@ -33,13 +35,15 @@
 		"remark-html": "^16.0.1",
 		"remark-parse": "^11.0.0",
 		"remark-rehype": "^11.1.2",
+		"resend": "^6.20.0",
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"typescript": "^5.0.0",
 		"typescript-eslint": "^8.20.0",
 		"unified": "^11.0.5",
 		"vite": "^7.0.4",
-		"vitest": "^4.0.16"
+		"vitest": "^4.0.16",
+		"wrangler": "^4.123.0"
 	},
 	"dependencies": {
 		"hast-util-to-html": "^9.0.5",

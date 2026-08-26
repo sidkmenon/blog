@@ -3,20 +3,19 @@ const svxModules = import.meta.glob<{ metadata: { title: string; description: st
 	{ eager: true }
 );
 
+export const prerender = true;
+
 export const load = async ({ url }) => {
 	const pathname = url.pathname === '/' ? '' : url.pathname;
 	const svxPath = `.${pathname}/+page.svx`;
 
 	const module = svxModules[svxPath];
 
-	if (!module) {
-		throw new Error(`No .svx module found for path: ${svxPath}`);
-	}
-
 	return {
-		metadata: {
-			title: module.metadata.title,
-			description: module.metadata.description
+		isArticle: pathname.startsWith('/posts/'),
+		metadata: module?.metadata ?? {
+			title: 'Page not found · Sid Menon',
+			description: "This page doesn't exist."
 		}
 	};
 };

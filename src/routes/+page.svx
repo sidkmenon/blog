@@ -1,26 +1,572 @@
 ---
-title: "Home"
-description: "Sid Menon's blog"
-date: 2025-09-14
+title: "Sid Menon"
+description: "Sid Menon writes about technology, design, culture, and learning to think for himself."
+date: 2026-08-16
 autotagging: false
 ---
-<script>
-	import BioSection from '$lib/components/BioSection.svelte';
-	import { bioLevels } from '$lib/data/bio-levels';
+<script lang="ts">
+	import { resolve } from '$app/paths';
+	import { onMount } from 'svelte';
+	import type { PageData } from './$types';
+
+	let { data }: { data: PageData } = $props();
+	let subscriptionState = $state<'idle' | 'submitting' | 'pending' | 'confirmed' | 'error'>(
+		'idle'
+	);
+	let subscriptionMessage = $state('');
+
+	onMount(() => {
+		const status = new URL(window.location.href).searchParams.get('subscription');
+		if (status === 'confirmed') {
+			subscriptionState = 'confirmed';
+			subscriptionMessage = "You're subscribed. The next essay will arrive by email.";
+		} else if (status === 'invalid') {
+			subscriptionState = 'error';
+			subscriptionMessage = 'That confirmation link is invalid or expired. Try subscribing again.';
+		} else if (status === 'error') {
+			subscriptionState = 'error';
+			subscriptionMessage = 'Something went wrong while confirming. Try again in a moment.';
+		}
+	});
+
+	async function subscribe(event: SubmitEvent) {
+		event.preventDefault();
+		const form = event.currentTarget as HTMLFormElement;
+		subscriptionState = 'submitting';
+		subscriptionMessage = '';
+
+		try {
+			const response = await fetch(form.action, {
+				method: 'POST',
+				body: new FormData(form),
+				headers: { Accept: 'application/json' }
+			});
+			const result = (await response.json()) as { message?: string };
+
+			if (!response.ok) throw new Error(result.message || 'Unable to subscribe right now.');
+
+			form.reset();
+			subscriptionState = 'pending';
+			subscriptionMessage = result.message || 'Check your inbox to confirm your subscription.';
+		} catch (error) {
+			subscriptionState = 'error';
+			subscriptionMessage =
+				error instanceof Error ? error.message : 'Unable to subscribe right now.';
+		}
+	}
+
+	function dateParts(date: string) {
+		const parsed = new Date(date);
+		const year = String(parsed.getUTCFullYear());
+		const month = String(parsed.getUTCMonth() + 1).padStart(2, '0');
+		const day = String(parsed.getUTCDate()).padStart(2, '0');
+		return { year, compact: `${month} / ${day}` };
+	}
 </script>
 
-<BioSection levels={bioLevels} defaultLevel={0}>
-	<p class="email">Email: menon.sid.k [at] gmail [dot] com</p>
-	<blockquote>I have had my invitation to this world's festival, and thus my life has been blessed. - Tagore</blockquote>
-</BioSection>
+<div class="home-page">
+	<main class="home-main">
+		<header class="identity-row">
+			<h1>Sid Menon</h1>
+			<a href={resolve('/about')}>ABOUT →</a>
+		</header>
+
+		<div class="bio">
+			<p>My name is Sidharth (Sid) Menon.</p>
+			<p>I am currently based out of San Francisco and am interested in the intersection of technology, design, and culture.</p>
+			<p>I grew up in Ohio and studied at Harvard.</p>
+		</div>
+
+		<section class="writing" aria-labelledby="writing-heading">
+			<h2 id="writing-heading">WRITING</h2>
+			<div class="post-list waterfall-list">
+				{#each data.posts as post, index (post.slug)}
+					{@const date = dateParts(post.date)}
+					<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+					<a class="post-row" href="/posts/{post.slug}" aria-label="Read {post.title}">
+						<span class="year">{index === 0 || dateParts(data.posts[index - 1].date).year !== date.year ? date.year : ''}</span>
+						<div class="post-copy">
+							<span class="post-title">{post.title}</span>
+							<p>{post.description}</p>
+						</div>
+						<span class="leader" aria-hidden="true"></span>
+						<time class="post-date" datetime={post.date}>{date.compact}</time>
+					</a>
+				{/each}
+			</div>
+		</section>
+	</main>
+
+	<section class="subscribe" aria-labelledby="subscribe-heading">
+		<div class="subscribe-meta">
+			<h2 id="subscribe-heading">NEW ESSAYS</h2>
+			<a href={resolve('/rss.xml')}>rss</a>
+		</div>
+		<div class="subscribe-action">
+			{#if subscriptionState === 'pending' || subscriptionState === 'confirmed'}
+				<p class="subscribe-status" aria-live="polite">{subscriptionMessage}</p>
+			{:else}
+				<form class="subscribe-form" method="post" action="/api/subscribe" onsubmit={subscribe}>
+					<label class="sr-only" for="subscribe-email">Email address</label>
+					<input
+						id="subscribe-email"
+						name="email"
+						type="email"
+						autocomplete="email"
+						placeholder="you@example.com"
+						required
+					/>
+					<label class="website-field" aria-hidden="true">
+						Website
+						<input name="website" type="text" tabindex="-1" autocomplete="off" />
+					</label>
+					<button type="submit" disabled={subscriptionState === 'submitting'}>
+						{subscriptionState === 'submitting' ? 'sending…' : 'subscribe →'}
+					</button>
+				</form>
+				{#if subscriptionState === 'error'}
+					<p class="subscribe-error" aria-live="polite">{subscriptionMessage}</p>
+				{/if}
+			{/if}
+		</div>
+	</section>
+
+	<footer class="site-footer">
+		<p>I have had my invitation to this world's festival, and thus my life has been blessed. - Tagore</p>
+		<nav aria-label="External links">
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+			<a href="https://www.linkedin.com/in/sidkmenon/">LinkedIn</a>
+			<span aria-hidden="true">·</span>
+			<a href="mailto:menon.sid.k@gmail.com">Email</a>
+			<span aria-hidden="true">·</span>
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+			<a href="https://dev.fast">/dev/fast</a>
+		</nav>
+	</footer>
+</div>
 
 <style>
-    .email {
-		color: #6b7280;
-    }
-	blockquote {
-		border-left: none;
-		padding-left: 0;
-		color: #9ca3af;
+	.home-page {
+		--home-content-width: min(100%, clamp(680px, 64vw, 960px));
+		display: flex;
+		flex-direction: column;
+		width: min(calc(100% - 240px), 1200px);
+		min-height: 100svh;
+		margin: 0 auto;
+		padding: 64px 0 48px;
+	}
+
+	.home-main {
+		width: var(--home-content-width);
+	}
+
+	.identity-row {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 32px;
+	}
+
+	h1 {
+		margin: 0;
+		font-size: 46px;
+		font-weight: 600;
+		line-height: 50px;
+		letter-spacing: -0.028em;
+	}
+
+	.identity-row a,
+	.writing h2,
+	.subscribe h2,
+	.subscribe-meta a,
+	.year,
+	.post-date,
+	.site-footer nav {
+		font-family: var(--mono);
+	}
+
+	.identity-row a {
+		color: var(--blue);
+		font-size: 12px;
+		line-height: 16px;
+		letter-spacing: 0.05em;
+		text-decoration: none;
+	}
+
+	.bio {
+		width: 100%;
+		margin-top: 28px;
+		font-size: 19px;
+		line-height: 30px;
+	}
+
+	.bio p {
+		margin: 0 0 12px;
+	}
+
+	.bio p:last-child {
+		margin-bottom: 0;
+	}
+
+	.writing {
+		margin-top: 60px;
+	}
+
+	.writing h2,
+	.subscribe h2 {
+		margin: 0;
+		font-size: 12px;
+		font-weight: 500;
+		line-height: 16px;
+		letter-spacing: 0.08em;
+	}
+
+	.writing h2 {
+		padding-bottom: 14px;
+		border-bottom: 1px solid var(--hairline);
+	}
+
+	.post-row {
+		display: grid;
+		grid-template-columns: 104px minmax(360px, 600px) minmax(40px, 1fr) 64px;
+		align-items: center;
+		min-height: 92px;
+		border-bottom: 1px solid var(--row-line);
+		text-decoration: none;
+	}
+
+	.year,
+	.post-date {
+		color: var(--graphite);
+		font-size: 13px;
+		line-height: 18px;
+		white-space: nowrap;
+	}
+
+	.post-date {
+		text-align: right;
+	}
+
+	.post-copy {
+		padding: 18px 0;
+	}
+
+	.post-title {
+		display: inline-block;
+		font-size: 28px;
+		font-weight: 500;
+		line-height: 34px;
+		letter-spacing: -0.018em;
+		text-decoration: none;
+	}
+
+	.post-copy p {
+		margin: 3px 0 0;
+		color: var(--graphite);
+		font-size: 17px;
+		font-style: italic;
+		line-height: 25px;
+	}
+
+	.leader {
+		align-self: center;
+		height: 1px;
+		margin: 0 20px;
+		background-image: radial-gradient(circle, var(--leader) 1px, transparent 1.2px);
+		background-position: center;
+		background-size: 6px 2px;
+	}
+
+	.subscribe {
+		display: flex;
+		width: var(--home-content-width);
+		align-items: center;
+		justify-content: space-between;
+		gap: 40px;
+		margin-top: 56px;
+		padding-top: 16px;
+		border-top: 1px solid var(--hairline);
+	}
+
+	.subscribe-meta {
+		display: flex;
+		align-items: center;
+		gap: 22px;
+	}
+
+	.subscribe-meta a {
+		color: var(--graphite);
+		font-size: 11px;
+		line-height: 16px;
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
+	.subscribe-action {
+		width: min(100%, 430px);
+	}
+
+	.subscribe-form {
+		display: flex;
+		align-items: stretch;
+		width: 100%;
+		border-bottom: 1px solid var(--ink);
+	}
+
+	.subscribe-form input {
+		min-width: 0;
+		flex: 1;
+		padding: 8px 4px;
+		border: 0;
+		outline: 0;
+		background: transparent;
+		color: var(--ink);
+		font-family: var(--mono);
+		font-size: 12px;
+		line-height: 16px;
+	}
+
+	.subscribe-form input::placeholder {
+		color: #989b9f;
+	}
+
+	.subscribe-form button {
+		padding: 8px 0 8px 20px;
+		border: 0;
+		background: transparent;
+		color: var(--blue);
+		font-family: var(--mono);
+		font-size: 12px;
+		line-height: 16px;
+		cursor: pointer;
+	}
+
+	.subscribe-form button:disabled {
+		cursor: wait;
+		opacity: 0.65;
+	}
+
+	.website-field {
+		position: absolute;
+		left: -10000px;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+	}
+
+	.subscribe-status,
+	.subscribe-error {
+		margin: 0;
+		font-family: var(--mono);
+		font-size: 11px;
+		line-height: 17px;
+	}
+
+	.subscribe-status {
+		color: var(--graphite);
+		text-align: right;
+	}
+
+	.subscribe-error {
+		margin-top: 7px;
+		color: #9f2f2f;
+	}
+
+	.site-footer {
+		display: flex;
+		width: var(--home-content-width);
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 48px;
+		margin-top: auto;
+		padding-top: 46px;
+	}
+
+	.site-footer p {
+		max-width: 680px;
+		margin: 0;
+		color: var(--graphite);
+		font-size: 14px;
+		font-style: italic;
+		line-height: 20px;
+	}
+
+	.site-footer nav {
+		display: flex;
+		align-items: center;
+		gap: 9px;
+		color: var(--graphite);
+		font-size: 11px;
+		line-height: 16px;
+		white-space: nowrap;
+	}
+
+	.site-footer a {
+		text-decoration: none;
+	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	@media (hover: hover) {
+		.identity-row a:hover,
+		.site-footer a:hover {
+			text-decoration: underline;
+		}
+
+		.post-row:hover .post-title {
+			color: var(--blue);
+		}
+	}
+
+	@media (max-width: 1100px) {
+		.home-page {
+			width: auto;
+			margin: 0 60px;
+		}
+
+		.post-row {
+			grid-template-columns: 104px minmax(320px, 600px) minmax(20px, 1fr) 64px;
+		}
+	}
+
+	@media (max-width: 700px) {
+		.home-page {
+			width: auto;
+			min-height: 100svh;
+			margin: 0;
+			padding: 28px 24px 24px;
+		}
+
+		h1 {
+			font-size: 34px;
+			line-height: 38px;
+		}
+
+		.identity-row a {
+			font-size: 11px;
+			line-height: 15px;
+		}
+
+		.bio {
+			margin-top: 22px;
+			font-size: 16px;
+			line-height: 24px;
+		}
+
+		.bio p {
+			margin-bottom: 10px;
+		}
+
+		.writing {
+			margin-top: 40px;
+		}
+
+		.writing h2,
+		.subscribe h2 {
+			font-size: 11px;
+			line-height: 15px;
+		}
+
+		.writing h2 {
+			padding-bottom: 12px;
+		}
+
+		.post-row {
+			display: grid;
+			grid-template-columns: 1fr auto;
+			min-height: 0;
+			padding: 15px 0 17px;
+		}
+
+		.year,
+		.post-date {
+			font-size: 11px;
+			line-height: 15px;
+		}
+
+		.year {
+			grid-column: 1;
+			grid-row: 1;
+		}
+
+		.post-date {
+			grid-column: 2;
+			grid-row: 1;
+		}
+
+		.post-copy {
+			grid-column: 1 / -1;
+			grid-row: 2;
+			padding: 7px 0 9px;
+		}
+
+		.post-title {
+			font-size: 25px;
+			line-height: 30px;
+		}
+
+		.post-copy p {
+			margin-top: 2px;
+			font-size: 15px;
+			line-height: 22px;
+		}
+
+		.leader {
+			display: none;
+		}
+
+		.subscribe {
+			display: block;
+			margin-top: 40px;
+			padding-top: 13px;
+		}
+
+		.subscribe-meta {
+			justify-content: space-between;
+		}
+
+		.subscribe-action {
+			width: 100%;
+			margin-top: 12px;
+		}
+
+		.subscribe-status {
+			text-align: left;
+		}
+
+		.subscribe-form input,
+		.subscribe-form button {
+			font-size: 11px;
+			line-height: 15px;
+		}
+
+		.site-footer {
+			display: block;
+			margin-top: 38px;
+			padding-top: 16px;
+			border-top: 1px solid var(--hairline);
+		}
+
+		.site-footer p {
+			font-size: 13px;
+			line-height: 19px;
+		}
+
+		.site-footer nav {
+			justify-content: flex-end;
+			margin-top: 14px;
+			font-size: 10px;
+			line-height: 14px;
+		}
 	}
 </style>
